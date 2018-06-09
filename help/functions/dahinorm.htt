@@ -1,0 +1,77 @@
+<!--%%page.i
+&secname=dahinorm
+&name=
+&next=deg.html
+&nextname=deg
+&prev=coprime.html
+&prevname=coprime
+&content=
+<H4>dahinorm</H4>
+
+<H3>Syntax</H3>
+<p class="code">cost = dahinorm ( sys, K )</p>
+
+<H3>Description</H3>
+<code>dahinorm</code> returns the
+<A HREF="../getstart/ahinf.html">associated <!--%%hinf.i%%-->-norm</A> for
+standard discrete-time system.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">sys</td>
+<td>model of an discrete-time plant associated with the
+standard system
+</td></tr>
+<tr>
+<td class="cc">K</td>
+<td>discrete-time feedback controller</td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">cost</TD>
+<TD>
+<!--%%ahinf.i%%-->-norm of the discrete-time system </TD>
+</tr>
+</table>
+
+<H3>Limitations</H3>
+<ul>
+<li>Controller <span class=tms>K</span> is a SISO system.
+</ul>
+
+<H3>Example</H3>
+<pre>
+    T = 1;
+    G = tf ( [1 0],  [-2 1], T );
+    V = tf ( [1 -2], [-2 1], T );
+    W1 = tf ( 1, 1, T );
+    W2 = tf ( 1, 1, T );
+    sys = [W1*V W1*G
+              0   W2
+             -V   -G];
+    sys = z2zeta(sys);
+    K = zpk([], [], 1.5, T);
+    cost = dahinorm ( sys, K )
+
+cost =
+    3.6056
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Rosenwasser, E.N., and B.P. Lampe,
+<I>Computer Controlled Systems: Analysis and Design with
+Process-orientated Models</I>. London: Springer-Verlag, 2000.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Polyakov, K.Yu., Polynomial Design of Optimal
+Sampled-data Control Systems, Dr. Sc. Thesis, State University of Ocean Technology,
+St. Petersburg, 2006 [in Russian].
+</p>
+
+<H3>See also</H3>
+<!--%%funref.i&name=sdahinorm&text=<code>&nbsp;&nbsp;</code><I>AH</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT=""></SUB>-norm of sampled-data systems.%%-->
+<!--%%funref.i&name=sdtrhinferr&text=<I>AH</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT=""></SUB>-norm of sampled-data tracking systems.%%-->
+
+%%-->

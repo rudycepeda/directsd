@@ -1,0 +1,88 @@
+<!--%%spage.i
+&secname=Examples
+&name=
+&next=demo_fil1.html
+&nextname=Reconstructing a first-order process 
+&prev=ssdesign\limits.html
+&prevname=Limitations
+&content=
+<H1>Examples and demos</H1><hr>
+<H2>Sampled-data filtering</H2>
+<p class="ex">
+<A HREF="demo_fil1.html">Reconstructing a first-order process</A>
+</p>
+<p class="ex">
+<A HREF="demo_fil2.html">Sampled-data filtering with delay</A>
+</p>
+<p class="ex">
+<A HREF="demo_fil3.html">Reconstructing a second-order process</A>
+</p>
+<p class="ex">
+<A HREF="demo_hold.html">Using generalized hold</A>
+</p>
+
+<H2>Sampled-data optimal control</H2>
+<p class="ex">
+<A HREF="demo_aut97.html">Optimal disturbance attenuation</A>
+</p>
+<p class="ex">
+<A HREF="demo_at96.html">Optimal ship course stabilization</A>
+</p>
+<p class="ex">
+<A HREF="demo_c2d.html"><I>L</I><SUB>2</SUB>-optimal redesign</A>
+</p>
+<p class="ex">
+<A HREF="demo_doubint.html">Optimal control for double integrator</A>
+</p>
+<p class="ex">
+<A HREF="demo_h2hi.html">Mixed <I>H</I><SUB>2</SUB>/<!--%%ahinf.i%%-->-optimization</A>
+</p>
+<p class="ex">
+<A HREF="demo_l2.html"><I>L</I><SUB>2</SUB>-optimal tracking</A>
+</p>
+<p class="ex">
+<A HREF="demo_2dof.html">2-DOF optimal tracking</A>
+</p>
+
+<H2><!--%%ahinf.i%%-->optimal control</H2>
+<p class="ex">
+<A HREF="demo_dhinf.html"><!--%%ahinf.i%%-->-optimal discrete-time controllers</A>
+</p>
+<p class="ex">
+<A HREF="demo_filinf.html">Sampled-data <!--%%ahinf.i%%-->-optimal prediction</A>
+</p>
+<p class="ex">
+<A HREF="demo_hinf.html">Sampled-data <I>H</I><SUB>2</SUB>- and <!--%%ahinf.i%%-->-optimal control</A>
+</p>
+<p class="ex">
+<A HREF="demo_l2hi.html">Sampled-data <I>L</I><SUB>2</SUB>- and
+<!--%%ahinf.i%%-->-optimal tracking</A>
+</p>                              
+
+<H2>Sampled-data preview control</H2>
+<p class="ex">
+<A HREF="demo_h2p.html"><I>H</I><SUB>2</SUB>-optimal preview control</A>
+</p>
+<p class="ex">
+<A HREF="demo_l2p.html"><I>L</I><SUB>2</SUB>-optimal preview control</A>
+</p>
+<p class="ex">
+<A HREF="demo_2dofp.html">Optimal 2-DOF preview control</A>
+</p>
+
+<H2>Optimal reduced-order controllers</H2>
+<p class="ex">
+<A HREF="demo_modh2.html">
+Reduced-order <I>H</I><SUB>2</SUB>-optimal control</A>
+</p>
+<p class="ex">
+<A HREF="demo_modh2int.html">Optimal integral control</A>
+</p>
+<p class="ex">
+<A HREF="demo_modl2.html">Reduced-order <I>L</I><SUB>2</SUB>-optimal control</A>
+</p>
+<p class="ex">
+<A HREF="demo_modl2r.html">Reduced-order redesign</A>
+</p>
+
+%%-->

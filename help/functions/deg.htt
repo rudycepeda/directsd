@@ -1,0 +1,62 @@
+<!--%%page.i
+&secname=deg
+&name=
+&next=delzero.html
+&nextname=delzero
+&prev=dahinorm.html
+&prevname=dahinorm
+&content=
+<H4>deg</H4>
+
+<H3>Syntax</H3>
+<p class="code">d = deg ( a )</p>
+
+<H3>Description</H3>
+<code>deg</code> returns degree of a polynomial or order of a scalar transfer function.
+In the latter case the order is defined as the maximum of degrees of the numerator
+and denominator.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="ccw">a</td><td>a polynomial (as an array of coefficients or polynomial object)
+or scalar LTI model</td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="ccw">d</TD>
+<TD>degree of a polynomial or order of a transfer function</TD></tr>
+</table>
+
+<H3>Examples</H3>
+<B>Example 1.</B> Degree of a polynomial given as an array of coefficients.
+<pre>
+   a = [1 2 3];
+   d = deg(a)
+
+d =
+     2
+</pre>
+<B>Example 2.</B> Degree of a polynomial given as an object.
+<pre>
+   a = s^2 + 3*s + 3;
+   d = deg(a)
+
+d =
+     2
+</pre>
+<B>Example 3.</B> Order of a scalar transfer function.
+<pre>
+   a = rss(2, 1, 1);
+   d = deg(a)
+
+d =
+     2
+</pre>
+
+<H3>See also</H3>
+<!--%%funref.i&name=striplz&text=Remove leading zeros of a polynomial.%%-->
+
+%%-->

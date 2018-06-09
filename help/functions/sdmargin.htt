@@ -1,0 +1,81 @@
+<!--%%page.i
+&secname=sdmargin
+&name=
+&next=sdnorm.html
+&nextname=sdnorm
+&prev=sdl2err.html
+&prevname=sdl2err
+&content=
+<H4>sdmargin</H4>
+
+<H3>Syntax</H3>
+<p class="code">g = sdmargin ( sys, K )</p>
+<p class="code">g = sdmargin ( sys, K, H )</p>
+<p class="code">g = sdmargin ( sys, K, type )</p>
+<p class="code">g = sdmargin ( sys, K, H, type )</p>
+
+<H3>Description</H3>
+<code>sdmargin</code> returns stability radius of the
+<A HREF="../getstart/sdstd.html">standard sampled-data system</A>
+<A HREF="#ref1">[1]</A> as the inverse of
+<!--%%hinf.i%%-->-norm (if <code>type</code> is <code>'inf'</code>)
+or the inverse of
+<!--%%ahinf.i%%-->-norm (if <code>type</code> is <code>'ainf'</code>).
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">sys</td>
+<td>model of an LTI plant associated with the
+<A HREF="../getstart/sdstd.html">standard sampled-data system</A>.
+</td></tr>
+<tr>
+<td class="cc">K</td>
+<td>feedback discrete-time controller</td></tr>
+<tr>
+<td class="cc">H</td>
+<td><A HREF="../getstart/sdstd.html#hold">generalized hold</A> given as an
+LTI continuous-time model.                      
+</td></tr>
+<tr>
+<td class="cc">type</td>
+<td>type of norm: <code>'inf'</code> for
+<!--%%hinf.i%%-->-norm or <code>'ahinf'</code> for
+<!--%%ahinf.i%%-->-norm (default)
+</td></tr>
+</table>
+<p>
+If the hold is not given, a zero-order hold is used by default.
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">g</TD>
+<TD>stability margin of the sampled-data system</TD></tr>
+</table>
+
+<H3>Example</H3>
+<pre>
+    sys = rss(2, 2, 2);
+    T = 1;
+    K = zpk([], [], 1, T);
+    H = rss(1, 1, 1);
+    H.d = 0;
+    sdmargin( sys, K, H )
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Chen, T., and B.A. Francis,
+<I>Optimal Sampled-Data Control Systems</I>.
+Berlin Heidelberg New York: Springer-Verlag, 1995.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Polyakov, K.Yu., Polynomial Design of Optimal
+Sampled-data Control Systems, Dr. Sc. Thesis, State University of Ocean Technology,
+St. Petersburg, 2006 [in Russian].
+</p>
+
+<H3>See also</H3>
+<!--%%funref.i&name=sdahinorm&text=<I>AH</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT=""></SUB>-norm of sampled-data systems.%%-->
+<!--%%funref.i&name=sdhinorm&text=<code>&nbsp;</code><I>H</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT=""></SUB>-norm (<I>L</I><SUB>2</SUB>-induced norm) of sampled-data systems.%%-->
+
+%%-->

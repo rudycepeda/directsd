@@ -1,0 +1,122 @@
+<!--%%page.i
+&secname=sdl2
+&name=
+&next=sdl2err.html
+&nextname=sdl2err
+&prev=sdhinorm.html
+&prevname=sdhinorm
+&content=
+<H4>sdl2</H4>
+
+<H3>Syntax</H3>
+<p class="code">[K,cost] = sdl2 ( sys, T )</p>
+<p class="code">[K,cost] = sdl2 ( sys, T, H )</p>
+<p class="code">[K,cost] = sdl2 ( sys, T, method )</p>
+<p class="code">[K,cost] = sdl2 ( sys, T, H, method )</p>
+
+<H3>Description</H3>
+<code>sdl2</code> returns the <I>L</I><SUB>2</SUB>-optimal controller
+<code>K</code> for standard sampled-data system
+and the minimal value of the cost function
+<code>cost</code>.
+<P>
+It is assumed that the input <span class=tms>w</span> is a scalar
+Dirac delta-function <span class=tms>&#948;</span>(<span class=tms>t</span>).
+Optimization is performed with respect to the
+integral square error in continuous time
+<CENTER><IMG SRC="../images/l2err.gif" WIDTH=225 HEIGHT=47 ALT=""></CENTER>
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">sys</td>
+<td>model of an LTI plant associated with the
+<A HREF="../getstart/sdstd.html">standard sampled-data system</A>.
+</td></tr>
+<tr>
+<td class="cc">T</td>
+<td>the sampling period</td></tr>
+<tr>
+<td class="cc">H</td>
+<td><A HREF="../getstart/sdstd.html#hold">generalized hold</A> given as an
+LTI continuous-time model.
+</td></tr>
+<tr><td class="cc">method</td>
+<td>
+optional parameter
+that specifies solution algorithm. There are four possible
+methods:
+<ul>
+<LI><code>'ss'&nbsp;</code> - state-space solution (for delay-free systems only)
+    <A HREF="#ref1">[1]</A>;
+<LI><code>'wh'&nbsp;</code> - Wiener-Hopf method <A HREF="#ref2">[2]</A>;
+<LI><code>'pol'</code> - polynomial design method <A HREF="#ref3">[3]</A> (default);
+<LI><code>'ssf'</code> - state-space optimization of frequency-domain functional
+<A HREF="#ref3">[3]</A>.
+</ul></td></tr>
+</table>
+<p>
+If the hold is not given, a zero-order hold is used by default.
+
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">K</TD>
+<TD>discrete LTI model of controller</TD>
+</tr>
+<tr>
+<TD class="cc">cost</TD>
+<TD>minimal value of the cost function</TD>
+</tr>
+</tr>
+</table>
+
+<H3>Limitations</H3>
+<ul>
+<li>Input signal <span class=tms>w</span> is scalar.
+<li>Controller <span class=tms>K</span> is a SISO system.
+<LI> Transfer matrices <I>P</I><SUB>11</SUB>(s), <I>P</I><SUB>21</SUB>(s),
+and <I>P</I><SUB>22</SUB>(s) must be strictly proper,
+<I>P</I><SUB>12</SUB>(s) must be at least proper.
+</ul>
+
+<H3>Example</H3>
+<pre>
+    Q = 1;
+    R = tf(1, [1 0]);
+    F = tf(1, [1 1 1]);
+    sys = [-R*Q F;R*Q -F];
+    T = 1;
+    [K,cost] = sdl2(sys,T,'ss')
+
+K: zero-pole-gain model 1 x 1
+
+      2.5883 (z^2  - 0.7859z + 0.3679)
+      --------------------------------
+              (z+0.6055) (z-1)
+
+Sampling time: 1
+cost =
+    0.5644
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Chen, T., and B.A. Francis,
+<I>Optimal Sampled-Data Control Systems</I>.
+Berlin Heidelberg New York: Springer-Verlag, 1995.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Rosenwasser, E.N., and B.P. Lampe,
+<I>Computer Controlled Systems: Analysis and Design with
+Process-orientated Models</I>. London: Springer-Verlag, 2000.
+</p>
+<p><A name="ref3"></A>[3]&nbsp;Polyakov, K.Yu., Polynomial Design of Optimal
+Sampled-data Control Systems, Dr. Sc. Thesis, State University of Ocean Technology,
+St. Petersburg, 2006 [in Russian].
+</p>
+
+<H3>See also</H3>
+<!--%%funref.i&name=sdh2&text=<code>&nbsp;&nbsp;&nbsp;&nbsp;</code><I>H</I><SUB>2</SUB>-optimization of sampled-data systems.%%-->
+<!--%%funref.i&name=sdh2hinf&text=Mixed <I>H</I><SUB>2</SUB>/<I>H</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT=""></SUB>-optimization of sampled-data systems.%%-->
+
+%%-->

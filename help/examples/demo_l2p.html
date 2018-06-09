@@ -1,0 +1,178 @@
+<html><head><title>L2-optimal preview control  :: Examples (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="demo_h2p.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="demo_2dofp.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H2>Example: <I>L</I><SUB>2</SUB>-optimal preview control</H2>
+<H3>Statement of the problem</H3>
+Consider the following sampled-data tracking system:
+<CENTER><IMG SRC="images/l2p_scheme.gif" WIDTH=430 HEIGHT=75 ALT=""></CENTER>
+Here <span class=tms>w(t</span>) is a unit impulse,
+blocks <span class=tms>F</span> and <span class=tms>R</span> denote a
+plant and model of the reference signal, respectively,
+with transfer functions
+<CENTER><IMG SRC="images/l2p_rf.gif" WIDTH=252 HEIGHT=43 ALT=""></CENTER>
+Preview block
+<SUB><IMG SRC="images/h2p_pi.gif" WIDTH=21 HEIGHT=18 ALT=""></SUB>
+generates a "previewed" signal
+(future value of <span class=tms>r</span>(<span class=tms>t</span>)),
+where <span class=tms>&#960;</span>&nbsp;>&nbsp;0 is a preview interval.
+<p>
+Digital computer has a sampling unit with period <span class=tms>T</span>&nbsp;=&nbsp;1,
+discrete controller <span class=tms>K</span> and a zero-order hold <I>H</I>.
+Control delay by <span class=tms>&#964;</span>&nbsp;=&nbsp;1.5 should be taken into account.
+<p>
+It is required to find the discrete controller <span class=tms>K</span>
+such that the output of the system be as close as possible to the
+output of the reference system:
+<CENTER><IMG SRC="images/l2_csheme.gif" WIDTH=165 HEIGHT=49 ALT=""></CENTER>
+where
+<CENTER><IMG SRC="images/l2p_q.gif" WIDTH=122 HEIGHT=42 ALT=""></CENTER>
+The cost function to be minimized is the integral squared
+error
+<CENTER><IMG SRC="images/l2err0.gif" WIDTH=156 HEIGHT=47 ALT=""></CENTER>
+i.e., the <I>L</I><SUB>2</SUB>-norm
+of the signal:
+<CENTER><IMG SRC="images/l2_eps.gif" WIDTH=144 HEIGHT=24 ALT=""></CENTER>
+which is the difference between the outputs of the systems.
+
+<H3>Preparing data</H3>
+First, we enter the models of the command signal, plant and
+reference system:
+<pre>
+   R = tf ( 1, [1 1 0] );
+   F = tf ( 1, [5 1] );
+   F.iodelay = 1.5;
+   Q = tf ( 1, [0.1 1] );
+   T = 1;
+</pre>
+Let the preview interval <span class=tms>&#960;</span> be equal to 2:
+<pre>
+   preview = 2;
+</pre>
+Then, we represent the preview in the form
+<CENTER><IMG SRC="images/l2p_pi.gif" WIDTH=92 HEIGHT=22 ALT=""></CENTER>
+where <span class=tms>&#963;</span> is a non-negative integer and
+0&nbsp;&#8804;&nbsp;<span class=tms>&#952;</span>&nbsp;&nbsp;<I><span class=tms>T</span></I>.
+It can be shown that non-causal preview block can be removed
+and the equal delay be added to the ideal operator
+<I><span class=tms>Q</span></I>.
+In addition, a pure delay by <span class=tms>&#952;</span> should be added to
+the reference block (see <A HREF="#ref1">[1]</A>-<A HREF="#ref2">[2]</A>
+for details). Therefore,
+<pre>
+   sigma = ceil(preview/T);
+   theta = sigma*T - preview;
+   R.iodelay = theta;
+   Q.iodelay = preview;
+</pre>
+Then, it is necessary to construct a model the augmented
+plant in the <A HREF="../getstart/sdstd.html">standard sampled-data system</A>.
+Operator equations have the form
+<CENTER><IMG SRC="images/l2p_op.gif" WIDTH=233 HEIGHT=50 ALT=""></CENTER>
+Then, blocks of the plant in the standard system have the form
+<CENTER><IMG SRC="images/l2p_pij.gif" WIDTH=315 HEIGHT=56 ALT=""></CENTER>
+Such a system can be formed as
+<pre>
+   sys = [Q*R -F
+            R -F]
+
+sys: transfer function 2 x 2
+
+    !                       1                               -1   !
+    ! exp(-2*s) * ---------------------    exp(-1.5*s) * ------- !
+    !             0.1 s^3 + 1.1 s^2 + s                  5 s + 1 !
+    !                                                            !
+    !                       1                               -1   !
+    !                    -------           exp(-1.5*s) * ------- !
+    !                    s^2 + s                         5 s + 1 !
+
+</pre>
+
+<H3>Optimal controller</H3>
+To minimize the <I>L</I><SUB>2</SUB>-norm of the output
+we use <A HREF="../functions/sdl2.html">sdl2</A>
+<pre>
+   K = sdl2 ( sys, T )
+
+K: zero-pole-gain model 1 x 1
+
+           7.5673 z^2 (z-0.8187) (z-0.07603)
+      ------------------------------------------
+      (z-1) (z-0.07625) (z^2  + 1.344z + 0.6498)
+
+Sampling time: 1
+
+</pre>
+Compute the cost function using
+<A HREF="../functions/sdl2err.html">sdl2err</A>
+<pre>
+   sdl2err ( sys, K )
+
+ans =
+    0.0517
+</pre>
+
+<H3>Dependence on <span class=tms>&#960;</span></H3>
+It is quite interesting to observe how changes the minimal reachable
+value of the cost function when preview interval
+<span class=tms>&#960;</span> increases.
+It could be expected that the cost function will decrease, but this
+is so only for stable plants.
+<p>
+For the given case (with stable plant)
+the curve <I>J</I><SUB>min</SUB>(<span class=tms>&#960;</span>) is shown below:
+<CENTER><IMG SRC="images/l2p_curve.jpg" vspace=5 WIDTH=373 HEIGHT=368 ALT=""></CENTER>
+As <span class=tms>&#960;</span> increases, it tends asymptotically to a periodic
+curve (here looks like a dashed line in the figure).
+<p>
+If we consider instead an unstable plant
+<CENTER><IMG SRC="images/l2p_fu.gif" WIDTH=109 HEIGHT=42 ALT=""></CENTER>
+the curve will have a quite different form:
+<CENTER><IMG SRC="images/l2p_curve2.jpg" vspace=5 WIDTH=360 HEIGHT=341 ALT=""></CENTER>
+This is explained by the fact that the controller is to
+perform two conflicting tasks: 1) to stabilize the plant and
+2) to minimize the cost function. The dashed green line denote
+the limiting periodic curve to which the function
+<I>J</I><SUB>min</SUB>(<span class=tms>&#960;</span>) tends
+asymptotiically.
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;
+Polyakov K., Rosenwasser E., and Lampe B.,
+Design of optimal sampled-data tracking systems with preview,
+Proc. 4th IFAC Workshops on Time-Delay Systems,
+Rocquencourt, France, September 8-10, 2003.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Polyakov, K.Yu., Polynomial Design of Optimal
+Sampled-data Control Systems, Dr. Sc. Thesis, State University of Ocean Technology,
+St. Petersburg, 2006 [in Russian].
+</p>
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="demo_h2p.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;H2-optimal preview control </td><td>&nbsp;</td>
+<td align=right>Optimal 2-DOF preview control &nbsp;</td>
+<td align=right width=20><a href="demo_2dofp.html"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+

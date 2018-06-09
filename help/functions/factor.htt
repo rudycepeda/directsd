@@ -1,0 +1,115 @@
+<!--%%page.i
+&secname=factor
+&name=
+&next=gcd.html
+&nextname=gcd
+&prev=dtfm2.html
+&prevname=dtfm2
+&content=
+<H4>factor</H4>
+
+<H3>Syntax</H3>
+<p class="code">[ps,pu,p0] = factor ( p )</p>
+<p class="code">[ps,pu,p0] = factor ( p, type )</p>
+
+<H3>Description</H3>
+<code>factor</code> performs factorization of a
+(quasi)polynomial with respect to the imaginary axis or
+the unit circle. The function returns stable, antistable
+and neutral cofactors.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">p</td>
+<td>a (quasi)polynomial in the form of array of coefficients
+or polynomial object</td></tr>
+<tr>
+<td class="cc">type</td>
+<td>type of factorization:
+<ul>
+<LI><code>'s'</code> - with respect to the imaginary axis, stability region
+is the left half-plane (default for
+continuous-time models)
+<LI><code>'z'</code> - with respect to the unit circle, stability region
+is inside the unit disk
+<LI><code>'d'</code> - with respect to the unit circle, stability region
+is outside the unit disk (default for discrete-time models)
+</ul>
+</td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">ps</TD><TD>stable factor</TD></tr>
+<tr>
+<TD class="cc">pu</TD><TD>monic antistable factor</TD></tr>
+<tr>
+<TD class="cc">p0</TD><TD>monic neutral factor</TD></tr>
+</table>
+
+<H3>Examples</H3>
+<B>Example 1.</B> Continuous-time polynomial.
+<pre>
+a = poln( [-1 2 0], 'r' )
+<I>a: polynomial
+  s^3 - s^2 - 2 s</I>
+[ps,pu,p0] = factor ( a )
+<I>ps: polynomial
+  s + 1
+pu: polynomial
+  s - 2
+p0: polynomial
+  s
+</I>
+</pre>
+<B>Example 2.</B> Discrete-time polynomial.
+<pre>
+a = poln( [0.3 1.5 1], 'rz' )
+<I>a: polynomial
+  z^3 - 2.8 z^2 + 2.25 z - 0.45
+</I>
+[ps,pu,p0] = factor ( a )
+<I>ps: polynomial
+  z - 1.5
+pu: polynomial
+  z - 0.3
+p0: polynomial
+  z - 1
+</I>
+</pre>
+<B>Example 3.</B> Discrete-time quasipolynomial
+(shift is assigned to the antistable cofactor).
+<pre>
+a = poln( [0.3 1.5 1], 'rz', 1 )
+<I>a: polynomial
+  z^3 - 2.8 z^2 + 2.25 z - 0.45
+</I>
+[ps,pu,p0] = factor ( a )
+<I>ps: polynomial
+  z - 1.5
+pu: quasipolynomial
+  1 - 0.3 z^-1
+p0: polynomial
+  z - 1
+</I>
+</pre>
+<B>Example 4.</B> Polynomial as an array.
+<pre>
+a = [1 -2.8 2.25 -0.45];
+[ps,pu,p0] = factor ( a, 'z' )
+<I>ps =
+    1.0000   -1.3000    0.3000
+pu =
+    1.0000   -1.5000
+p0 =
+     1
+</I>
+</pre>
+
+<H3>See also</H3>
+<!--%%funref.i&name=sfactor&text=<code>&nbsp;</code>Spectral factorization for polynomials and rational functions.%%-->
+<!--%%funref.i&name=sfactfft&text=FFT factorization of discrete-time polynomials.%%-->
+
+%%-->

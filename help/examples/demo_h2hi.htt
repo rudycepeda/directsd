@@ -1,0 +1,199 @@
+<!--%%page.i
+&secname=:: Examples
+&name=Mixed H2/AHinf-optimization 
+&next=demo_l2hi.html
+&nextname=L2- and AHinf-optimal tracking 
+&prev=demo_hinf.html
+&prevname=H2- and AHinf-optimal control 
+&content=
+<H2>Example: Mixed <I>H</I><SUB>2</SUB>/<!--%%ahinf.i%%-->-optimization</H2>
+<H3>Statement of the problem</H3>
+Consider the following sampled-data control problem:
+<CENTER><IMG SRC="images/h2hi_scheme.gif" WIDTH=362 HEIGHT=133 ALT=""></CENTER>
+Here <span class=tms>w</span> is a centered white noise signal
+with unit intensity. The plant is modelled as a linear
+system with transfer function
+<CENTER><IMG SRC="images/h2hi_f.gif" WIDTH=133 HEIGHT=45 ALT=""></CENTER>
+It is required to find digital controller <span class=tms>K</span> that
+provide for a trade-off between stabilization precision and
+robustness with respect to unknown disturbances.
+The aims are:
+<ol>
+<LI> to minimize
+(in the steady-state mode for
+<span class=tms>r</span>(<span class=tms>t</span>)&nbsp;=&nbsp;0) the cost function
+<CENTER><IMG SRC="images/h2hi_j.gif" WIDTH=109 HEIGHT=22 ALT=""></CENTER>
+where <SUB><IMG SRC="images/dint_ve.gif" WIDTH=18 HEIGHT=17 ALT=""></SUB>
+and <SUB><IMG SRC="images/dint_vu.gif" WIDTH=18 HEIGHT=17 ALT=""></SUB>
+denote the average variances of the <A HREF="../getstart/stochstd.html">periodically nonstationary
+signals</A> <span class=tms>e</span>(<span class=tms>t</span>)
+and <span class=tms>u</span>(<span class=tms>t</span>), respectively, and
+<SUB><IMG SRC="images/h2hi_kappa.gif" WIDTH=19 HEIGHT=21 ALT=""></SUB>=1
+is a nonnegative constant;
+<LI> to minimize the <!--%%ahinf.i%%-->-norm of the
+system with input <span class=tms>w</span> and output
+<span class=tms>&#949;</span>&nbsp;=&nbsp;[<span class=tms>e</span>&nbsp;<span class=tms>&#949;<SUB>u</SUB></span>]'.
+</ol>
+
+<H3>Preparing data</H3>
+First, we enter the plant transfer function:
+<pre>
+   F = tf ( 1, [5 1 0] );
+</pre>
+Then, it is necessary to construct a model the augmented
+plant in the <A HREF="../getstart/sdstd.html">standard sampled-data system</A>.
+Operator equations have the form
+<CENTER><IMG SRC="images/h2hi_op.gif" vspace=5 WIDTH=157 HEIGHT=73 ALT=""></CENTER>
+Then, blocks of the plant in the standard system have the form
+<CENTER><IMG SRC="images/h2hi_pij.gif" vspace=5 WIDTH=279 HEIGHT=85 ALT=""></CENTER>
+Such a system can be formed as
+<pre>
+   kappa = 1;
+   sys = [-F  -F
+           0 kappa
+          -F  -F];
+
+sys: transfer function 3 x 2
+
+    !     -1           -1    !
+    ! ---------    --------- !
+    ! 5 s^2 + s    5 s^2 + s !
+    !                        !
+    !     0            1     !
+    !                        !
+    !     -1           -1    !
+    ! ---------    --------- !
+    ! 5 s^2 + s    5 s^2 + s !
+
+</pre>
+
+<H3><I>H</I><SUB>2</SUB>-optimization</H3>
+Now we compute the controller that minimizes <span class=tms>J</span>
+so that the second requirement is ignored.
+Choose a sampling period:
+<pre>
+   T = 1;
+</pre>
+To minimize the <I>H</I><SUB>2</SUB>-norm
+of the system (this is equivalent to minimizing
+the chosen cost function), we use
+<A HREF="../functions/sdh2.html">sdh2</A>:
+<pre>
+   KH2 = sdh2 ( sys, T )
+
+KH2: zero-pole-gain model 1 x 1
+
+      3.2523 (z-0.6906)
+      -----------------
+          (z+0.409)
+
+Sampling time: 1
+
+</pre>
+For the system with this controller,
+we compute the <I>H</I><SUB>2</SUB>-norm and
+<!--%%ahinf.i%%-->-norm, using the functions
+<A HREF="../functions/sdh2norm.html">sdh2norm</A> and
+<A HREF="../functions/sdahinorm.html">sdahinorm</A>,
+respectively:
+<pre>
+   sdh2norm ( sys, KH2 )
+
+ans =
+    0.8153
+
+   sdahinorm ( sys, KH2 )
+
+ans =
+    1.7326
+</pre>
+
+<H3>
+<!--%%ahinf.i%%-->-optimization</H3>
+Now we compute the controller that minimizes the
+<!--%%ahinf.i%%-->-norm of the system
+so that the first requirement (minimization of <span class=tms>J</span>)
+is ignored.
+Using the function
+<A HREF="../functions/sdahinf.html">sdahinf</A>,
+we find
+<pre>
+   Kinf = sdahinf ( sys, T )
+
+Kinf: zero-pole-gain model 1 x 1
+
+      8.3005 (z-0.7207)
+      -----------------
+          (z+0.6402)
+
+Sampling time: 1
+
+</pre>
+The <I>H</I><SUB>2</SUB>-norm and
+<!--%%ahinf.i%%-->-norm for this system are computed as
+<pre>
+   sdh2norm ( sys, Kinf )
+
+ans =
+    1.2251
+
+   sdahinorm ( sys, Kinf )
+
+ans =
+    1.2251
+</pre>
+
+<H3>Mixed <I>H</I><SUB>2</SUB>/<!--%%ahinf.i%%-->-optimization</H3>
+To provide for a trade-off between the two
+criteria, we use the function
+<A HREF="../functions/sdh2hinf.html">sdh2hinf</A>.
+The weighting coefficient
+<span class=tms>&#961;&nbsp;&#8712;&nbsp;[0,1]</span> makes it possible
+to provide for a trade-off between stochastic and
+robust criteria. For <span class=tms>&#961;&nbsp;=&nbsp;0</span> we obtain
+the <!--%%ahinf.i%%-->-optimal controller, while for
+<span class=tms>&#961;&nbsp;=&nbsp;1</span>
+the <I>H</I><SUB>2</SUB>-norm is minimized.
+<p>
+Choosing<span class=tms> &#961;&nbsp;=&nbsp;0.5,</span> we find:
+<pre>
+   Kmix = sdh2hinf ( sys, T, 0.5, 2, 1 )
+
+Kmix: zero-pole-gain model 1 x 1
+
+      5.8253 (z-0.7217) (z^2  - 1.402z + 0.5314)
+      ------------------------------------------
+          (z+0.5234) (z^2  - 1.427z + 0.547)
+
+Sampling time: 1
+
+</pre>
+The <I>H</I><SUB>2</SUB>-norm and
+<!--%%ahinf.i%%-->-norm for this system are computed as
+<pre>
+   sdh2norm ( sys, Kmix )
+
+ans =
+    0.9498
+
+   sdahinorm ( sys, Kmix )
+
+ans =
+    1.3436
+</pre>
+When &#961; increases, the <I>H</I><SUB>2</SUB>-norm
+decreases and <!--%%ahinf.i%%-->-norm increases
+(see the graph below).
+<CENTER><IMG SRC="images/h2hi_trade.jpg" vspace=5 WIDTH=400 HEIGHT=385 ALT=""></CENTER>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Rosenwasser, E.N., and B.P. Lampe,
+<I>Computer Controlled Systems: Analysis and Design with
+Process-orientated Models</I>. London: Springer-Verlag, 2000.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Polyakov, K.Yu., Polynomial Design of Optimal
+Sampled-data Control Systems, Dr. Sc. Thesis, State University of Ocean Technology,
+St. Petersburg, 2006 [in Russian].
+</p>
+
+%%-->

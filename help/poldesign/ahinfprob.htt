@@ -1,0 +1,75 @@
+<!--%%page.i
+&secname=:: Polynomial design
+&name=AHinf-optimization problem
+&next=modal.html
+&nextname=Reduced-order controllers
+&prev=h2prob.html
+&prevname=H2-optimization problem
+&content=
+<H2>Associated <I>H</I><SUB>&#8734;</SUB> problem</H2>
+Associated
+<!--%%hinf.i%%-->-problem consists in minimizing
+the
+<A HREF="../analysis/ahinf.html"><!--%%ahinf.i%%-->-norm</A> of sampled-data system
+<a href="#ref1">[1]</a>, <a href="#ref2">[2]</a>:
+<CENTER><IMG SRC="../images/ahinorm.gif" WIDTH=143 HEIGHT=26 ALT=""></CENTER>
+where U denotes the causal periodically nonstationary operator
+corresponding to the sampled-data system, and
+<span class=tms>F</span>(<span class=tms>&#950;</span>)
+denotes transfer function of an equivalent discrete-time system.
+<p>
+<!--%%ahinf.i%%--> norm can be computed effectively in the
+frequency domain for a wide class of sampled-data systems,
+including time-delay systems.
+<p>
+<!--%%ahinf.i%%--> norm coincides (up to a constant factor) with the classical
+<!--%%hinf.i%%-->
+(<I>L</I><SUB>2</SUB>-induced) norm <A HREF="#ref3">[3]</A>
+only for systems with <I>P</I><SUB>11</SUB>(s)&nbsp;=&nbsp;0. Nevertheless,
+computations show that in many cases optimization on the basis
+of minimizing
+<!--%%hinf.i%%--> and
+<!--%%ahinf.i%%-->-norms give quite similar results.
+<p>
+Polynomial method of solving the <!--%%ahinf.i%%-->-problem
+for sampled-data systems <A HREF="#ref4">[4]</A> is realized in the function
+<A HREF="../functions/sdahinf.html">sdahinf</A>, which returns the optimal
+digital controller and the minimal attainable value of the cost function:
+<pre>
+   F = tf(1, [1 1 0]);
+   sys = [F F;-F -F];
+   T = 0.1;
+   [K,cost] = sdahinf ( sys, T )
+
+K: zero-pole-gain model 1 x 1
+
+      381.503 (z-0.4524)
+      ------------------
+          (z+0.8954)
+
+Sampling time: 0.1
+cost =
+    0.0287
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Polyakov K., Rosenwasser E., and Lampe B.,
+Associated
+<!--%%hinf.i%%--> problem for sampled-data systems //  Proc. 3rd IFAC
+Symposium on Robust Control Design, Prague, June 21-23, 2000.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Rosenwasser, E.N., and B.P. Lampe,
+<I>Computer Controlled Systems: Analysis and Design with
+Process-orientated Models</I>. London: Springer-Verlag, 2000.
+</p>
+<p><A name="ref3"></A>[3]&nbsp;Chen, T., and B.A. Francis,
+<I>Optimal Sampled-Data Control Systems</I>.
+Berlin Heidelberg New York: Springer-Verlag, 1995.
+</p>
+
+<p><A name="ref4"></A>[4]&nbsp;Polyakov, K.Yu., Polynomial Design of Optimal
+Sampled-data Control Systems, Dr. Sc. Thesis, State University of Ocean Technology,
+St. Petersburg, 2006 [in Russian].
+</p>
+%%-->
+

@@ -1,0 +1,147 @@
+<html><head><title>Miscellaneous functions :: Polynomials (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="factor.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="poleq.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H2>Miscellaneous functions</H2>
+<H5>Reciprocal polynomial</H5>
+Reciprocal polynomial (the one with the inverve order of
+coefficients) can be found using the function
+<A HREF="../functions/recip.html">recip</A>:
+<pre>
+   a = poln( [1 2 3 4], 'z' )
+
+a: polynomial
+  z^3 + 2 z^2 + 3 z + 4
+
+   b = recip ( a )
+
+b: polynomial
+  4 z^3 + 3 z^2 + 2 z + 1
+</pre>
+
+<H5>Removing roots at the origin</H5>
+Function <A HREF="../functions/delzero.html">delzero</A> removes all zeros of a polynomial
+at the origin and returns the reduced polynomial and
+the number of removed zeros:
+<pre>
+   a = poln( [1 2 0 0], 'z' )
+
+a: polynomial
+  z^3 + 2 z^2
+
+   [b,nz] = delzero ( a )
+
+b: polynomial
+  z + 2
+nz =
+     2
+</pre>
+
+<H5>Transformation to ZPK-model</H5>
+To transform a polynomial or a pair of polynomials
+to the corresponsing zero-pole-gain model of Control System
+Toolbox the overloaded <code>zpk</code> function can be used.
+The function can be called with one argument
+<pre>
+   n = poln( [2 3], 'z' )
+
+n: polynomial
+  2 z + 3
+
+   f = zpk ( n )
+
+f: zero-pole-gain model 1 x 1
+
+      2 (z+1.5)
+
+Sampling time: 1
+</pre>
+or with two arguments (when a polynomial ratio is transformed
+into a zpk-model)
+<pre>
+   d = poln( [1 2 0], 'z' )
+
+d: polynomial
+  z^2 + 2 z
+
+   f = zpk ( n, d )
+
+f: zero-pole-gain model 1 x 1
+
+      2 (z+1.5)
+      ---------
+       z (z+2)
+
+Sampling time: 1
+</pre>
+
+<H5>Discretization</H5>
+Discretization of a polynomial means transformation to a
+discretized form. In this case roots of the polynomial are transformed to
+their discretized version so that a root <code>a<SUB>i</SUB></code> is changed
+for <code>z<SUB>i</SUB>=exp(-a<SUB>i</SUB>*T)</code>
+(function <A HREF="../functions/c2d.html">c2d</A>)
+or <code>z<SUB>i</SUB>=exp(a<SUB>i</SUB>*T)</code>
+(function <A HREF="../functions/c2z.html">c2z</A>). For example:
+<pre>
+   a = poln([-1 -2 -3],'r')
+
+a: polynomial
+  s^3 + 6 s^2 + 11 s + 6
+
+   T = 1;
+   b = c2d(a, T)
+
+b: polynomial
+  z^3 - 30.1929 z^2 + 223.0968 z - 403.4288
+
+   roots(b)
+
+ans =
+    2.7183
+    7.3891
+   20.0855
+
+   c = c2z(a, T)
+
+c: polynomial
+   z^3 - 0.553 z^2 + 0.074841 z - 0.0024788
+
+   roots(c)
+
+ans =
+    0.3679
+    0.1353
+    0.0498
+</pre>
+
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="factor.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;Factorization</td><td>&nbsp;</td>
+<td align=right>Polynomial equations&nbsp;</td>
+<td align=right width=20><a href="poleq.html"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+
+

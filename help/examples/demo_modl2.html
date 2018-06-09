@@ -1,0 +1,206 @@
+<html><head><title>Reduced-order L2-optimal control  :: Examples (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="demo_modh2int.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="demo_modl2r.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H2>Example: Reduced-order <I>L</I><SUB>2</SUB>-optimal control</H2>
+<H3>Statement of the problem</H3>
+Consider the following sampled-data tracking system:
+<CENTER><IMG SRC="images/l2_scheme.gif" WIDTH=344 HEIGHT=76 ALT=""></CENTER>
+Here <span class=tms>w</span>(<span class=tms>t</span>) is a unit impulse,
+blocks
+<span class=tms>F</span> and <span class=tms>R</span> denote a
+plant and model of the reference signal (unit step), respectively,
+with transfer functions
+<CENTER><IMG SRC="images/modl2_rf.gif" WIDTH=226 HEIGHT=46 ALT=""></CENTER>
+Digital computer has a sampling unit with period
+<span class=tms>T&nbsp;=&nbsp;0.2</span>,
+discrete controller <span class=tms>K</span> and a zero-order
+hold <span class=tms>H</span>.
+It is required to find the controller <span class=tms>K</span>
+such that the output of the system be as close as possible to the
+output of the reference system:
+<CENTER><IMG SRC="images/l2_csheme.gif" WIDTH=165 HEIGHT=49 ALT=""></CENTER>
+where
+<CENTER><IMG SRC="images/modl2_q.gif" WIDTH=128 HEIGHT=50 ALT=""></CENTER>
+The cost function to be minimized is the integral squared
+error
+<CENTER><IMG SRC="images/l2err0.gif" WIDTH=156 HEIGHT=47 ALT=""></CENTER>
+i.e., the <I>L</I><SUB>2</SUB>-norm
+of the signal:
+<CENTER><IMG SRC="images/l2_eps.gif" WIDTH=144 HEIGHT=24 ALT=""></CENTER>
+which is the difference between the outputs of the systems.
+
+<H3>Preparing data</H3>
+First, we enter the models of the command signal, plant and
+reference system:
+<pre>
+   R = tf ( 1, [1 0] );
+   F = tf ( 10, [2 1 0] );
+   Q = tf ( 1, [1 2 1] );
+   T = 0.2;
+</pre>
+Then, it is necessary to construct a model the augmented
+plant in the <A HREF="../getstart/sdstd.html">standard sampled-data system</A>.
+Operator equations have the form
+<CENTER><IMG SRC="images/l2_op.gif" WIDTH=152 HEIGHT=43 ALT=""></CENTER>
+Then, blocks of the plant in the standard system have the form
+<CENTER><IMG SRC="images/l2_pij.gif" WIDTH=230 HEIGHT=51 ALT=""></CENTER>
+Such a system can be formed as
+<pre>
+   sys = [Q*R  -F
+            R  -F];
+
+sys: transfer function 2 x 2
+
+    !        -1              10    !
+    ! ---------------    --------- !
+    ! s^3 + 2 s^2 + s    2 s^2 + s !
+    !                              !
+    !        1              -10    !
+    !        -           --------- !
+    !        s           2 s^2 + s !
+</pre>
+
+<H3>Full-order optimal controller</H3>
+To minimize the <I>L</I><SUB>2</SUB>-norm of the output
+we use
+<A HREF="../functions/sdl2.html">sdl2</A>
+<pre>
+   Kopt = sdl2 ( sys, T )
+
+Kopt: zero-pole-gain model 1 x 1
+
+      0.17973 (z+0.06196) (z+0.3496) (z-0.9048)
+      -----------------------------------------
+           (z+0.04274) (z+0.4309) (z-0.655)
+
+Sampling time: 0.2
+
+</pre>
+Compute the cost function using
+<A HREF="../functions/sdl2err.html">sdl2err</A>
+<pre>
+    sdl2err ( sys, Kopt )
+
+ans =
+  1.2116e-008
+
+</pre>
+The closed-loop poles can be found as:
+<pre>
+   rOpt = roots(charpol(sys, Kopt))
+
+rOpt =
+   0.9048
+   0.8187 + 0.0000i
+   0.8187 - 0.0000i
+  -0.4305
+  -0.0431
+</pre>
+
+<H3>Reduced-order suboptimal controller</H3>
+Then, we find a reduced-order controller. Since the plant
+has order 2, we can find a controller of order 1.
+Moreover, we also require that degree of stability of the closed-loop
+system be al least 0.1:
+<pre>
+   ordK = 1;
+   alpha = 0.1;
+   beta = Inf;
+</pre>
+Here <code>alpha</code> means minimal degree of stability and
+<code>beta</code> denotes the maximal degree of oscillation.
+<p>
+Then, we form a structure <code>option</code> and set the poles of
+the optimal controller as initial guess:
+<pre>
+   options.optPoles = rOpt;
+</pre>
+The suboptimal reduced order controller can be found using
+<A HREF="../functions/modsdl2.html">modsdl2</A>:
+<pre>
+   [Kred,cost,x] = modsdl2 ( sys, T, ordK, alpha, beta, options )
+
+Kred: zero-pole-gain model 1 x 1
+
+      0.17256 (z-0.9048)
+      ------------------
+          (z-0.6542)
+
+Sampling time: 0.2
+
+cost =
+  8.0495e-006
+
+x =
+    0.8488
+    0.0080
+    0.0384
+
+</pre>
+Here <code>x</code> is the parameter-vector, each
+component of which may be changed independently in
+the range [0,1]. Using this vector as an initial guess,
+we use local optimization to improve the controller:
+<pre>
+   options.paramGuess = x;
+   options.method = 'local';
+   [K,cost] = modsdl2 ( sys, T, ordK, alpha, beta, options )
+
+K: zero-pole-gain model 1 x 1
+
+      0.17441 (z-0.9046)
+      ------------------
+          (z-0.6507)
+
+Sampling time: 0.2
+
+cost =
+    4.752e-007
+
+</pre>
+We find that the reduced order controller yields negligible
+increase of the total error, but has order 1 instead of 3.
+Simulation show that the transients of the reference and actual systems
+almost coincide.
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;
+Polyakov K., Rosenwasser E., and Lampe B., Two-level numerical procedure for
+optimal design of digital modal controllers,
+<I>Proc. 44th IEEE Conf. Decision Contr. and ECC</I>,
+Sevilla, Spain, pp.&nbsp;4481-4486, 2005.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Polyakov, K.Yu., Polynomial Design of Optimal
+Sampled-data Control Systems, Dr. Sc. Thesis, State University of Ocean Technology,
+St. Petersburg, 2006 [in Russian].
+</p>
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="demo_modh2int.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;Optimal integral control </td><td>&nbsp;</td>
+<td align=right>Reduced-order redesign &nbsp;</td>
+<td align=right width=20><a href="demo_modl2r.html"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+

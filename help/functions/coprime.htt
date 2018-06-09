@@ -1,0 +1,76 @@
+<!--%%page.i
+&secname=coprime
+&name=
+&next=dahinorm.html
+&nextname=dahinorm
+&prev=charpol.html
+&prevname=charpol
+&content=
+<H4>coprime</H4>
+
+<H3>Syntax</H3>
+<p class="code">[a0,b0,g] = coprime ( a, b )</p>
+<p class="code">[a0,b0,g] = coprime ( a, b, tol )</p>
+
+<H3>Description</H3>
+<code>coprime</code> extracts common factors of two polynomials.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">a, b</td><td>given polynomials as arrays of coefficients or polynomial objects</td></tr>
+<tr>
+<td class="cc">tol</td><td>tolerance for cancellation (default 1e-8)</td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">a0, b0</TD>
+<TD>coprime polynomials</TD></tr>
+<tr>
+<TD class="cc">g</TD>
+<TD>the prime greatest common divisor such that <code>a=a<SUB>0</SUB>g</code>
+and <code>b=b<SUB>0</SUB>g</code></TD>
+</tr>
+</tr>
+</table>
+
+<H3>Examples</H3>
+<B>Example 1.</B> Initial data as arrays of coefficients.
+<pre>
+   a = poly([1 2 3]);
+   b = poly([2 3 4]);
+   [a0,b0,g] = coprime(a, b)
+
+a0 =
+    1.0000   -1.0000
+b0 =
+    1.0000   -4.0000
+g =
+    1.0000   -5.0000    6.0000
+</pre>
+<B>Example 2.</B> Polynomial form of initial data.
+<pre>
+   a = poln([1 2 3], 'r');
+   b = poln([2 3 4], 'r');
+   [a0,b0,g] = coprime(a, b)
+
+a0: polynomial
+  s - 1
+b0: polynomial
+  s - 4
+g: polynomial
+  s^2 - 5 s + 6
+</pre>
+                                                                                
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Kucera V., Discrete Linear Control,
+New York: Wiley, 1979.
+</p>
+
+<H3>See also</H3>
+<!--%%funref.i&name=gcd&text=<code>&nbsp;&nbsp;&nbsp;</code>Greatest common divisor of several polynomials.%%-->
+<!--%%funref.i&name=triple&text=Extraction of a common factor of three polynomials.%%-->
+
+%%-->

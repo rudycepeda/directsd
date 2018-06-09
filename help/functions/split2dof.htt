@@ -1,0 +1,68 @@
+<!--%%page.i
+&secname=split2dof
+&name=
+&next=ssquad.html
+&nextname=ssquad
+&prev=sfactor.html
+&prevname=sfactor
+&content=
+<H4>split2dof</H4>
+
+<H3>Syntax</H3>
+<p class="code">[K1,KR1,KC] = split2dof ( K, KR )</p>
+
+<H3>Description</H3>
+<code>split2dof</code> constructs a realizable version of a 2-DOF
+controller. Feedback controller <code>K</code> and feedforward controllers
+<code>KR</code> may have common unstable poles, and this does not
+cause instability of the system provided that the feedback controller
+stabilizes the control loop. This function find their common factors
+and store them into <code>KC</code>.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr><td class="cc">K</td><td>feedback controller</td></tr>
+<tr><td class="cc">KR</td><td>feedforward controller</td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr><td class="cc">K1</td><td>specific part of feedback controller</td></tr>
+<tr><td class="cc">KR1</td><td>specific part of feedforward controller</td></tr>
+<tr><td class="cc">KC</td><td>common factor of feedback and feedforward controller</td></tr>
+</table>
+
+<H3>Limitations</H3>
+<ul>
+<li>Controllers <span class=tms>K</span> and <span class=tms>K</span><SUB>R</SUB>
+are SISO systems.
+</ul>
+
+<H3>Example</H3>
+<pre>
+    T = 1;
+    K  = zpk([0.3 -0.2], [0.5 1], 1, T);
+    KR = zpk([0.6 0.9], [-0.2 1], 1, T);
+    [K1,KR1,KC] = split2dof ( K, KR )
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Polyakov, K.,
+Design of optimal 2-DOF sampled-data systems,
+<I>Automation and Remote Control</i>, vol.&nbsp;62,
+no.&nbsp;6, pp.&nbsp;934-942, 2001.
+</p>
+<p><A name="ref2"></A>[2] Polyakov K., Rosenwasser E., and Lampe B., Optimal design of
+2-DOF sampled-data systems // Proc. 13th Int. Conf. Process Control,
+Strbske Pleso, SK, June 2001.
+</p>
+<p><A name="ref3"></A>[3]&nbsp;Polyakov, K.Yu., Polynomial Design of Optimal
+Sampled-data Control Systems, Dr. Sc. Thesis, State University of Ocean Technology,
+St. Petersburg, 2006 [in Russian].
+</p>
+
+<H3>See also</H3>
+<!--%%funref.i&name=sd2dof&text=<code>&nbsp;&nbsp;&nbsp;</code>Optimization of 2-DOF sampled-data system.%%-->
+<!--%%funref.i&name=sd2doferr&text=Integral quadratic error for 2-DOF sampled-data system.%%-->
+
+%%-->

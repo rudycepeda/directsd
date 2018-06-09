@@ -1,0 +1,102 @@
+<!--%%page.i
+&secname=sdfast
+&name=
+&next=sdgh2mod.html
+&nextname=sdgh2mod
+&prev=sdahinorm.html
+&prevname=sdahinorm
+&content=
+<H4>sdfast</H4>
+
+<H3>Syntax</H3>
+<p class="code">dsys = sdfast ( sys, T )</p>
+<p class="code">dsys = sdfast ( sys, T, nmeas, ncon )</p>
+<p class="code">dsys = sdfast ( sys, T, nmeas, ncon, Nfast )</p>
+<p class="code">dsys = sdfast ( sys, T, nmeas, ncon, Nfast, type )</p>
+
+<H3>Description</H3>
+<code>sdfast</code> constructs a discrete-time equivalent model of the
+sampled-data system using fast discretization method.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">sys</td>
+<td>model of an LTI plant associated with the
+<A HREF="../getstart/sdstd.html">standard sampled-data system</A>.
+</td></tr>
+<tr>
+<td class="cc">T</td>
+<td>the sampling period</td></tr>
+<tr>
+<td class="cc">nmeas</td><td>number of measured signals (default 1)</td></tr>
+<tr>
+<td class="cc">ncon</td><td>number of control signals (default 1)</td></tr>
+<tr>
+<td class="cc">Nfast</td><td>frequency multiplication factor for fast discretization (default 5)</td></tr>
+<tr>
+<td class="cc">type</td><td>
+discretization method:
+<ul>
+<li><code>'std'</code> - standard technique, discretize input and output
+<A HREF="#ref1">[1]</A> (default)
+<LI><code>&nbsp;'l2'</code> - discretize input and preserve <I>L</I><SUB>2</SUB>-norm of the
+output <A HREF="#ref2">[2]</A>
+</td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">dsys</TD><TD>generalized plant for an equivalent
+discrete-time standard system</TD></tr>
+</table>
+
+<H3>Limitations</H3>
+<ul>
+<LI>Only for delay-free systems.
+<LI>Only for systems with zero-order hold.
+<LI> Transfer matrices <I>P</I><SUB>11</SUB>(s),
+<I>P</I><SUB>21</SUB>(s),
+and <I>P</I><SUB>22</SUB>(s) must be strictly proper,
+<I>P</I><SUB>12</SUB>(s) must be at least proper.
+</ul>
+
+<H3>Example</H3>
+<pre>
+    F = tf(1, [1 1 0]);
+    sys = [F F;-F -F];
+    T = 0.1;
+    dsys = sdfast ( sys, T );
+    K = h2reg ( dsys );
+    K = zpk ( K )
+
+K: zero-pole-gain model 1 x 1
+
+      368.2916 (z-0.4561)
+      -------------------
+           (z+0.8743)
+
+Sampling time: 0.1
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Chen, T., and B.A. Francis,
+<I>Optimal Sampled-Data Control Systems</I>.
+Berlin Heidelberg New York: Springer-Verlag, 1995.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;
+Hara S., H. Fujioka, P. Khargonekar, and Y. Yamamoto, Computational
+aspects of gain-frequency response for sampled-data systems //
+<I>Proc 34th CDC</I>, New Orleans, LA, pp.&nbsp;1784-1789, 1995.
+</p>
+
+<H3>See also</H3>
+<!--%%funref.i&name=sdh2reg&text=<code>&nbsp;&nbsp;&nbsp;</code>State-space <I>H</I><SUB>2</SUB>-optimization of sampled-data systems.%%-->
+<!--%%funref.i&name=sdh2simple&text=Equivalent discrete model in simple <I>H</I><SUB>2</SUB>-problem for sampled-data systems.%%-->
+<!--%%funref.i&name=sdgh2mod&text=<code>&nbsp;&nbsp;</code>Equivalent discrete model in generalized <I>H</I><SUB>2</SUB>-problem for sampled-data systems.%%-->
+<!--%%funref.i&name=sdl2&text=<code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><I>L</I><SUB>2</SUB>-optimization of sampled-data systems.%%-->
+<!--%%funref.i&name=sdh2&text=<code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><I>H</I><SUB>2</SUB>-optimization of sampled-data systems.%%-->
+
+%%-->
+

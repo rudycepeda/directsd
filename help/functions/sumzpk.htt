@@ -1,0 +1,49 @@
+<!--%%page.i
+&secname=sumzpk
+&name=
+&next=tf2nd.html
+&nextname=tf2nd
+&prev=striplz.html
+&prevname=striplz
+&content=
+<H4>sumzpk</H4>
+
+<H3>Syntax</H3>
+<p class="code">s = sumzpk ( f1, f2, ... )</p>
+
+<H3>Description</H3>
+<code>sumzpk</code> constructs the sum of <code>'zpk'</code>-models
+with common zeros and poles. It is more reliable than usual
+procedure.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="ccw">f1, f2, ...</td>
+<td>LTI models as objects of classes <code>'ss'</code>,
+<code>'tf'</code> or <code>'zpk'</code>, the number of arguments
+is not limited</A></td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">s</TD>
+<TD>sum of the functions in <code>'zpk'</code>-form</TD></tr>
+</table>
+
+<H3>Example</H3>
+<pre>
+   f1 = tf([1 2 3], [1 3]);
+   f2 = zpk([1 2], [-2 -3], 1);
+   s = sumzpk ( f1, f2, 1 )
+
+s: zero-pole-gain model 1 x 1
+
+      (s+4.722) (s^2  + 1.278s + 2.965)
+      ---------------------------------
+                 (s+2) (s+3)
+</pre>
+
+
+%%-->

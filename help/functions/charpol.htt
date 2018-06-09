@@ -1,0 +1,70 @@
+<!--%%page.i
+&secname=charpol
+&name=
+&next=coprime.html
+&nextname=coprime
+&prev=ch2.html
+&prevname=ch2
+&content=
+<H4>charpol</H4>
+
+<H3>Syntax</H3>
+<p class="code">p = charpol ( sys, K )</p>
+<p class="code">p = charpol ( sys, K, H )</p>
+
+<H3>Description</H3>
+<code>charpol</code> returns the characteristic polynomial of the
+control loop of the
+<A HREF="../getstart/sdstd.html">standard sampled-data system</A>
+<A HREF="#ref1">[1]</A>.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">sys</td>
+<td>model of an LTI plant associated with the
+<A HREF="../getstart/sdstd.html">standard sampled-data system</A>.
+</td></tr>
+<tr>
+<td class="cc">K</td>
+<td>feedback discrete-time controller</td></tr>
+<tr>
+<td class="cc">H</td>
+<td><A HREF="../getstart/sdstd.html#hold">generalized hold</A> given as an
+LTI continuous-time model.
+</td></tr>
+</table>
+<p>
+If the hold is not given, a zero-order hold is used by default.
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">p</TD>
+<TD>characteristic polynomial of the closed loop</TD></tr>
+</table>
+
+<H3>Example</H3>
+<pre>
+   sys = rss(2, 2, 2);
+   T = 1;
+   K = zpk([], [], 1, T);
+   H = rss(1, 1, 1);
+   H.d = 0;
+   charpol( sys, K, H )
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Chen, T., and B.A. Francis,
+<I>Optimal Sampled-Data Control Systems</I>.
+Berlin Heidelberg New York: Springer-Verlag, 1995.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Rosenwasser, E.N., and B.P. Lampe,
+<I>Computer Controlled Systems: Analysis and Design with
+Process-orientated Models</I>. London: Springer-Verlag, 2000.
+</p>
+
+<H3>See also</H3>
+<!--%%funref.i&name=sdmargin&text=Stability margin of sampled-data systems.%%-->
+
+%%-->

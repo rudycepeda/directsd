@@ -1,0 +1,137 @@
+<html><head><title> psigain (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="polquad.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="quaderr.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H4>psigain</H4>
+
+<H3>Syntax</H3>
+<p class="code">[G,GK,a0,b0] = psigain ( sys, T )</p>
+<p class="code">[G,GK,a0,b0] = psigain ( sys, T, Delta )</p>
+
+<H3>Description</H3>
+<code>psigain</code> returns the DC-gain of the parameter
+&#936; in the parameterization
+
+<table width=100% border=0>
+<tr><td align=center>
+<IMG SRC="../images/kparam.gif" WIDTH=193 HEIGHT=47 ALT="">
+</td>
+<td width=30 align=center>(1)</td>
+</tr>
+</table>
+such 
+that the error &#949; can be made zero for
+<span class=tms>t</span>&nbsp;=&nbsp;<IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="">.
+Here polynomials <I>n</I>(&#950;) and <I>d</I>(&#950;) are numerator and
+denominator of the discrete model of <I>P</I><SUB>22</SUB>(s) with
+a zero-order hold <I>H</I>(s),
+while polynomials <I>a</I><SUB>0</SUB>(&#950;) and <I>b</I><SUB>0</SUB>(&#950;)
+satisfy the polynomial equation
+
+<table width=100% border=0>
+<tr><td align=center>
+<IMG SRC="../images/a0b0delta.gif" WIDTH=223 HEIGHT=24 ALT="">
+</td>
+<td width=30 align=center>(2)</td>
+</tr>
+</table>
+where 
+&#916;(&#950) is a characteristic polynomial.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">sys</td>
+<td>model of an LTI plant associated with the
+<A HREF="../getstart/sdstd.html">standard sampled-data system</A>.
+</td></tr>
+<tr>
+<td class="cc">T</td>
+<td>the sampling period</td></tr>
+<tr>
+<td class="cc">Delta</td>
+<td>characteristic polynomial of the closed-loop sampled-data system (default &#916;(&#950)=1)
+</td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">G</TD>
+<TD>DC-gain of the function &#936; in (1) (NaN if no restriction) </TD></tr>
+<tr>
+<TD class="cc">GK</TD>
+<TD>DC-gain of the controller (NaN if no restriction)</TD></tr>
+<tr>
+<TD class="cc">a0, b0</TD>
+<TD>polynomials satisfying (2)</TD></tr>
+</table>
+
+<H3>Limitations</H3>
+<ul>
+<li>Controller <span class=tms>K</span> is a SISO system.
+<li>Zero-order hold is used as an extrapolator.
+<LI> Transfer matrices <I>P</I><SUB>11</SUB>(s), <I>P</I><SUB>21</SUB>(s),
+and <I>P</I><SUB>22</SUB>(s) must be strictly proper,
+<I>P</I><SUB>12</SUB>(s) must be at least proper.
+</ul>
+
+<H3>Example</H3>
+<pre>
+   Q = 1;
+   R = tf(1, [1 0]);
+   F = tf(1, [1 1 1]);
+   sys = [-R*Q F;R*Q -F];
+   T = 1;
+   [G,GK] = psigain(sys, T)
+
+G =
+    0.3395
+GK =
+   Inf
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Polyakov, K.Yu., Polynomial Design of Optimal
+Sampled-data Control Systems, Dr. Sc. Thesis, State University of Ocean Technology,
+St. Petersburg, 2006 [in Russian].
+</p>
+
+<H3>See also</H3>
+
+<p class=fref><code><a 
+href=modsdh2.html>modsdh2</a>&nbsp;&nbsp;</code><I>H</I><SUB>2</SUB>-optimization of modal digital 
+controllers</SUB>.</p>
+<p class=fref><code><a 
+href=modsdl2.html>modsdl2</a>&nbsp;&nbsp;</code><I>L</I><SUB>2</SUB>-optimization of modal digital 
+controllers</SUB>.</p>
+
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="polquad.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;polquad</td><td>&nbsp;</td>
+<td align=right>quaderr&nbsp;</td>
+<td align=right width=20><a href="quaderr.html"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+

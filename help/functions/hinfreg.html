@@ -1,0 +1,128 @@
+<html><head><title> hinfreg (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="h2reg.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="improper.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H4>hinfreg</H4>
+
+<H3>Syntax</H3>
+<p class="code">[K,cost,CL] = hinfreg ( sys )</p>
+<p class="code">[K,cost,CL] = hinfreg ( sys, nmeas, ncon )</p>
+<p class="code">[K,cost,CL] = hinfreg ( sys, nmeas, ncon, options )</p>
+
+<H3>Description</H3>
+<code>hinfreg</code> returns the controller <code>K</code>
+that minimizes the
+
+<I>H</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="" border=0></SUB>-norm</A> 
+of the standard LTI system,
+and the minimal value of the cost function
+<code>cost</code>.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">sys</td>
+<td>model of a continuous-time or discrete-time LTI plant associated with the
+standard system.
+</td></tr>
+<tr>
+<td class="cc">nmeas</td><td>number of measured signals (default 1)</td></tr>
+<tr>
+<td class="cc">ncon</td><td>number of control signals (default 1)</td></tr>
+<tr>
+<td class="cc">options</td>
+<td>additional parameters:
+<ul>
+<LI><code>options.tol</code> - tolerance (default 1e-4)
+<LI><code>options.verbose</code> - verbosity level (0-1, default 0)
+<LI><code>options.method</code> - solution method:
+<ul>
+<LI>'sa' - formulas by Safonov, Limebeer and Chiang (default)
+<LI>'gl' - formulas by Glover and Doyle
+</ul>
+</ul>
+</td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">K</TD>
+<TD>LTI model of controller</TD></tr>
+<tr>
+<TD class="cc">cost</TD>
+<TD>minimal value of the cost function</TD></tr>
+<tr>
+<TD class="cc">CL</TD>
+<TD>model of the optimal closed-loop system</TD></tr>
+</table>
+
+<H3>Example</H3>
+<pre>
+    sys = drss ( 2, 2, 2);
+    [K,cost,CL] = hinfreg ( sys )
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;M.G. Safonov, D.J.N. Limebeer, and R.Y. Chiang,
+Simplifying
+
+<I>H</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="" border=0></SUB>-theory 
+via loop shifting, matrix
+pencil and descriptor concept, <I>Int. J. Control</I>,
+vol.&nbsp;50, pp.&nbsp;2467-2488, 1990.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;K. Glover, and J.C. Doyle, State-space formulae for all
+stabilizing controllers that satisfy an
+
+<I>H</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="" border=0></SUB>-norm 
+bound and relations to risk sensitivity,
+<I>Systems and Control Letters</I>, vol.&nbsp;11, pp.&nbsp;167-172, 1988.
+</p>
+
+<H3>See also</H3>
+
+<p class=fref><code><a 
+href=h2reg.html>h2reg</a>&nbsp;&nbsp;</code><code>&nbsp;&nbsp;&nbsp;</code>Minimization of 
+<I>H</I><SUB>2</SUB>-norm of LTI systems.</p>
+<p class=fref><code><a 
+href=dhinf.html>dhinf</a>&nbsp;&nbsp;</code><code>&nbsp;&nbsp;&nbsp;</code>Minimization of 
+<I>H</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT=""></SUB>-norm of discrete-time 
+systems.</p>
+<p class=fref><code><a 
+href=sdahinf.html>sdahinf</a>&nbsp;&nbsp;</code><code>&nbsp;</code>Minimization of 
+<I>AH</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT=""></SUB>-norm of sampled-data 
+systems.</p>
+<p class=fref><code><a href=sdtrhinf.html>sdtrhinf</a>&nbsp;&nbsp;</code><I>AH</I><SUB><IMG 
+SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT=""></SUB>-optimization of sampled-data tracking 
+systems.</p>
+
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="h2reg.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;h2reg</td><td>&nbsp;</td>
+<td align=right>improper&nbsp;</td>
+<td align=right width=20><a href="improper.html"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+

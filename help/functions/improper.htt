@@ -1,0 +1,74 @@
+<!--%%page.i
+&secname=improper
+&name=
+&next=modsdh2.html
+&nextname=modsdh2
+&prev=hinfreg.html
+&prevname=hinfreg
+&content=
+<H4>improper</H4>
+
+<H3>Syntax</H3>
+<p class="code">[p,f0] = improper ( f )</p>
+<p class="code">[p,f0] = improper ( f, type )</p>
+
+<H3>Description</H3>
+<code>improper</code> extract improper part of a scalar transfer function.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">f</td><td>scalar LTI model</td></tr>
+<tr>
+<td class="cc">type</td><td>type of separation:
+<UL>
+<LI><code>&nbsp;&nbsp;'p'&nbsp;</code> - <code>f0</code> is proper but not necessarily strictly proper
+<LI><code>&nbsp;'sp'&nbsp;</code> - <code>f0</code> is strictly proper (default)
+<LI><code>'symm'</code> - <code>f0</code> is strictly proper and Hermitian self-conjugate
+(like spectral density)
+</UL>
+</td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">p</TD><TD>improper part (a polynomial)</TD></tr>
+<tr>
+<TD class="cc">f0</TD><TD>proper or strictly proper part</TD></tr>
+</table>
+
+<H3>Examples</H3>
+<B>Example 1.</B> Extract improper and strictly proper terms.
+<pre>
+   f = tf([5 2 3],[1 2]);
+   [p,f0] = improper ( f )
+
+p: polynomial
+  5 s - 8
+
+f0: transfer function 1 x 1
+
+        19
+      -----
+      s + 2
+</pre>
+<B>Example 2.</B> Extract improper and proper terms.
+<pre>
+   f = tf([5 2 3],[1 2]);
+   [p,f0] = improper ( f, 'p' )
+
+p: polynomial
+  5 s
+
+f0: transfer function 1 x 1
+
+      -8 s + 3
+      --------
+        s + 2
+</pre>
+
+<H3>See also</H3>
+<!--%%funref.i&name=tf2nd&text=Numerator and denonminator of a transfer function.%%-->
+
+%%-->

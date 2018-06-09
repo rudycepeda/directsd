@@ -1,0 +1,79 @@
+<!--%%epage.i
+&secname=:: Polynomials
+&name=Polynomial equations
+&next=analysis\analysis.html
+&nextname=Analysis
+&prev=misc.html
+&prevname=Miscellaneous functions
+&content=
+<H2>Polynomial equations</H2>
+<H5>Standard Diophantine equation</H5>
+The standard scalar Diophantine polynomial equation has the form
+<CENTER><IMG SRC="../images/dioph.gif" WIDTH=176 HEIGHT=20 ALT=""></CENTER>
+where <code>a</code>, <code>b</code>, and <code>c</code>
+are known polynomials, while  <code>x</code> and <code>y</code>
+are to be found. For solvability it is necessary and
+sufficient that the polynomial <code>c</code> be divisible
+by the greatest common divisor of <code>a</code> and <code>b</code>
+<A HREF="#ref1">[1]</A>.
+<p>
+If the equation is solvable, there exist a family of solutions,
+which can be parametrized in terms of a free polynomial.
+Among them there are a solution with <code>x</code> of minimal
+degree, which can be found using the function
+<A HREF="../functions/dioph.html">dioph</A>. Numerically, a linear polynomial equation is
+equivalent to a linear system of equations. For example,
+<pre>
+   a = s^2 + 3*s + 6;
+   b = 2*s + 1;
+   [x,y] = dioph(a, b, 1)
+
+x: polynomial
+  0.21053
+y: polynomial
+  - 0.10526 s - 0.26316
+</pre>
+
+<H5>Special polynomial equation</H5>
+A special polynomial equations are encounterd in polynomial solution
+algorithms for
+<!--%%hinf.i%%-->-optimization problems:
+<CENTER><IMG SRC="../images/dioph2.gif" WIDTH=228 HEIGHT=21 ALT=""></CENTER>
+Here ~ denotes the polynomial with inverse order of coefficients
+such that for
+<CENTER><IMG SRC="../images/invpol1.gif" WIDTH=263 HEIGHT=19 ALT=""></CENTER>
+we have
+<CENTER><IMG SRC="../images/invpol2.gif" WIDTH=266 HEIGHT=20 ALT=""></CENTER>
+(see function <A HREF="../functions/recip.html">recip</A>).
+This type of equation is solved by
+<A HREF="../functions/dioph2.html">dioph2</A>. For example,
+<pre>
+   a = s^2 + 3*s + 6;
+   b = 2*s + 1;
+   c = 3*s^2 + 7*s + 6;
+   [x,y] = dioph2(a, b, c)
+
+x: polynomial
+  s^2 + 2.627 s + 1.5794
+y: polynomial
+  - 0.33333 s^2 - 2.1508 s - 1.746
+</pre>
+
+<H5>Systems of polynomial equations</H5>
+Polynomial approach to <I>H</I><SUB>2</SUB>- and
+<!--%%hinf.i%%-->-optimization problems are based on
+systems of polynomial equations of the form
+<CENTER><IMG SRC="../images/diophsys.gif" WIDTH=229 HEIGHT=42 ALT=""></CENTER>
+and
+<CENTER><IMG SRC="../images/diophsys2.gif" WIDTH=281 HEIGHT=43 ALT=""></CENTER>
+These systems are solved by means of functions
+<A HREF="../functions/diophsys.html">diophsys</A> and
+<A HREF="../functions/diophsys2.html">diophsys2</A>, respectively.
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Kucera V., Discrete Linear Control,
+New York: Wiley, 1979.
+</p>
+
+%%-->
+   

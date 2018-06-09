@@ -1,0 +1,156 @@
+<html><head><title> separss (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="sector.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="separtf.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H4>separss</H4>
+
+<H3>Syntax</H3>
+<p class="code">[fs,fu,ns,nu] = separss ( f )</p>
+<p class="code">[fs,fu,ns,nu] = separss ( f, type )</p>
+<p class="code">[fs,fu,ns,nu] = separss ( f, type, stype )</p>
+<p class="code">[fs,fu,ns,nu] = separss ( f, ps )</p>
+
+<H3>Description</H3>
+<code>separss</code> performs proper separation of a rational
+function, extracting stable, antistable and neutral terms such that
+<code>f=fs+fu</code>.
+<p>
+Special syntax (the last line) is used when it is necessary to
+extract a strictly proper part with given poles.
+<p>
+The algorithm is based on state-space techniques.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">f</td>
+<td>scalar model of LTI system in <code>'ss'</code>, <code>'tf'</code>
+or <code>'zpk'</code> form</td></tr>
+<tr>
+<td class="cc">type</td>
+<td>type of separation:
+<ul>
+<LI><code>'s'</code> - with respect to the imaginary axis, stability region
+is the left half-plane (default for continuous-time models)
+<LI><code>'z'</code> - with respect to the unit circle, stability region
+is inside the unit disk  (default for discrete-time models)
+<LI><code>'d'</code> - with respect to the unit circle, stability region
+is outside the unit disk
+<LI><code>'s0'</code>, <code>'z0'</code> and <code>'d0'</code> -
+the same as <code>'s'</code>, <code>'z'</code> and <code>'d'</code>, but
+neutral poles are included in the stable term
+</ul>
+</td></tr>
+<tr>
+<td class="cc">stype</td>
+<td>defines where to place a polynomial term for non-strictly proper functions:
+<ul>
+<LI><code>'infs'</code> - polynomial term is included in the stable part (default)
+<LI><code>'infu'</code> - polynomial term is included in the antistable part
+<LI><code>'symm'</code> - symmetric distribution between the stable and antistable parts
+</ul>
+</td></tr>
+<tr>
+<td class="cc">ps</td><TD>poles that should be placed in the first block</td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">fs</TD><TD>stable term (or term containing poles at <code>ps</code>)</TD></tr>
+<tr>
+<TD class="cc">fu</TD><TD>antistable term (or term free of poles at <code>ps</code>)</TD></tr>
+<tr>
+<TD class="cc">ns</TD><TD>dimension of state space for the first term</TD></tr>
+<tr>
+<TD class="cc">nu</TD><TD>dimension of state space for the second term</TD></tr>
+</table>
+
+<H3>Examples</H3>
+<B>Example 1.</B> Standard proper separaton.
+<pre>
+     F = zpk([3 4 -5 -3], [1 -1 -2 0], 1);
+     [fs,fu] = separss ( F )
+
+fs: zero-pole-gain model 1 x 1
+
+      (s+65.76) (s+2.235)
+      -------------------
+          (s+1) (s+2)
+
+fu: zero-pole-gain model 1 x 1
+
+      -66 (s-1.364)
+      -------------
+         s (s-1)
+</pre>
+<B>Example 2.</B> Separation with neutral poles.
+<pre>
+     F = zpk([3 4 -5 -3], [1 -1 -2 0], 1);
+     [fs,fu] = separss ( F, 's0' )
+
+fs: zero-pole-gain model 1 x 1
+
+      (s-26.83) (s^2  + 4.834s + 6.708)
+      ---------------------------------
+                s (s+1) (s+2)
+
+
+fu: zero-pole-gain model 1 x 1
+
+        24
+      -----
+      (s-1)
+</pre>
+<B>Example 3.</B> Special separation.
+<pre>
+     F = zpk([3 4 -5 -3], [1 -1 -2 0], 1);
+     [fs,fu] = separss ( F, [1 -1] )
+
+fs: zero-pole-gain model 1 x 1
+
+      (s+104.5) (s-0.5452)
+      --------------------
+           (s-1) (s+1)
+
+fu: zero-pole-gain model 1 x 1
+
+      -105 (s+1.714)
+      --------------
+          s (s+2)
+</pre>
+
+<H3>See also</H3>
+
+<p class=fref><code><a href=separtf.html>separtf</a>&nbsp;&nbsp;</code>Frequency-domain separation 
+of transfer functions.</p>
+
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="sector.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;sector</td><td>&nbsp;</td>
+<td align=right>separtf&nbsp;</td>
+<td align=right width=20><a href="separtf.html"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+

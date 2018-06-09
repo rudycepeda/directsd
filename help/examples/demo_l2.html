@@ -1,0 +1,289 @@
+<html><head><title>L2-optimal tracking  :: Examples (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="demo_doubint.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="demo_c2d.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H2>Example: <I>L</I><SUB>2</SUB>-optimal tracking</H2>
+<H3>Statement of the problem</H3>
+Consider the following sampled-data tracking system:
+<CENTER><IMG SRC="images/l2_scheme.gif" WIDTH=344 HEIGHT=76 ALT=""></CENTER>
+Here <span class=tms>w</span>(<span class=tms>t</span>) is a unit impulse,
+blocks <span class=tms>F</span> and <span class=tms>R</span> denote a
+plant and model of the reference signal (unit step), respectively,
+with transfer functions
+<CENTER><IMG SRC="images/l2_rf.gif" WIDTH=224 HEIGHT=49 ALT=""></CENTER>
+It is required to find the discrete controller <span class=tms>K</span>
+such that the output of the system be as close as possible to the
+output of the reference system:
+<CENTER><IMG SRC="images/l2_csheme.gif" WIDTH=165 HEIGHT=49 ALT=""></CENTER>
+where
+<CENTER><IMG SRC="images/l2_q.gif" WIDTH=107 HEIGHT=45 ALT=""></CENTER>
+The cost function to be minimized is the integral squared
+error
+<CENTER><IMG SRC="images/l2err0.gif" WIDTH=156 HEIGHT=47 ALT=""></CENTER>
+i.e., the <I>L</I><SUB>2</SUB>-norm
+of the signal:
+<CENTER><IMG SRC="images/l2_eps.gif" WIDTH=144 HEIGHT=24 ALT=""></CENTER>
+which is the difference between the outputs of the systems.
+
+<H3>Preparing data</H3>
+First, we enter the models of the command signal, plant and
+reference system:
+<pre>
+   R  = tf ( 1, [1 0] );
+   F  = tf ( 1, [5 1 0] );
+   Q  = tf ( 1, [1 1] );
+</pre>
+Then, it is necessary to construct a model the augmented
+plant in the <A HREF="../getstart/sdstd.html">standard sampled-data system</A>.
+Operator equations have the form
+<CENTER><IMG SRC="images/l2_op.gif" WIDTH=152 HEIGHT=43 ALT=""></CENTER>
+Then, blocks of the plant in the standard system have the form
+<CENTER><IMG SRC="images/l2_pij.gif" WIDTH=230 HEIGHT=51 ALT=""></CENTER>
+Such a system can be formed as
+<pre>
+   sys = [Q*R  -F
+            R  -F];
+
+sys: transfer function 2 x 2
+
+    !    1          -1     !
+    ! -------    --------- !
+    ! s^2 + s    5 s^2 + s !
+    !                      !
+    !    1           -1    !
+    !    -       --------- !
+    !    s       5 s^2 + s !
+
+</pre>
+
+<H3>Sampled-data design</H3>
+Choose a sampling period:
+<pre>
+   T = 0.2;
+</pre>
+To minimize the <I>L</I><SUB>2</SUB>-norm
+of the error in continuous time we use
+<A HREF="../functions/sdl2.html">sdl2</A>:
+<pre>
+   Kopt = sdl2 ( sys, T )
+
+Kopt: zero-pole-gain model 1 x 1
+
+      39.2047 (z-0.9608) (z-0.1202)
+      -----------------------------
+         (z+0.5064) (z-0.006249)
+
+Sampling time: 0.2
+
+</pre>
+Since the system contains no delays, we can apply also
+the "lifting" method for the associated simple
+<I>H</I><SUB>2</SUB>-problem <A HREF="#ref1">[1]</A>.
+First, we construct an equivalent discrete-time model
+by means of <A HREF="../functions/sdh2simple.html">sdh2simple</A>:
+<pre>
+   sysH2s = sdh2simple ( sys, T );
+</pre>
+Then, the optimal controller is found using
+<A HREF="../functions/h2reg.html">h2reg</A>:
+<pre>
+   KL = zpk( h2reg(sysH2s) )
+
+KL: zero-pole-gain model 1 x 1
+
+      39.2047 (z-0.9608) (z-0.1202)
+      -----------------------------
+         (z+0.5064) (z-0.006249)
+
+Sampling time: 0.2
+
+</pre>
+As is expected, the result is the same.
+For the system with this controller,
+we compute cost function using
+<A HREF="../functions/sdl2err.html">sdl2err</A>:
+<pre>
+   sdl2err ( sys, Kopt )
+
+ans =
+  4.6824e-004
+
+</pre>
+Compute the closed-loop poles of the
+optimal sampled-data system by taking roots of
+the characteristic polynomial (see
+<A HREF="../functions/charpol.html">charpol</A>):
+<pre>
+   roots(charpol(sys,Kopt))
+
+ans =
+   -0.4306
+   -0.0431
+    0.8187
+    0.9608
+
+</pre>
+Since all of them are inside the unit disk, the system is
+stable.
+
+<H3>Redesign technique</H3>
+For comparison, we consider how the redesign technique works.
+First, we find the optimal <I>continuous-time controller</I>,
+using <A HREF="../functions/ch2.html">ch2</A>):
+<pre>
+   Kc = ch2 ( sys )
+
+Kc: zero-pole-gain model 1 x 1
+
+      5 (s+0.2)
+
+</pre>
+This means that the optimal controller contains
+differentiating term and is not causal. Then,
+using <A HREF="../functions/bilintr.html">bilintr</A>,
+we apply the Tustin transform to obtain the causal
+redesigned discrete controller:
+<pre>
+   Kc2d = bilintr ( Kc, 'tustin', T )
+
+Kc2d: zero-pole-gain model 1 x 1
+
+      51 (z-0.9608)
+      -------------
+          (z+1)
+
+Sampling time: 0.2
+
+</pre>
+We note that this controller has a pole at
+<span class=tms>&#950;&nbsp;=&nbsp;-1 </span>
+and may cause highly oscillating transients.
+<p>
+Having found the closed-loop poles
+<pre>
+   roots(charpol(sys,Kc2d))
+
+ans =
+ans =
+   -1.0015
+    0.8002
+    0.9608
+
+</pre>
+we conclude that the system is <B>unstable</B> due to
+the pole at <span class=tms>&#950;&nbsp;=&nbsp;-1.0015</span>, which is outside
+the unit disk.
+
+<H3>Discretization method</H3>
+Another approximate method supposes preliminary
+discretization of the augmented plant:
+<pre>
+   dsys = c2d ( sys, T )
+
+dsys: transfer function 2 x 2
+
+    ! 0.018731 (z+0.9355)    -0.0039472 (z+0.9868) !
+    ! -------------------    --------------------- !
+    !   (z-1) (z-0.8187)        (z-1) (z-0.9608)   !
+    !                                              !
+    !         0.2            -0.0039472 (z+0.9868) !
+    !        -----           --------------------- !
+    !        (z-1)              (z-1) (z-0.9608)   !
+
+Sampling time: 0.2
+
+</pre>
+Then, we find the optimal discrete-time controller
+for this model:
+<pre>
+   Kd = zpk( h2reg(dsys) )
+
+zero-pole-gain model 1 x 1
+
+      65.3493 (z-0.2973) (z-0.9608)
+      -----------------------------
+          (z-0.07668) (z+0.9868)
+
+Sampling time: 0.2
+
+</pre>
+The controller also has a pole at <span class=tms>&#950;&nbsp;=&nbsp;-1</span>
+so that oscillations are expected.
+The closed-loop poles
+<pre>
+   roots(charpol(sys,Kd))
+
+ans =
+   -0.9868
+    0.9608
+    0.8187
+
+</pre>
+indicate that there is a pole near the point
+<span class=tms>&#950;&nbsp;=&nbsp;-1</span>.
+
+<H3>Comparison</H3>
+The following main points should be emphasized:
+<ol>
+<LI>Controllers obtained by the three methods are
+quite different.
+<LI>The redesign method may lead to an unstable system.
+<LI>The plant discretization technique yield a controller
+that has a pole near the point &#950;&nbsp;=&nbsp;-1, which
+causes highly oscillatory motion.
+<LI>Decreasing the sampling period does not improve the
+situation with the approximate methods.
+</ol>
+Finally, the following step responses of the three systems
+are instructive:
+<CENTER><IMG SRC="images/l2_cmp.jpg" vspace=5 WIDTH=400 HEIGHT=415 ALT=""></CENTER>
+The upper two graphs are for direct sampled-data design,
+the next two characterize the redesign method, while
+the lower pair is for the discretization method.
+
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Chen, T., and B.A. Francis,
+<I>Optimal Sampled-Data Control Systems</I>.
+Berlin Heidelberg New York: Springer-Verlag, 1995.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Rosenwasser, E.N., and B.P. Lampe,
+<I>Computer Controlled Systems: Analysis and Design with
+Process-orientated Models</I>. London: Springer-Verlag, 2000.
+</p>
+<p><A name="ref3"></A>[3]&nbsp;Polyakov, K. Yu., Polynomial design of optimal sampled-data
+tracking systems, I,  II, <I>Automation and Remote Control</I>,
+2001; vol. 62, no. 2, pp. 304-316; no. 3, pp. 430-442.
+<p><A name="ref3"></A>[3]&nbsp;Polyakov, K.Yu., Polynomial Design of Optimal
+Sampled-data Control Systems, Dr. Sc. Thesis, State University of Ocean Technology,
+St. Petersburg, 2006 [in Russian].
+</p>
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="demo_doubint.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;Optimal control for double integrator </td><td>&nbsp;</td>
+<td align=right>L2-optimal redesign &nbsp;</td>
+<td align=right width=20><a href="demo_c2d.html"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+

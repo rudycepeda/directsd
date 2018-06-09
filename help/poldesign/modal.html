@@ -1,0 +1,134 @@
+<html><head><title>Reduced-order controllers :: Polynomial design (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="ahinfprob.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="limits.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H2>Reduced-order controlers</H2>
+Optimal controllers often are not suitable for
+applications for the followung reasons:
+<ul>
+<LI>They have high order, which is generally equal to
+the order of augmented plant minus the number of measured
+signals.
+<li> High order controller can be "fragile", i.e., very
+sensitive to realizing thier parameters
+<A HREF="#ref1">[1]</A>.
+<li>Stability margin of optimal systems with observers
+can be arbitrary low <A HREF="#ref2">[2]</A>.
+<LI>In some problems there are no stabilizing optimal
+controller <A HREF="#ref3">[3]</A>. This means that the
+strictly optimal system is not asymptotically stable.
+</ul>
+Therefore, for aplications it is important to design a
+reduced order controllers that provide for sufficient stability
+margin.
+<p>
+In the DirectSD Toolbox there are functions that implement
+numerical search algorithms for modal design of
+reduced-order controllers developed in <A HREF="#ref4">[4]</A>.
+Admissible stability domain
+is restricted by specifying a degree of stability
+<span class=tms>&#945;</span>
+and degree of oscillation
+<span class=tms>&#946;</span> (clipped sector in the <code>s</code>-plane).
+<CENTER><IMG SRC="../images/sector.gif" WIDTH=167 HEIGHT=149 ALT=""></CENTER>
+Desired order of controller
+<span class=tms>q</span> can also be specified such
+that <span class=tms>q</span>&nbsp;&#8805;&nbsp;<span class=tms>p-1</span>,
+where <span class=tms>p</span> denotes the order
+of the minimal realization of <I>P</I><SUB>22</SUB>(s).
+<p>
+Function <A HREF="../functions/modsdh2.html">modsdh2</A>
+searches for <I>H</I><SUB>2</SUB>-optimal reduced-order
+controller, while <A HREF="../functions/modsdl2.html">modsdl2</A>
+returns suboptimal reduced-order solution for the
+<A HREF="l2prob.html"><I>L</I><SUB>2</SUB>-problem</A>.
+For example, consider the <I>H</I><SUB>2</SUB>-problem
+for the augmented plant
+<pre>
+   F = tf(1, [1 -1]);
+   Fw = tf(1, [1 2]);
+   sys = [F*Fw F; -F*Fw -F];
+
+</pre>
+The optimal controller has order 1:
+<pre>
+   T = 1;
+   [Kopt,cost] = sdh2 ( sys, T )
+
+Kopt: zero-pole-gain model 1 x 1
+
+      1.9387 (z-0.1107)
+      -----------------
+          (z-0.1547)
+
+Sampling time: 1
+cost =
+    0.5124
+
+</pre>
+Function <A HREF="../functions/modsdh2.html">modsdh2</A>
+returns a constant controller such that performance
+deterioration is negligible:
+<pre>
+   ordK = 0;           <FONT COLOR="green">% controller order</FONT>
+   alpha = 0;          <FONT COLOR="green">% degree of stability &#945;</FONT>
+   beta = 1;           <FONT COLOR="green">% degree of oscillation &#946;</FONT>
+   [K,cost] = modsdh2 ( sys, T, ordK, alpha, beta )
+
+K: zero-pole-gain model 1 x 1
+
+      1.5993
+
+cost =
+   0.5154
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Keel L.H., Bhattacharyya S.P.,
+Robust, fragile, or optimal? //  </i>IEEE
+Trans. Automat. Contr.</i>, vol.&nbsp;AC-42, no.&nbsp;8, pp.&nbsp;1098-1105, 1997.
+</p>
+<p>
+<p><A name="ref2"></A>[2]&nbsp;Doyle J.C.,
+Guaranteed margins for LQG regulators // <i>IEEE Trans.
+Automat. Contr.</i>, vol.&nbsp;AC-23, no.&nbsp;8,
+pp.&nbsp;756-757, 1978.
+</p>
+<p><A name="ref3"></A>[3]&nbsp;Rosenwasser, E.N., and B.P. Lampe,
+<I>Computer Controlled Systems: Analysis and Design with
+Process-orientated Models</I>. London: Springer-Verlag, 2000.
+</p>
+<p><A name="ref4"></A>[4]&nbsp;Polyakov, K.Yu., Polynomial Design of Optimal
+Sampled-data Control Systems, Dr. Sc. Thesis, State University of Ocean Technology,
+St. Petersburg, 2006 [in Russian].
+</p>
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="ahinfprob.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;AHinf-optimization problem</td><td>&nbsp;</td>
+<td align=right>Limitations&nbsp;</td>
+<td align=right width=20><a href="limits.html"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+
+

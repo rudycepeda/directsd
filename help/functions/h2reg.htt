@@ -1,0 +1,85 @@
+<!--%%page.i
+&secname=h2reg
+&name=
+&next=hinfreg.html
+&nextname=hinfreg
+&prev=gcd.html
+&prevname=gcd
+&content=
+<H4>h2reg</H4>
+                                                    
+<H3>Syntax</H3>
+<p class="code">[K,cost,CL] = h2reg ( sys )</p>
+<p class="code">[K,cost,CL] = h2reg ( sys, nmeas, ncon )</p>
+<p class="code">[K,cost,CL] = h2reg ( sys, nmeas, ncon, options )</p>
+
+<H3>Description</H3>
+<code>h2reg</code> r
+eturns the controller <code>K</code>
+that minimizes the
+<!--%%hinf.i%%-->-norm</A> of the standard LTI system,
+and the minimal value of the cost function
+<code>cost</code>.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">sys</td>
+<td>model of a continuous-time or discrete-time LTI plant associated with the
+standard system.
+</td></tr>
+<tr>
+<td class="cc">nmeas</td><td>number of measured signals (default 1)</td></tr>
+<tr>
+<td class="cc">ncon</td><td>number of control signals (default 1)</td></tr>
+<tr>
+<td class="cc">options</td>
+<td>additional parameters:
+<ul>
+<LI><code>options.tol</code> - tolerance (default 1e-4)
+<LI><code>options.verbose</code> - verbosity level (0-2, default 0)
+<LI><code>options.method</code> - solution method:
+<ul>
+<LI>'sa' - formulas by Safonov and Chiang, strictly proper controllers
+(default for continuous-time systems)
+<LI>'ch' - formulas by Chen and Francis (default for discrete-time systems),
+proper controllers
+</ul>
+</ul>
+</td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">K</TD>
+<TD>LTI model of controller</TD></tr>
+<tr>
+<TD class="cc">cost</TD>
+<TD>minimal value of the cost function</TD></tr>
+<tr>
+<TD class="cc">CL</TD>
+<TD>model of the optimal closed-loop system</TD></tr>
+</table>
+
+<H3>Example</H3>
+<pre>
+    sys = drss ( 2, 2, 2);
+    [K,cost,CL] = h2reg ( sys )
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Zhou K., Doyle J.C., and Glover K.,
+<I>Robust and Optimal Control</I>, New Jersey: Prentice Hall, 1996.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Chen, T., and B.A. Francis,
+<I>Optimal Sampled-Data Control Systems</I>.
+Berlin Heidelberg New York: Springer-Verlag, 1995.
+</p>
+
+<H3>See also</H3>
+<!--%%funref.i&name=ch2&text=<code>&nbsp;&nbsp;&nbsp;&nbsp;</code><I>H</I><SUB>2</SUB>-optimization of continuous-time systems.%%-->
+<!--%%funref.i&name=sdh2&text=<code>&nbsp;&nbsp;&nbsp;</code><I>H</I><SUB>2</SUB>-optimization of sampled-data systems.%%-->
+<!--%%funref.i&name=hinfreg&text=<I>H</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT=""></SUB>-optimization of LTI systems.%%-->
+
+%%-->

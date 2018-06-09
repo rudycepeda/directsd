@@ -1,0 +1,114 @@
+<html><head><title> vec (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="triple.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="whquad.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H4>vec</H4>
+
+<H3>Syntax</H3>
+<p class="code">v = vec ( p )</p>
+<p class="code">v = vec ( p, type )</p>
+
+<H3>Description</H3>
+<code>vec</code> constructs the vector of coefficients for
+a polynomial of quasipolynomial.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">p</td>
+<td>polynomial as an array of coefficients or polynomial object</A>.
+</td></tr>
+<tr>
+<td class="cc">type</td>
+<td>type of vectorization:
+<ul>
+<LI><code>'all'</code> - all coefficients (default)
+<LI><code>&nbsp;'+'&nbsp;</code> - coefficients at non-negative powers (in ascending order)
+<LI><code>&nbsp;'-'&nbsp;</code> - coefficients at non-positive powers (in descending order)
+</ul>
+</td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">v</TD>
+<TD>constant column-vector of coefficients</TD></tr>
+</table>
+
+<H3>Examples</H3>
+<B>Example 1.</B> Polynomial given as an array of coefficients.
+<pre>
+   p = [2 1 0];
+   v = vec(p)
+
+v =
+     0
+     1
+     2
+</pre>
+<B>Example 2.</B> Polynomial given as a polynomial object.
+<pre>
+   p = 2*s^2 + s;
+   v = vec(p)
+
+v =
+     0
+     1
+     2
+</pre>
+<B>Example 3.</B> Quasipolynomial as an object.
+<pre>
+   p = 2*z^2 + z - z^-1 -2*z^-2;
+   v = vec(p)
+
+v =
+    -2
+    -1
+     0
+     1
+     2
+
+   vp = vec(p, '+')
+
+vp =
+     0
+     1
+     2
+
+   vm = vec(p, '-')
+
+vm =
+    -2
+    -1
+     0
+</pre>
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="triple.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;triple</td><td>&nbsp;</td>
+<td align=right>whquad&nbsp;</td>
+<td align=right width=20><a href="whquad.html"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+

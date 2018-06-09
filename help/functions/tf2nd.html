@@ -1,0 +1,97 @@
+<html><head><title> tf2nd (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="sumzpk.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="triple.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H4>tf2nd</H4>
+
+<H3>Syntax</H3>
+<p class="code">[n,d] = tf2nd ( f )</p>
+<p class="code">[n,d] = tf2nd ( f, var )</p>
+
+<H3>Description</H3>
+<code>tf2nd</code> extracts numerator and denominator of a
+transfer function in the form of polynomial objects.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">f</td>
+<td>LTI model of a scalar plant (an object of classes <code>'ss'</code>,
+<code>'tf'</code> or <code>'zpk'</code>)</A></td></tr>
+<tr>
+<td class="cc">var</td>
+<td>variable for polynomials: <code>'s'</code> (default for continuous-time systems),
+<code>'p'</code>, <code>'z'</code> (default for discrete-time systems),
+<code>'d'</code> or <code>'q'</code>.
+</td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">n, d</TD>
+<TD>numerator and denominator as polynomial objects</TD></tr>
+</table>
+
+<H3>Examples</H3>
+<B>Example 1.</B> State-space model:
+<pre>
+   f = rss(2,1,1);
+   [n,d] = tf2nd ( f )
+</pre>
+<B>Example 2.</B> Transfer function model:
+<pre>
+   f = tf([1 2 3], [4 5]);
+   [n,d] = tf2nd ( f )
+
+n: polynomial
+  s^2 + 2 s + 3
+d: polynomial
+  4 s + 5
+</pre>
+<B>Example 3.</B> Zero-pole-gain model.
+<pre>
+   T = 1;
+   f = zpk([1 2 3], [4 5], 1, 1);
+   [n,d] = tf2nd ( f, 'q' )
+
+n: polynomial
+  q^3 - 6 q^2 + 11 q - 6
+d: polynomial
+  q^2 - 9 q + 20
+</pre>
+
+<H3>See also</H3>
+
+<p class=fref><code><a href=improper.html>improper</a>&nbsp;&nbsp;</code>Improper part of a 
+transfer function.</p>
+
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="sumzpk.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;sumzpk</td><td>&nbsp;</td>
+<td align=right>triple&nbsp;</td>
+<td align=right width=20><a href="triple.html"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+

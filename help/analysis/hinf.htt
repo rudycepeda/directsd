@@ -1,0 +1,53 @@
+<!--%%page.i
+&secname=:: Analysis
+&name=Hinf norm
+&next=ahinf.html
+&nextname=Associated Hinf-norm
+&prev=stoch.html
+&prevname=Stochastic analysis
+&content=
+<H2><I>H</I><SUB>&#8734;</SUB> norm</H2>
+The following <I>L</I><SUB>2</SUB>-induced norm
+<CENTER><IMG SRC="../images/l2indnorm.gif" WIDTH=265 HEIGHT=47 ALT=""></CENTER>
+is usually meant by the
+<!--%%hinf.i%%-->-norm of a sampled-data system. This equals
+the supremum of <I>L</I><SUB>2</SUB>-norm of the output for
+all inputs with bounded <I>L</I><SUB>2</SUB>-norm.
+<p>
+For sampled-data systems with time delays computation of the
+<!--%%hinf.i%%-->-norm and solution of the corresponding
+optimization problem can be problematic. As an alternative,
+the <A HREF="ahinf.html">associated
+<!--%%hinf.i%%-->-norm</A> can be used.
+
+<H3>Computation</H3>
+Function <A HREF="../functions/sdhinorm.html">sdhinorm</A> returns the
+<!--%%hinf.i%%-->-norm of the <A HREF="../getstart/sdstd.html">standard sampled-data system</A>
+with continuous-time plant <code>sys</code> and discrete-time controller
+<code>K</code>:
+<pre>
+    F = tf(1, [1 1 0]);
+    sys = [F F;-F -F];
+    T = 0.1;
+    K = zpk ( 0.45, -0.89, 380, T );
+    v = sdhinorm(sys, K)
+
+v =
+    0.0092
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Chen, T., and B.A. Francis,
+<I>Optimal Sampled-Data Control Systems</I>.
+Berlin Heidelberg New York: Springer-Verlag, 1995.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Bamieh B.A., Pearson J.B.,
+A general framework for linear periodic systems
+with applications to
+<!--%%hinf.i%%--> sampled-data control //
+<I>IEEE Trans. Automat. Contr.</I>, vol.&nbsp;AC-37,
+no.&nbsp;4, pp.&nbsp;418-435, 1992.
+</p>
+
+%%-->
+

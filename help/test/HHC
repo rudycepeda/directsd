@@ -1,0 +1,396 @@
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="Getting started">
+	<param name="Local" value="getstart\getstart.html">
+</OBJECT>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Standard sampled-data system">
+		<param name="Local" value=">getstart\sdstd.html">
+	</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Deterministic problem">
+		<param name="Local" value=">getstart\determstd.html">
+	</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Stochastic problem">
+		<param name="Local" value=">getstart\stochstd.html">
+	</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="2-DOF control">
+		<param name="Local" value=">getstart\2dofstd.html">
+	</OBJECT>
+</UL>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="Polynomials">
+	<param name="Local" value="polynom\polynom.html">
+</OBJECT>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Creating polynomials">
+		<param name="Local" value=">polynom\create.html">
+	</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Internal properties of polynomials">
+		<param name="Local" value=">polynom\props.html">
+	</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Other properties of polynomials">
+		<param name="Local" value=">polynom\props2.html">
+	</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Common divisors">
+		<param name="Local" value=">polynom\gcd.html">
+	</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Derivatives">
+		<param name="Local" value=">polynom\derive.html">
+	</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Factorization">
+		<param name="Local" value=">polynom\factor.html">
+	</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Miscellaneous functions">
+		<param name="Local" value=">polynom\misc.html">
+	</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Polynomial equations">
+		<param name="Local" value=">polynom\poleq.html">
+	</OBJECT>
+</UL>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="Analysis">
+	<param name="Local" value="analysis\analysis.html">
+</OBJECT>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Stabilization">
+		<param name="Local" value=">analysis\stabil.html">
+	</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Simple H2-norm">
+		<param name="Local" value=">analysis\h2simple.html">
+	</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="H2-norm">
+		<param name="Local" value=">analysis\h2.html">
+	</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Integral quadratic error">
+		<param name="Local" value=">analysis\quaderr.html">
+	</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Stochastic analysis">
+		<param name="Local" value=">analysis\stoch.html">
+	</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Hinf norm">
+		<param name="Local" value=">analysis\hinf.html">
+	</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Associated Hinf-norm">
+		<param name="Local" value=">analysis\ahinf.html">
+	</OBJECT>
+</UL>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="Polynomial design">
+	<param name="Local" value="poldesign\poldesign.html">
+</OBJECT>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="L2-optimization problem">
+		<param name="Local" value=">poldesign\l2prob.html">
+	</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="H2-optimization problem">
+		<param name="Local" value=">poldesign\h2prob.html">
+	</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="AHinf-optimization problem">
+		<param name="Local" value=">poldesign\ahinfprob.html">
+	</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Reduced-order controllers">
+		<param name="Local" value=">poldesign\modal.html">
+	</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Limitations">
+		<param name="Local" value=">poldesign\limits.html">
+	</OBJECT>
+</UL>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="State-space design">
+	<param name="Local" value="ssdesign\ssdesign.html">
+</OBJECT>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="H2-optimization problem">
+		<param name="Local" value=">ssdesign\h2prob.html">
+	</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Hinf-optimization problem">
+		<param name="Local" value=">ssdesign\hinfprob.html">
+	</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Limitations">
+		<param name="Local" value=">ssdesign\limits.html">
+	</OBJECT>
+</UL>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="Functions - Categorical List">
+	<param name="Local" value="functions\category.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="Functions - Alphabetical List">
+	<param name="Local" value="functions\alphabet.html">
+</OBJECT>
+<UL>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="c2d">
+	<param name="Local" value="functions\c2d.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="c2z">
+	<param name="Local" value="functions\c2z.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="charpol">
+	<param name="Local" value="functions\charpol.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="coprime">
+	<param name="Local" value="functions\coprime.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="dahinorm">
+	<param name="Local" value="functions\dahinorm.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="deg">
+	<param name="Local" value="functions\deg.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="delzero">
+	<param name="Local" value="functions\delzero.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="dhinf">
+	<param name="Local" value="functions\dhinf.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="dinfnorm">
+	<param name="Local" value="functions\dinfnorm.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="dioph">
+	<param name="Local" value="functions\dioph.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="dioph2">
+	<param name="Local" value="functions\dioph2.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="diophsys">
+	<param name="Local" value="functions\diophsys.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="diophsys2">
+	<param name="Local" value="functions\diophsys2.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="dtfm">
+	<param name="Local" value="functions\dtfm.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="dtfm2">
+	<param name="Local" value="functions\dtfm2.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="factor">
+	<param name="Local" value="functions\factor.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="gcd">
+	<param name="Local" value="functions\gcd.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="h2reg">
+	<param name="Local" value="functions\h2reg.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="hinfreg">
+	<param name="Local" value="functions\hinfreg.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="improper">
+	<param name="Local" value="functions\improper.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="modsdh2">
+	<param name="Local" value="functions\modsdh2.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="modsdl2">
+	<param name="Local" value="functions\modsdl2.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="polhinf">
+	<param name="Local" value="functions\polhinf.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="polopth2">
+	<param name="Local" value="functions\polopth2.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="polquad">
+	<param name="Local" value="functions\polquad.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="psigain">
+	<param name="Local" value="functions\psigain.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="quaderr">
+	<param name="Local" value="functions\quaderr.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="recip">
+	<param name="Local" value="functions\recip.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="sd2dof">
+	<param name="Local" value="functions\sd2dof.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="sd2doferr">
+	<param name="Local" value="functions\sd2doferr.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="sdahinf">
+	<param name="Local" value="functions\sdahinf.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="sdahinorm">
+	<param name="Local" value="functions\sdahinorm.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="sdfast">
+	<param name="Local" value="functions\sdfast.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="sdgh2mod">
+	<param name="Local" value="functions\sdgh2mod.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="sdh2">
+	<param name="Local" value="functions\sdh2.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="sdh2hinf">
+	<param name="Local" value="functions\sdh2hinf.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="sdh2norm">
+	<param name="Local" value="functions\sdh2norm.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="sdh2reg">
+	<param name="Local" value="functions\sdh2reg.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="sdh2simple">
+	<param name="Local" value="functions\sdh2simple.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="sdhinfreg">
+	<param name="Local" value="functions\sdhinfreg.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="sdhinorm">
+	<param name="Local" value="functions\sdhinorm.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="sdl2">
+	<param name="Local" value="functions\sdl2.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="sdl2err">
+	<param name="Local" value="functions\sdl2err.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="sdmargin">
+	<param name="Local" value="functions\sdmargin.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="sdnorm">
+	<param name="Local" value="functions\sdnorm.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="sdsim">
+	<param name="Local" value="functions\sdsim.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="sdtrhinf">
+	<param name="Local" value="functions\sdtrhinf.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="sdtrhinferr">
+	<param name="Local" value="functions\sdtrhinferr.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="sector">
+	<param name="Local" value="functions\sector.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="separss">
+	<param name="Local" value="functions\separss.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="separtf">
+	<param name="Local" value="functions\separtf.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="sfactfft">
+	<param name="Local" value="functions\sfactfft.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="sfactor">
+	<param name="Local" value="functions\sfactor.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="split2dof">
+	<param name="Local" value="functions\split2dof.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="ssquad">
+	<param name="Local" value="functions\ssquad.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="striplz">
+	<param name="Local" value="functions\striplz.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="sumzpk">
+	<param name="Local" value="functions\sumzpk.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="tf2nd">
+	<param name="Local" value="functions\tf2nd.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="triple">
+	<param name="Local" value="functions\triple.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="vec">
+	<param name="Local" value="functions\vec.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="whquad">
+	<param name="Local" value="functions\whquad.html">
+</OBJECT>
+<LI> <OBJECT type="text/sitemap">
+	<param name="Name" value="ztrm">
+	<param name="Local" value="functions\ztrm.html">
+</OBJECT>
+</UL>

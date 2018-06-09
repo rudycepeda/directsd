@@ -1,0 +1,87 @@
+<!--%%page.i
+&secname=hinfreg
+&name=
+&next=improper.html
+&nextname=improper
+&prev=h2reg.html
+&prevname=h2reg
+&content=
+<H4>hinfreg</H4>
+
+<H3>Syntax</H3>
+<p class="code">[K,cost,CL] = hinfreg ( sys )</p>
+<p class="code">[K,cost,CL] = hinfreg ( sys, nmeas, ncon )</p>
+<p class="code">[K,cost,CL] = hinfreg ( sys, nmeas, ncon, options )</p>
+
+<H3>Description</H3>
+<code>hinfreg</code> returns the controller <code>K</code>
+that minimizes the
+<!--%%hinf.i%%-->-norm</A> of the standard LTI system,
+and the minimal value of the cost function
+<code>cost</code>.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">sys</td>
+<td>model of a continuous-time or discrete-time LTI plant associated with the
+standard system.
+</td></tr>
+<tr>
+<td class="cc">nmeas</td><td>number of measured signals (default 1)</td></tr>
+<tr>
+<td class="cc">ncon</td><td>number of control signals (default 1)</td></tr>
+<tr>
+<td class="cc">options</td>
+<td>additional parameters:
+<ul>
+<LI><code>options.tol</code> - tolerance (default 1e-4)
+<LI><code>options.verbose</code> - verbosity level (0-1, default 0)
+<LI><code>options.method</code> - solution method:
+<ul>
+<LI>'sa' - formulas by Safonov, Limebeer and Chiang (default)
+<LI>'gl' - formulas by Glover and Doyle
+</ul>
+</ul>
+</td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">K</TD>
+<TD>LTI model of controller</TD></tr>
+<tr>
+<TD class="cc">cost</TD>
+<TD>minimal value of the cost function</TD></tr>
+<tr>
+<TD class="cc">CL</TD>
+<TD>model of the optimal closed-loop system</TD></tr>
+</table>
+
+<H3>Example</H3>
+<pre>
+    sys = drss ( 2, 2, 2);
+    [K,cost,CL] = hinfreg ( sys )
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;M.G. Safonov, D.J.N. Limebeer, and R.Y. Chiang,
+Simplifying
+<!--%%hinf.i%%-->-theory via loop shifting, matrix
+pencil and descriptor concept, <I>Int. J. Control</I>,
+vol.&nbsp;50, pp.&nbsp;2467-2488, 1990.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;K. Glover, and J.C. Doyle, State-space formulae for all
+stabilizing controllers that satisfy an
+<!--%%hinf.i%%-->-norm bound and relations to risk sensitivity,
+<I>Systems and Control Letters</I>, vol.&nbsp;11, pp.&nbsp;167-172, 1988.
+</p>
+
+<H3>See also</H3>
+<!--%%funref.i&name=h2reg&text=<code>&nbsp;&nbsp;&nbsp;</code>Minimization of <I>H</I><SUB>2</SUB>-norm of LTI systems.%%-->
+<!--%%funref.i&name=dhinf&text=<code>&nbsp;&nbsp;&nbsp;</code>Minimization of <I>H</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT=""></SUB>-norm of discrete-time systems.%%-->
+<!--%%funref.i&name=sdahinf&text=<code>&nbsp;</code>Minimization of <I>AH</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT=""></SUB>-norm of sampled-data systems.%%-->
+<!--%%funref.i&name=sdtrhinf&text=<I>AH</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT=""></SUB>-optimization of sampled-data tracking systems.%%-->
+
+%%-->

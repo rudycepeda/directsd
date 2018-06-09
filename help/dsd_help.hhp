@@ -1,0 +1,77 @@
+[OPTIONS]
+Auto Index=Yes
+Compatibility=1.1 or later
+Compiled file=dsd_help.chm
+Contents file=dsd_help.hhc
+Default Window=main
+Default topic=dsd_product_page.html
+Display compile progress=Yes
+Error log file=Errlog.txt
+Full-text search=Yes
+Index file=dsd_help.hhk
+Language=0x419 Русский
+Title=test
+
+[WINDOWS]
+main="DirectSD Toolbox Help","dsd_help.hhc","dsd_help.hhk","dsd_product_page.html","dsd_product_page.html",,,,,0x61520,240,0x304e,[122,88,892,628],,,,,,,0
+
+
+[FILES]
+dsd_product_page.html
+getstart\getstart.html
+getstart\sdstd.html
+getstart\determstd.html
+getstart\stochstd.html
+getstart\2dofstd.html
+getstart\release.html
+polynom\polynom.html
+polynom\create.html
+polynom\props.html
+polynom\props2.html
+polynom\gcd.html
+polynom\derive.html
+polynom\factor.html
+polynom\misc.html
+polynom\poleq.html
+analysis\analysis.html
+analysis\stabil.html
+analysis\h2simple.html
+analysis\h2.html
+analysis\quaderr.html
+analysis\stoch.html
+analysis\hinf.html
+analysis\ahinf.html
+poldesign\poldesign.html
+poldesign\l2prob.html
+poldesign\h2prob.html
+poldesign\ahinfprob.html
+poldesign\modal.html
+poldesign\limits.html
+ssdesign\ssdesign.html
+ssdesign\h2prob.html
+ssdesign\hinfprob.html
+ssdesign\limits.html
+examples\examples.html
+examples\demo_fil1.html
+examples\demo_fil2.html
+examples\demo_fil3.html
+examples\demo_hold.html
+examples\demo_aut97.html
+examples\demo_c2d.html
+examples\demo_doubint.html
+examples\demo_hinf.html
+examples\demo_l2.html
+examples\demo_2dof.html
+examples\demo_filinf.html
+examples\demo_h2hi.html
+examples\demo_l2hi.html
+examples\demo_h2p.html
+examples\demo_l2p.html
+examples\demo_2dofp.html
+examples\demo_modh2.html
+examples\demo_modh2int.html
+examples\demo_modl2.html
+examples\demo_modl2r.html
+
+[INFOTYPES]
+

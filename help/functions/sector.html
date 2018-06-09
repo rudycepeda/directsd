@@ -1,0 +1,99 @@
+<html><head><title> sector (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="sdtrhinferr.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="separss.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H4>sector</H4>
+
+<H3>Syntax</H3>
+<p class="code">[alpha,beta] = sector ( p )</p>
+<p class="code">[alpha,beta] = sector ( p, dom )</p>
+<p class="code">[alpha,beta] = sector ( p, dom, T )</p>
+
+<H3>Description</H3>
+<code>sector</code> computes degree of stability <code>alpha</code>
+and degree of oscillation <code>beta</code> (clipped sector in the <code>s</code>-plane)
+for given roots of the characteristic polynomial.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">p</td>
+<td>roots of the characteristic polynomial</td></tr>
+<tr>
+<td class="cc">dom</td>
+<td>domain:
+<ul>
+<LI><code>'s'</code> - continuous-time systems (default)
+<LI><code>'z'</code> - discrete-time systems, forward shift operator
+<LI><code>'d'</code> - discrete-time systems, backward shift operator
+</ul>
+</td></tr>
+<tr>
+<td class="cc">T</td>
+<td>sampling period for discrete-time systems (default 1)</td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">alpha</TD>
+<TD>degree of stability for each element of <code>p</code></TD></tr>
+<tr>
+<TD class="cc">beta</TD>
+<TD>degree of oscillation for each element of <code>p</code></TD></tr>
+</table>
+
+<H3>Example</H3>
+<pre>
+   F = tf(1, [1 -1]);
+   sys = [F F; -F -F];
+   T = 1;
+   rts = roots(charpol(sys, K))
+
+rts =
+   -0.2526
+
+   [alpha,beta] = sector(rts, 'z', T)
+
+alpha =
+    1.3758
+beta =
+    2.2834
+</pre>
+
+<H3>See also</H3>
+
+<p class=fref><code><a href=modsdh2.html>modsdh2</a>&nbsp;&nbsp;</code>Design of 
+<I>H</I><SUB>2</SUB>-suboptimal modal controllers.</p>
+<p class=fref><code><a href=modsdl2.html>modsdl2</a>&nbsp;&nbsp;</code>Design of 
+<I>L</I><SUB>2</SUB>-suboptimal modal controllers.</p>
+
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="sdtrhinferr.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;sdtrhinferr</td><td>&nbsp;</td>
+<td align=right>separss&nbsp;</td>
+<td align=right width=20><a href="separss.html"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+

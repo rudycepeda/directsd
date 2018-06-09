@@ -1,0 +1,50 @@
+<!--%%epage.i
+&secname=:: State-space design
+&name=Limitations
+&next=examples\examples.html
+&nextname=Examples
+&prev=hinfprob.html
+&prevname=Hinf-optimization problem
+&content=
+<H2>Limitations</H2>
+State-space design methods for sampled-data systems
+developed in <A HREF="#ref1">[1]</A> (see also
+references therein) have some limitations:
+<ol>
+<li> The methods give no information on the structure
+of the optimal controller.
+<li> For systems with time-delay these methods can be
+hardly applicable. This version of the DirectSD toolbox
+realizes state-space algorithms only for finite-dimensional
+plants.
+<LI> Transfer matrices <I>P</I><SUB>11</SUB>(s), <I>P</I><SUB>21</SUB>(s),
+and <I>P</I><SUB>22</SUB>(s) must be strictly proper,
+<I>P</I><SUB>12</SUB>(s) must be at least proper.
+</ol>
+The most restrictive are the first and second assumptions.
+As an alternative, for systems with scalar controllers
+<I>polynomial</I> design methods can be used (see
+<A HREF="#ref2">[2]</A> and <A HREF="#ref3">[3]</A>),
+which are free of these limitations.
+<p>
+The third limitation ensures that the problems under consideration
+are well-posed. This means that the inputs are affacted only
+by finite signals and the outputs are finite also (no
+impulsive modes).
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Chen, T., and B.A. Francis,
+<I>Optimal Sampled-Data Control Systems</I>.
+Berlin Heidelberg New York: Springer-Verlag, 1995.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Rosenwasser, E.N., and B.P. Lampe,
+<I>Computer Controlled Systems: Analysis and Design with
+Process-orientated Models</I>. London: Springer-Verlag, 2000.
+</p>
+<p><A name="ref3"></A>[3]&nbsp;Polyakov, K.Yu., Polynomial Design of Optimal
+Sampled-data Control Systems, Dr. Sc. Thesis, State University of Ocean Technology,
+St. Petersburg, 2006 [in Russian].
+</p>
+
+%%-->
+

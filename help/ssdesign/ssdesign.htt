@@ -1,0 +1,37 @@
+<!--%%spage.i
+&secname=State-space design
+&name=
+&next=h2prob.html
+&next=h2prob.html
+&nextname=H2-optimization problem
+&prev=poldesign\limits.html
+&prev=poldesign\limits.html
+&prevname=Limitations
+&content=
+<H1>State-space design methods</H1><hr>
+<table width=100% border=0>
+<TR>
+<TD class="ref"><A HREF="h2prob.html"><I>H</I><SUB>2</SUB>-optimization problem</A></TD>
+<TD>
+How to compute <I>L</I><SUB>2</SUB>-optimal digital controller for
+<A HREF="../getstart/sdstd.html">standard sampled-data system</A>?
+</TD>
+</TR>
+<TR>
+<TD class="ref"><A HREF="hinfprob.html">
+<!--%%hinf.i%%-->-optimization problem</A></TD>
+<TD>
+How to compute
+<!--%%hinf.i%%-->-optimal digital controller for
+standard sampled-data system?
+</TD>
+</TR>
+<TR>
+<TD class="ref"><A HREF="limits.html">Limitations</A></TD>
+<TD>
+What are limitations of state-space design methods?
+</TD>
+</TR>
+</table>
+
+%%-->

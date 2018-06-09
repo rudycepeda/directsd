@@ -1,0 +1,59 @@
+<!--%%page.i
+&secname=dinfnorm
+&name=
+&next=dioph.html
+&nextname=dioph
+&prev=dhinf.html
+&prevname=dhinf
+&content=
+<H4>dinfnorm</H4>
+
+<H3>Syntax</H3>
+<p class="code">[cost,w] = dinfnorm ( sys )</p>
+<p class="code">[cost,w] = dinfnorm ( sys, tol )</p>
+
+<H3>Description</H3>
+<code>dinfnorm</code> returns the
+<!--%%hinf.i%%-->-norm of a discrete-time system.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">sys</td>
+<td>model of a discrete-time LTI plant</A>.
+</td></tr>
+<tr>
+<td class="cc">tol</td>
+<td>tolerance (default 1e-3)</td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">cost</TD>
+<TD>
+<!--%%hinf.i%%-->-norm of the discrete-time  system </TD></tr>
+<tr>
+<TD class="cc">w</TD>
+<TD>
+frequency at which the maximum is reached</TD></tr>
+</table>
+
+<H3>Example</H3>
+<pre>
+    sys = drss ( 2, 1, 1 );
+    [cost,w] = dinfnorm( sys )
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Bruisma, N.A., and M. Steinbuch,
+A fast algorithm to compute the
+<!--%%hinf.i%%-->-norm of a transfer function matrix,
+<I>Syst. Contr. Letters</I>, vol.&nbsp;14, pp.&nbsp;287-293, 1990.
+</p>
+
+<H3>See also</H3>
+<!--%%funref.i&name=sdahinorm&text=<I>AH</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT=""></SUB>-norm of sampled-data systems.%%-->
+<!--%%funref.i&name=sdh2norm&text=<code>&nbsp;</code><I>H</I><SUB>2</SUB>-norm of sampled-data systems.%%-->
+
+%%-->

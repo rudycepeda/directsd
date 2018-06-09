@@ -1,0 +1,91 @@
+<!--%%page.i
+&secname=diophsys
+&name=
+&next=diophsys2.html
+&nextname=diophsys2
+&prev=dioph2.html
+&prevname=dioph2
+&content=
+<H4>diophsys</H4>
+
+<H3>Syntax</H3>
+<p class="code">[x,y1,y2,err] = diophsys ( a1, b1, c1, a2, b2, c2 )</p>
+
+<H3>Description</H3>
+<code>diophsys</code> solves a system of coupled Diophantine polynomial equations
+<!--%%eqn.i&name=diophsys&w=229&h=42&no=1%%-->
+with respect to unknown polynomials <code>x</code>, <code>y1</code> and <code>y2</code>.
+Among all solutions, the solution with <code>x</code> of minimal degree
+is returned.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="ccw">a1, b1, c1, a2, b2, c2</td>
+<td>given polynomials in (1); they can be specified as arrays of
+coefficients ot polynomial objects</td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="ccw">x, y1, y2</TD>
+<TD>polynomials that solve (1)</TD></tr>
+<tr>
+<TD class="ccw">err</TD>
+<TD>solution error</TD>
+</tr>
+</tr>
+</table>
+
+<H3>Examples</H3>
+<B>Example 1.</B> Initial data as arrays of coefficients.
+<pre>
+   a1 = [1 3 6];
+   b1 = [2 1];
+   c1 = [3 7 6];
+   a2 = [7 2 1];
+   b2 = [3 2];
+   c2 = [1 1 6];
+   [x,y1,y2,err] = diophsys(a1, b1, c1, a2, b2, c2)
+
+x =
+   -8.3747   -3.5032
+y1 =
+    4.1874   13.7200   27.0189
+y2 =
+   19.5411    1.0632    4.7516
+err =
+  1.8728e-015
+</pre>
+<B>Example 2.</B> Polynomial form of initial data.
+<pre>
+   a1 = s^2 + 3*s + 6;
+   b1 = 2*s + 1;
+   c1 = 3*s^2 + 7*s + 6;
+   a2 = 7*s^2 + 2*s + 1;
+   b2 = 3*s + 2;
+   c2 = s^2 + s + 6;
+   [x,y1,y2,err] = diophsys(a1, b1, c1, a2, b2, c2)
+
+x: polynomial
+  - 8.3747 s - 3.5032
+y1: polynomial
+  4.1874 s^2 + 13.72 s + 27.0189
+y2: polynomial
+  19.5411 s^2 + 1.0632 s + 4.7516
+err =
+     0
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Kucera V., Discrete Linear Control,
+New York: Wiley, 1979.
+</p>
+
+<H3>See also</H3>
+<!--%%funref.i&name=dioph&text=<code>&nbsp;&nbsp;&nbsp;&nbsp;</code>Solution to a simple polynomial equation.%%-->
+<!--%%funref.i&name=dioph2&text=<code>&nbsp;&nbsp;&nbsp;</code>Solution to a special polynomial equation.%%-->
+<!--%%funref.i&name=diophsys2&text=Solution to a system of special polynomial equations.%%-->
+
+%%-->

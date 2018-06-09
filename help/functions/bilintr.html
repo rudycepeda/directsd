@@ -1,0 +1,114 @@
+<html><head><title> bilintr (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="alphabet.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="c2d.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H4>bilintr</H4>
+
+<H3>Syntax</H3>
+<p class="code">b = bilintr ( f )</p>
+<p class="code">b = bilintr ( f, type )</p>
+<p class="code">b = bilintr ( f, type, T )</p>
+<p class="code">b = bilintr ( f, coef )</p>
+
+<H3>Description</H3>
+<code>bilintr</code> performs bilinear transformation
+of a transfer function or zero-pole-gain model.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">f</td>
+<td>continuous-time or discrete-time LTI model</td></tr>
+<tr>
+<td class="cc">type</td>
+<td>type of transformation:
+<ul>
+<LI><code>'s2z'</code> - maps the left half-plane into the unit disk
+(default for continuous-time models)
+<LI><code>'z2s'</code> - maps the unit disk into the left half-plane
+(default for discrete-time models)
+<LI><code>'s2d'</code> - maps the right half-plane into the unit disk
+(default for continuous-time models)
+<LI><code>'d2s'</code> - maps the unit disk into the right half-plane
+(default for discrete-time models)
+<LI><code>'tustin'</code> - direct and inverse Tustin
+transform
+</ul>
+</td></tr>
+<tr>
+<td class="cc">T</td>
+<td>sampling period for Tustin transform</td></tr>
+<td class="cc">coef</td>
+<td>array of four coefficients <span class=tms>(a,b,c,d)</span>
+for general transformation
+<span class=tms>x&nbsp;=&nbsp;(ay+b)/(cy+d)</span></td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">b</TD><TD>bilinearly transformed function</TD></tr>
+</table>
+
+<H3>Example</H3>
+<pre>
+    F = tf ( 1, [1 1] );
+    bilintr ( F )
+
+ans: transfer function 1 x 1
+
+      0.5 z + 0.5
+      -----------
+           z
+
+Sampling time: 1
+
+    bilintr ( F, 'tustin', 1 )
+
+ans: transfer function 1 x 1
+
+      0.3333 z + 0.3333
+      -----------------
+          z - 0.3333
+
+Sampling time: 1
+
+    bilintr ( F, [1 2 3 4] )
+
+ans: transfer function 1 x 1
+
+      0.75 z + 1
+      ----------
+        z + 1.5
+
+Sampling time: 1
+</pre>
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="alphabet.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;Functions - Alphabetical List</td><td>&nbsp;</td>
+<td align=right>c2d&nbsp;</td>
+<td align=right width=20><a href="c2d.html"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+

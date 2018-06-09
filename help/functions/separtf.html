@@ -1,0 +1,116 @@
+<html><head><title> separtf (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="separss.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="sfactfft.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H4>separtf</H4>
+
+<H3>Syntax</H3>
+<p class="code">[fs,fu,f0] = separtf ( f )</p>
+<p class="code">[fs,fu,f0] = separtf ( f, type )</p>
+<p class="code">[fs,fu,f0] = separtf ( f, type, stype )</p>
+
+
+<H3>Description</H3>
+<code>separtf</code> performs proper separation of a rational
+function, extracting stable, antistable and neutral terms such that
+<code>f=fs+fu+f0</code>.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">f</td>
+<td>scalar model of LTI system in <code>'ss'</code>, <code>'tf'</code>
+or <code>'zpk'</code> form</td></tr>
+<tr>
+<td class="cc">type</td>
+<td>type of separation:
+<ul>
+<LI><code>'s'</code> - with respect to the imaginary axis, stability region
+is the left half-plane (default for continuous-time models)
+<LI><code>'z'</code> - with respect to the unit circle, stability region
+is inside the unit disk  (default for discrete-time models)
+<LI><code>'d'</code> - with respect to the unit circle, stability region
+is outside the unit disk
+<LI><code>'s0'</code>, <code>'z0'</code> and <code>'d0'</code> -
+the same as <code>'s'</code>, <code>'z'</code> and <code>'d'</code>, but
+neutral poles are included in the stable term
+</ul>
+</td></tr>
+<tr>
+<td class="cc">stype</td>
+<td>defines where to place a polynomial term for non-strictly proper functions:
+<ul>
+<LI><code>'infs'</code> - polynomial term is included in the stable part (default)
+<LI><code>'infu'</code> - polynomial term is included in the antistable part
+</ul>
+</td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">fs</TD><TD>stable term</TD></tr>
+<TD class="cc">fu</TD><TD>antistable term</TD></tr>
+<TD class="cc">f0</TD><TD>neutral term</TD></tr>
+</table>
+
+<H3>Example</H3>
+<pre>
+   F = tf([2 4 -1 -2], [1 -1 -2 0])
+   [fs,fu,f0] = separtf ( F )
+
+fs: transfer function 1 x 1
+
+      2 s + 2.333
+      -----------
+         s + 1
+
+fu: transfer function 1 x 1
+
+      4.667
+      -----
+      s - 2
+
+f0: transfer function 1 x 1
+
+      1
+      -
+      s
+ </pre>
+
+<H3>See also</H3>
+
+<p class=fref><code><a href=sfactor.html>sfactor</a>&nbsp;&nbsp;</code>Spectral factorization for 
+polynomials and rational functions.</p>
+<p class=fref><code><a href=separss.html>separss</a>&nbsp;&nbsp;</code>State-space separation of 
+LTI models.</p>
+
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="separss.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;separss</td><td>&nbsp;</td>
+<td align=right>sfactfft&nbsp;</td>
+<td align=right width=20><a href="sfactfft.html"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+

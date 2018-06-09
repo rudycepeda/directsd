@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- $Revision: 3.00 $  $Date: 07-Apr-2006 $ -->
+<demos>
+   <name>DirectSD Control</name>
+   <type>toolbox</type>
+   <icon>$toolbox/matlab/icons/matlabicon.gif</icon>
+   <description><![CDATA[
+<p>The DirectSD Toolbox is a collection of 
+M-files for direct analysis and design of     
+sampled-data control systems.        
+The Toolbox contains functions to perform
+both frequency-domain and state-space analysis
+and design of sampled-data systems with generalized
+holds with account for their continuous-time 
+behaviour.  Using the DirectSD Toolbox, you can also
+design reduced-order quasioptimal controllers by
+means of global search algorithms.
+</p>
+]]></description>
+
+
+<demosection>
+   <label>Sampled-data filtering</label>
+        <demoitem>
+            <label>Optimal sampled-data filtering</label>
+            <file>html/demo_fil1.html</file>
+            <callback>demo_fil1</callback>
+        </demoitem>
+        <demoitem>
+            <label>Optimal sampled-data filtering with time delay</label>
+            <file>html/demo_fil2.html</file>
+            <callback>demo_fil2</callback>
+        </demoitem>
+        <demoitem>
+            <label>Optimal sampled-data filtering for 2nd order plant</label>
+            <file>html/demo_fil3.html</file>
+            <callback>demo_fil3</callback>
+        </demoitem>
+        <demoitem>
+            <label>Using generalized hold</label>
+            <file>html/demo_hold.html</file>
+            <callback>demo_hold</callback>
+        </demoitem>
+</demosection>
+
+
+<demosection>
+   <label>Sampled-data optimal control</label>
+        <demoitem>
+            <label>Optimal ship course stabilization</label>
+            <file>html/demo_at96.html</file>
+            <callback>demo_at96</callback>
+        </demoitem>
+        <demoitem>
+            <label>H2-optimal control for delayed plants</label>
+            <file>html/demo_aut97.html</file>
+            <callback>demo_autom97</callback>
+        </demoitem>
+        <demoitem>
+            <label>Optimal control for double integrator</label>
+            <file>html/demo_doubint.html</file>
+            <callback>demo_doubint</callback>
+        </demoitem>
+        <demoitem>
+            <label>Design of L2-optimal controller</label>
+            <file>html/demo_l2.html</file>
+            <callback>demo_l2</callback>
+        </demoitem>
+        <demoitem>
+            <label>Optimal 2-DOF tracking system</label>
+            <file>html/demo_2dof.html</file>
+            <callback>demo_2dof</callback>
+        </demoitem>
+        <demoitem>
+            <label>Optimal digital redesign of a continuous-time controller</label>
+            <file>html/demo_c2d.html</file>
+            <callback>demo_c2d</callback>
+        </demoitem>
+</demosection>
+
+<demosection>
+   <label>AHinf-optimal control</label>
+        <demoitem>
+            <label>Discrete-time polynomial AHinf-optimization</label>
+            <file>html/demo_dhinf.html</file>
+            <callback>demo_dhinf</callback>
+        </demoitem>
+        <demoitem>
+            <label>H2- and AHinf-optimization for sampled-data system</label>
+            <file>html/demo_hinf.html</file>
+            <callback>demo_ait98</callback>
+        </demoitem>
+        <demoitem>
+            <label>Mixed H2/AHinf-optimization</label>
+            <file>html/demo_h2hi.html</file>
+            <callback>demo_h2hinf</callback>
+        </demoitem>
+        <demoitem>
+            <label>AHinf-optimization for tracking system</label>
+            <file>html/demo_l2hi.html</file>
+            <callback>demo_l2hinf</callback>
+        </demoitem>
+</demosection>
+
+<demosection>
+   <label>Sampled-data optimal preview control</label>
+        <demoitem>
+            <label>H2-optimal control with preview</label>
+            <file>html/demo_h2p.html</file>
+            <callback>demo_h2p</callback>
+        </demoitem>
+        <demoitem>
+            <label>L2-optimal control with preview</label>
+            <file>html/demo_l2p.html</file>
+            <callback>demo_l2p</callback>
+        </demoitem>
+        <demoitem>
+            <label>2-DOF optimal control with preview</label>
+            <file>html/demo_2dofp.html</file>
+            <callback>demo_2dofp</callback>
+        </demoitem>
+</demosection>
+
+<demosection>
+   <label>Optimal reduced-order controllers</label>
+        <demoitem>
+            <label>Quasioptimal reduced-order H2-controller</label>
+            <file>html/demo_modh2.html</file>
+            <callback>demo_modsdh2</callback>
+        </demoitem>
+        <demoitem>
+            <label>Reduced-order H2-optimal controller with an integrator</label>
+            <file>html/demo_modh2int.html</file>
+            <callback>demo_modsdh2int</callback>
+        </demoitem>
+        <demoitem>
+            <label>Quasioptimal reduced-order L2-controller</label>
+            <file>html/demo_modl2.html</file>
+            <callback>demo_modsdl2</callback>
+        </demoitem>
+        <demoitem>
+            <label>Quasioptimal reduced-order L2-redesign</label>
+            <file>html/demo_modl2r.html</file>
+            <callback>demo_modsdl2a</callback>
+        </demoitem>
+</demosection>
+
+</demos>

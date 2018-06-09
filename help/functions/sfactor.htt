@@ -1,0 +1,88 @@
+<!--%%page.i
+&secname=sfactor
+&name=
+&next=split2dof.html
+&nextname=split2dof
+&prev=sfactfft.html
+&prevname=sfactfft
+&content=
+<H4>sfactor</H4>
+
+<H3>Syntax</H3>
+<p class="code">fs = sfactor ( s )</p>
+<p class="code">fs = sfactor ( s, type )</p>
+
+<H3>Description</H3>
+<code>sfactor</code> performs spectral factorization of a
+Hermitian self-conjugate (quasi)polynomial or
+rational function. Returns a stable factor, neutral terms
+are divided equally between stable and unstable cofactors.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">s</td>
+<td>Hermitian self-conjugate (quasi)polynomial or
+rational function</td></tr>
+<tr>
+<td class="cc">type</td>
+<td>type of factorization:
+<ul>
+<LI><code>'s'</code> - with respect to the imaginary axis, stability region
+is the left half-plane (default for
+continuous-time models)
+<LI><code>'z'</code> - with respect to the unit circle, stability region
+is inside the unit disk
+<LI><code>'d'</code> - with respect to the unit circle, stability region
+is outside the unit disk (default for discrete-time models)
+</ul>
+</td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">fs</TD>
+<TD>stable spectral factor with stable inverse</TD></tr>
+</table>
+
+<H3>Examples</H3>
+<B>Example 1.</B> Continuous-time polynomial.
+<pre>
+   s = poln([1 0 2 0 9]);
+   fs = sfactor ( s )
+
+fs: polynomial
+  s^2 + 2 s + 3
+
+</pre>
+<B>Example 2.</B> Discrete-time quasipolynomial.
+<pre>
+   s = 3*z^2 + 8*z + 14 + 8*z^-1 + 3*z^-2;
+   fs = sfactor ( s )
+
+fs: polynomial
+  z^2 + 2 z + 3
+
+   fs = sfactor ( s, 'z' )
+
+fs: polynomial
+  3 z^2 + 2 z + 1
+  
+</pre>
+<B>Example 3.</B> Hermitian self-conjugate rational function.
+<pre>
+   s = tf( [-1 0 1], [1 0 -4 0 0]);
+   fs = sfactor ( s )
+
+fs: zero-pole-gain model 1 x 1
+       (s+1)
+      -------
+      s (s+2)
+</pre>
+
+<H3>See also</H3>
+<!--%%funref.i&name=factor&text=<code>&nbsp;&nbsp;</code>Polynomial factorization.%%-->
+<!--%%funref.i&name=sfactfft&text=FFT factorization of discrete-time polynomials.%%-->
+
+%%-->

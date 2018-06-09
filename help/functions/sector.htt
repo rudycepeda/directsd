@@ -1,0 +1,72 @@
+<!--%%page.i
+&secname=sector
+&name=
+&next=separss.html
+&nextname=separss
+&prev=sdtrhinferr.html
+&prevname=sdtrhinferr
+&content=
+<H4>sector</H4>
+
+<H3>Syntax</H3>
+<p class="code">[alpha,beta] = sector ( p )</p>
+<p class="code">[alpha,beta] = sector ( p, dom )</p>
+<p class="code">[alpha,beta] = sector ( p, dom, T )</p>
+
+<H3>Description</H3>
+<code>sector</code> computes degree of stability <code>alpha</code>
+and degree of oscillation <code>beta</code> (clipped sector in the <code>s</code>-plane)
+for given roots of the characteristic polynomial.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">p</td>
+<td>roots of the characteristic polynomial</td></tr>
+<tr>
+<td class="cc">dom</td>
+<td>domain:
+<ul>
+<LI><code>'s'</code> - continuous-time systems (default)
+<LI><code>'z'</code> - discrete-time systems, forward shift operator
+<LI><code>'d'</code> - discrete-time systems, backward shift operator
+</ul>
+</td></tr>
+<tr>
+<td class="cc">T</td>
+<td>sampling period for discrete-time systems (default 1)</td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">alpha</TD>
+<TD>degree of stability for each element of <code>p</code></TD></tr>
+<tr>
+<TD class="cc">beta</TD>
+<TD>degree of oscillation for each element of <code>p</code></TD></tr>
+</table>
+
+<H3>Example</H3>
+<pre>
+   F = tf(1, [1 -1]);
+   sys = [F F; -F -F];
+   T = 1;
+   rts = roots(charpol(sys, K))
+
+rts =
+   -0.2526
+
+   [alpha,beta] = sector(rts, 'z', T)
+
+alpha =
+    1.3758
+beta =
+    2.2834
+</pre>
+
+<H3>See also</H3>
+<!--%%funref.i&name=modsdh2&text=Design of <I>H</I><SUB>2</SUB>-suboptimal modal controllers.%%-->
+<!--%%funref.i&name=modsdl2&text=Design of <I>L</I><SUB>2</SUB>-suboptimal modal controllers.%%-->
+
+%%-->

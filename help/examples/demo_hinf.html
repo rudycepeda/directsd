@@ -1,0 +1,210 @@
+<html><head><title>H2- and AHinf-optimal control :: Examples (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="demo_filinf.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="demo_h2hi.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H2>Example: <I>H</I><SUB>2</SUB>- and 
+<I>AH</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="" border=0></SUB>-optimal 
+control</H2>
+<H3>Statement of the problem</H3>
+Consider the following sampled-data stochastic control
+problem:
+<CENTER><IMG SRC="images/hinf_schema.gif" WIDTH=412 HEIGHT=141 ALT=""></CENTER>
+Here <span class=tms>w</span> is a centered white noise signal
+with unit intensity. The plant model consists of
+the two blocks with transfer functions
+<CENTER><IMG SRC="images/hinf_f1f2.gif" WIDTH=231 HEIGHT=45 ALT=""></CENTER>
+It is required to find digital controller <span class=tms>K</span>
+minimizing
+(in the steady-state mode for <I>r</I>(t)&nbsp;=&nbsp;0) the cost function
+<CENTER><IMG SRC="images/dint_j.gif" WIDTH=109 HEIGHT=22 ALT=""></CENTER>
+where <SUB><IMG SRC="images/dint_ve.gif" WIDTH=18 HEIGHT=17 ALT=""></SUB>
+and <SUB><IMG SRC="images/dint_vu.gif" WIDTH=18 HEIGHT=17 ALT=""></SUB>
+denote the average variances of the <A HREF="../getstart/stochstd.html">periodically nonstationary
+signals</A> <I>e</I>(t) and <I>u</I>(t), respectively, and
+<SUB><IMG SRC="images/dint_rho.gif" WIDTH=19 HEIGHT=21 ALT=""></SUB>&nbsp;=&nbsp;0.01
+is a nonnegative constant.
+
+<H3>Preparing data</H3>
+First, we enter the plant transfer functions:
+<pre>
+   F1 = tf ( 0.051, [25 1] );
+   F2 = tf ( 1, [1 0] );
+</pre>
+Then, it is necessary to construct a model the augmented
+plant in the <A HREF="../getstart/sdstd.html">standard sampled-data system</A>.
+Operator equations have the form
+<CENTER><IMG SRC="images/hinf_op.gif" WIDTH=194 HEIGHT=73 ALT=""></CENTER>
+Then, blocks of the plant in the standard system have the form
+<CENTER><IMG SRC="images/hinf_pij.gif" WIDTH=333 HEIGHT=85 ALT=""></CENTER>
+Such a system can be formed as
+<pre>
+   rho = 0.1;
+   sys = [-F2 -F2*F1
+            0   rho
+          -F2 -F2*F1];
+
+sys: transfer function 3 x 2
+
+    ! -1      -0.051   !
+    ! --    ---------- !
+    !  s    25 s^2 + s !
+    !                  !
+    !  0        0.1    !
+    !                  !
+    ! -1      -0.051   !
+    ! --    ---------- !
+    !  s    25 s^2 + s !
+</pre>
+
+<H3><I>H</I><SUB>2</SUB>-optimal controller</H3>
+Choose a sampling period:
+<pre>
+   T = 1;
+</pre>
+To minimize the <I>H</I><SUB>2</SUB>-norm
+of the system (this is equivalent to minimizing
+the chosen cost function), we use
+<A HREF="../functions/sdh2.html">sdh2</A>:
+<pre>
+   K2 = sdh2 ( sys, T )
+
+
+K2: zero-pole-gain model 1 x 1
+
+      9.2043 (z-0.9608)
+      -----------------
+          (z-0.8048)
+
+Sampling time: 1
+
+</pre>
+For the system with this controller,
+we compute the <I>H</I><SUB>2</SUB>-norm and
+
+<I>AH</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="" border=0></SUB>-norm, 
+using the functions
+<A HREF="../functions/sdh2norm.html">sdh2norm</A> and
+<A HREF="../functions/sdahinorm.html">sdahinorm</A>,
+respectively:
+<pre>
+   sdh2norm(sys, K2)
+
+ans =
+    3.2563
+
+   sdahinorm(sys, K2)
+
+ans =
+   11.4122
+
+</pre>
+For comparison, we compute also the 
+<I>H</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="" border=0></SUB>
+(or 
+<I>L</I><SUB>2</SUB>-induced norm)
+<A HREF="../functions/sdhinorm.html">sdhinorm</A>,
+<pre>
+   sdhinorm ( sys, K2 )
+
+ans =
+   11.4082
+
+</pre>
+which is very close to the 
+<I>AH</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="" border=0></SUB>-norm.
+
+<H3>
+<I>AH</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="" border=0></SUB>-optimal 
+controller</H3>
+Then we solve the associated 
+<I>AH</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="" border=0></SUB>-problem
+for 
+the stochastic problem considered above.
+Using
+<A HREF="../functions/sdahinf.html">sdahinf</A>
+yields:
+<pre>
+   Kinf = sdahinf(sys, T)
+
+Kinf: zero-pole-gain model 1 x 1
+
+      72.4068 (z-0.9608)
+      ------------------
+          (z+0.07181)
+
+Sampling time: 1
+
+</pre>
+The norms for this system are computed as
+<pre>
+   sdh2norm (sys, Kinf)
+
+ans =
+    7.6683
+
+   sdahinorm (sys, Kinf)
+
+ans =
+    7.6683
+
+   sdhinorm (sys, Kinf)
+
+ans =
+    7.6628
+</pre>
+
+<H3>Comparison</H3>
+To compare the two controllers, we measure the amplitude
+<span class=tms>a</span>(<span class=tms>&#969;</span>)
+of the closed-loop system output under harmonic excitation
+<CENTER><IMG SRC="images/hinf_wt.gif" WIDTH=101 HEIGHT=22 ALT=""></CENTER>
+The curves are shown below:
+<CENTER><IMG SRC="images/hinf_cmp.jpg" vspace=5  WIDTH=360 HEIGHT=328 ALT=""></CENTER>
+Obviously, attenuation of harmonic disturbances is almost
+equal for high frequencies, while 
+<I>AH</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="" border=0></SUB>-optimal
+controller 
+works better for the low frequency range.
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Chen, T., and B.A. Francis,
+<I>Optimal Sampled-Data Control Systems</I>.
+Berlin Heidelberg New York: Springer-Verlag, 1995.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Rosenwasser, E.N., and B.P. Lampe,
+<I>Computer Controlled Systems: Analysis and Design with
+Process-orientated Models</I>. London: Springer-Verlag, 2000.
+</p>
+<p><A name="ref3"></A>[3]&nbsp;Polyakov, K.Yu., Polynomial Design of Optimal
+Sampled-data Control Systems, Dr. Sc. Thesis, State University of Ocean Technology,
+St. Petersburg, 2006 [in Russian].
+</p>
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="demo_filinf.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;AHinf-optimal prediction</td><td>&nbsp;</td>
+<td align=right>Mixed H2/AHinf-optimization&nbsp;</td>
+<td align=right width=20><a href="demo_h2hi.html"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+

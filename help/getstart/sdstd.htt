@@ -1,0 +1,165 @@
+<!--%%page.i
+&secname=:: Getting started
+&name=Standard sampled-data system
+&next=determstd.html
+&nextname=Deterministic problem
+&prev=getstart.html
+&prevname=Getting started
+&content=
+<H2>Standard sampled-data system</H2>
+<P>All functions of the DirectSD Toolbox use the structure
+called the <I>standard sampled-data system</I> <A HREF="#ref1">[1]</A>.
+<CENTER><IMG SRC="../images/sdstd.gif" WIDTH=200 HEIGHT=147 ALT=""></CENTER>
+Continuous-time plant is described by the following operator
+equations
+<CENTER><IMG SRC="../images/opereq.gif" WIDTH=163 HEIGHT=45 ALT=""></CENTER>
+Here <span class=tms>P<SUB>ij</SUB></span>(<span class=tms>s</span>)
+for <span class=tms>i,j&nbsp;=&nbsp;1,2</span> denote
+transfer functions of the corresponding blocks;
+external disturbance, error, feedback and control signals are
+denoted by <span class=tms>w</span>,
+<span class=tms>&#949;</span>, <span class=tms>y</span> and
+<span class=tms>u</span>, respectively.
+The sampling units generates discrete-time sequence
+<span class=tms>y<SUB>k</SUB></span>&nbsp;=&nbsp;<span class=tms>y</span>(<span class=tms>kT</span>),
+where <span class=tms>T</span> is the sampling period.
+Linear discrete controller <span class=tms>K</span> transforms this sequence
+into the control sequence <span class=tms>v<SUB>k</SUB></span>.
+</p>
+<a name="hold"></a><H3>Generalized hold</H3>
+Generalized hold <span class=tms>H</span> reconstructs the
+continuous-time control signal <span class=tms>u</span>:
+<CENTER><IMG SRC="../images/v2u.gif" WIDTH=316 HEIGHT=30 ALT=""></CENTER>
+where <span class=tms>h</span>(<span class=tms>t</span>) is the form of the impulse:
+<CENTER>
+<IMG SRC="../images/ht.gif" WIDTH=198 HEIGHT=29 ALT="">
+</CENTER>
+Here <span class=tms>A</span>,
+<span class=tms>B</span> and <span class=tms>C</span> are constant matrices of
+compatible dimensions. By default, a zero-order hold
+is used, for which
+<CENTER><IMG SRC="../images/gh_ht0.gif" WIDTH=155 HEIGHT=23 ALT=""></CENTER>
+<H3>Limitations</H3>
+<ul>
+<li>
+Signals <I>y</I> and <I>u</I> are assumed to be scalar, so that
+controller <span class=tms>K</span> is scalar as well.
+<LI> Transfer matrices
+<span class=tms>P<SUB>11</SUB></span>(<span class=tms>s</span>),
+<span class=tms>P<SUB>21</SUB></span>(<span class=tms>s</span>),
+and
+<span class=tms>P<SUB>22</SUB></span>(<span class=tms>s</span>)
+must be strictly proper,
+<span class=tms>P<SUB>12</SUB></span>(<span class=tms>s</span>)
+must be at least proper.
+</ul>
+
+<H3>Example</H3>
+Consider the following sampled-data system:
+<CENTER><IMG SRC="../images/simplestd.gif" vspace=5 WIDTH=319 HEIGHT=138 ALT=""></CENTER>
+Here <span class=tms>F</span> denotes a plant to be controller,
+<span class=tms>F<SUB>w</SUB></span> is a shapinhg filter
+excited by an exogenous signal <span class=tms>w</span>(t).
+Digital part consists of a sampling unit with period <span class=tms>T</span>,
+digital controller with transfer function <span class=tms>K</span>(<span class=tms>z</span>)
+and a hold device <span class=tms>H</span>.
+<p>
+The system has single input <span class=tms>w</span> and
+single output <span class=tms>&#949;</span>. The operator equations have the form:
+<CENTER><IMG SRC="../images/simstd_op.gif" WIDTH=172 HEIGHT=47 ALT=""></CENTER>
+so that the blocks of the standard systems are given by
+<CENTER><IMG SRC="../images/simstd_pij.gif" WIDTH=252 HEIGHT=54 ALT=""></CENTER>
+Assume that
+<CENTER><IMG SRC="../images/simstd_ffw.gif" WIDTH=270 HEIGHT=48 ALT=""></CENTER>
+Then, the plant can be specified as:
+<pre>
+    F  = tf ( 1, [25 1 0] );
+    Fw = tf ( 2, [1 2] );
+    sys = [ F*Fw  F
+           -F*Fw -F]
+
+sys: transfer function 2 x 2
+
+    !           2                   1     !
+    ! ---------------------    ---------- !
+    ! 25 s^3 + 51 s^2 + 2 s    25 s^2 + s !
+    !                                     !
+    !           -2                 -1     !
+    ! ---------------------    ---------- !
+    ! 25 s^3 + 51 s^2 + 2 s    25 s^2 + s !
+
+</pre>
+Let the sampling period be <span class=tms>T</span>&nbsp;=&nbsp;1
+and the controller be
+<CENTER><IMG SRC="../images/simstd_k.gif" WIDTH=122 HEIGHT=42 ALT=""></CENTER>
+which can be entered as follows:
+<pre>
+    T  = 1;
+    K = tf ([1 -0.5], [1 -0.2], T);
+</pre>
+By default, it is assumed that the hold device
+<span class=tms>H</span> is a zero-order hold.
+<p>
+Characteristic polynomial for this system can be found
+using <A HREF="../functions/charpol.html">charpol</A>:
+<pre>
+   cp = charpol ( sys, K )
+
+cp: polynomial
+  z^3 - 2.1411 z^2 + 1.3626 z - 0.2019
+
+</pre>
+It can be easily found that all its roots are inside the unit disk
+so that the system is stable:
+<pre>
+    roots(cp)
+
+ans =
+   0.2115
+   0.9648 + 0.1537i
+   0.9648 - 0.1537i
+
+</pre>
+The <I>H</I><SUB>2</SUB>-norm of the system
+can be found
+using <A HREF="../functions/sdh2norm.html">sdh2norm</A>:
+<pre>
+   sdh2norm ( sys, K )
+
+ans =
+    0.8332
+
+</pre>
+Using <A HREF="../functions/sdh2.html">sdh2</A> one can
+find the optimal controller minimizing the <I>H</I><SUB>2</SUB>-norm:
+<pre>
+   Kopt = sdh2 ( sys, T )
+
+Kopt: zero-pole-gain model 1 x 1
+
+      105.4099 (z-0.3867) (z-0.1501)
+      ------------------------------
+           (z+0.9186) (z-0.1347)
+
+Sampling time: 1
+
+</pre>
+For the optimal <span class=tms>K</span> we have
+<pre>
+    sdh2norm ( sys, Kopt )
+
+ans =
+    0.0292
+
+</pre>
+i.e., the <I>H</I><SUB>2</SUB>-norm was decreased
+more than 28 times.
+
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Chen, T., and B.A. Francis,
+<I>Optimal Sampled-Data Control Systems</I>.
+Berlin Heidelberg New York: Springer-Verlag, 1995.
+</p>
+
+%%-->

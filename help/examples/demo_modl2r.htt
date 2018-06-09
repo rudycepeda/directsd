@@ -1,0 +1,199 @@
+<!--%%epage.i
+&secname=:: Examples
+&name=Reduced-order redesign 
+&next=functions\category.html
+&nextname=Functions - Categorical List
+&prev=demo_modl2.html
+&prevname=Reduced-order L2-optimal control 
+&content=
+<H2>Example: Reduced-order redesign</H2>
+<H3>Statement of the problem</H3>
+If there is a good continuous-time controller, it is
+often reasonable to discretize it using a redesign
+technique when transforming to a computer realization.
+Consider the following continuous-time system with
+controller in feedback:
+<CENTER><IMG SRC="images/modl2r_cscheme.gif" WIDTH=202 HEIGHT=84 ALT=""></CENTER>
+Here <span class=tms>r</span> is a unit step (reference command signal)
+with the model
+<CENTER><IMG SRC="images/c2d_r.gif" WIDTH=80 HEIGHT=45 ALT=""></CENTER>
+so that <span class=tms>w</span>(t) is a unit impulse.
+Blocks <span class=tms>F</span> and
+<span class=tms>K<SUB>c</SUB></span> denote
+plant and controller, respectively, with transfer functions
+<CENTER><IMG SRC="images/modl2r_fkc.gif" WIDTH=264 HEIGHT=42 ALT=""></CENTER>
+It is required to replace the continuous-time controller
+by a digital one with period <span class=tms>T</span>&nbsp;=&nbsp;0.5 and a
+zero-order hold <span class=tms>H</span>.
+<CENTER><IMG SRC="images/modl2r_scheme.gif" WIDTH=271 HEIGHT=82 ALT=""></CENTER>
+The cost function to be minimized is the integral squared
+error between step responses of original (continuous-time)
+and redesigned sampled-data systems in continuous time.
+This can be computed as the <I>L</I><SUB>2</SUB>-norm
+of the error
+<CENTER><IMG SRC="images/c2d_err.gif" WIDTH=143 HEIGHT=22 ALT=""></CENTER>
+between the outputs of the systems.
+
+<H3>Preparing data</H3>
+First, we enter the model of command signal
+<pre>
+   R  = tf ( 1, [1 0] );
+</pre>
+and the plant and controller transfer functions:
+<pre>
+   F  = tf ( 1, [1 -1 0] );
+   Kc = tf ( [5 1], [1 3] );
+</pre>
+and obtain transfer function of the original closed-loop system:
+<pre>
+   Q = minreal(feedback(F*Kc,1));
+</pre>
+Then, it is necessary to construct a model the augmented
+plant in the <A HREF="../getstart/sdstd.html">standard sampled-data system</A>.
+Operator equations have the form
+<CENTER><IMG SRC="images/modl2r_op.gif" WIDTH=219 HEIGHT=47 ALT=""></CENTER>
+Then, blocks of the plant in the standard system have the form
+<CENTER><IMG SRC="images/modl2r_pij.gif" WIDTH=265 HEIGHT=55 ALT=""></CENTER>
+Such a system can be formed as
+<pre>
+   sys = [(Q-F)*R  F
+            F*R   -F]
+
+sys: transfer function 2 x 2
+
+    !        -5 s - 1             1    !
+    ! ---------------------    ------- !
+    ! s^6 + s^5 - s^3 - s^2    s^2 - s !
+    !                                  !
+    !           1                 -1   !
+    !       ---------          ------- !
+    !       s^3 - s^2          s^2 - s !
+</pre>
+
+<H3>Full-order optimal controller</H3>
+To minimize the cost function we use
+<A HREF="../functions/sdl2.html">sdl2</A>
+<pre>
+   Kopt = sdl2 ( sys, T )
+
+Kopt: zero-pole-gain model 1 x 1
+
+      7.5302 (z-0.9048) (z^2  - 0.5074z + 0.0924) (z^2  - 0.05378z + 0.586)
+      ---------------------------------------------------------------------
+          (z+1.064) (z^2  - 0.5462z + 0.09074) (z^2  + 0.3082z + 0.4072)
+
+Sampling time: 0.5
+
+</pre>
+Compute the average error using
+<A HREF="../functions/sdl2err.html">sdl2err</A>
+<pre>
+   err = sdl2err ( sys, Kopt )
+
+err =
+    2.7771e-004
+
+</pre>
+The closed-loop poles can be found as:
+<pre>
+   rOpt = roots(charpol(sys, Kopt))
+
+rOpt =
+   0.7069 + 0.3268i
+   0.7069 - 0.3268i
+   0.6065
+  -0.0000
+  -0.0425
+  -0.4278
+  -0.8467
+
+</pre>
+
+<H3>Reduced-order suboptimal controller</H3>
+The optimal controller has order 5 and we will try to
+design a simpler controller. Since the plant
+has order 2, we can expect to find a controller of order 1.
+Nevertheless, in this system not every controller
+ensure zero steady-state error, so one degree of freedom
+is to be spent for this purpose. Finally, we design
+a controller of order 2.
+<p>
+To guarantee stability of the closed loop, we require that
+degree of stability be at least 0.001, while degree of oscillation
+is not restricted. Hence,
+<pre>
+   ordK = 2;
+   alpha = 0.001;
+   beta = Inf;
+</pre>
+Here <code>alpha</code> means minimal degree of stability and
+<code>beta</code> denotes the maximal degree of oscillation.
+<p>
+Then, we form a structure <code>option</code> and set the poles of
+the optimal controller as initial guess:
+<pre>
+   options.optPoles = rOpt;
+</pre>
+The suboptimal reduced order controller can be found using
+<A HREF="../functions/modsdl2.html">modsdl2</A>:
+<pre>
+   [Kred,cost,x] = modsdl2 ( sys, T, ordK, alpha, beta, options )
+
+Kred: zero-pole-gain model 1 x 1
+
+      5.8114 (z-0.9036) (z-0.2313)
+      ----------------------------
+          (z+0.9467) (z-0.3362)
+
+Sampling time: 0.5
+
+cost =
+    0.0248
+
+x =
+    0.8035
+    0.0598
+    0.2429
+    0.7472
+
+</pre>
+Here <code>x</code> is the parameter-vector, each
+component of which may be changed independently in
+the range [0,1]. Using this vector as an initial guess,
+we use local optimization to improve the controller:
+<pre>
+   options.paramGuess = x;
+   options.method = 'local';
+   [K,cost] = modsdl2 ( sys, T, ordK, alpha, beta, options )
+
+K: zero-pole-gain model 1 x 1
+
+      6.3134 (z-0.9051) (z-0.5441)
+      ----------------------------
+          (z+0.9615) (z-0.5825)
+
+Sampling time: 0.5
+
+cost =
+    0.0059
+
+</pre>
+So we found a reduced order controller, which
+has order 2 instead of 5. Though the cost function increases,
+simulation show that reference and real processes are
+very close:
+<CENTER><IMG SRC="images/modl2r_cmp.jpg" WIDTH=395 HEIGHT=286 vspace=5 ALT=""></CENTER>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;
+Polyakov K., Rosenwasser E., and Lampe B., Two-level numerical procedure for
+optimal design of digital modal controllers,
+<I>Proc. 44th IEEE Conf. Decision Contr. and ECC</I>,
+Sevilla, Spain, pp.&nbsp;4481-4486, 2005.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Polyakov, K.Yu., Polynomial Design of Optimal
+Sampled-data Control Systems, Dr. Sc. Thesis, State University of Ocean Technology,
+St. Petersburg, 2006 [in Russian].
+</p>
+
+%%-->

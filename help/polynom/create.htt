@@ -1,0 +1,99 @@
+<!--%%page.i
+&secname=:: Polynomials
+&name=Creating polynomials
+&next=props.html
+&nextname=Internal properties of polynomials
+&prev=polynom.html
+&prevname=Polynomials
+&content=
+<H1>Creating polynomials</H1><hr>
+<H2>Creating polynomials</H2>
+<H5>Using array of coefficients</H5>
+Polynomials can be created using
+array of coefficients or roots. For example, the command
+<pre>
+    P = poln ( [2 -10 12] )
+</pre>
+creates the polynomial
+<pre>
+P: polynomial
+  2 s^2 - 10 s + 12
+</pre>
+By default, the variable <code>s</code> is used. Other possible variables
+(<code>s</code>, <code>p</code>, <code>z</code>, <code>d</code> and <code>q</code> are allowed) can be
+specified as the second parameter of the constructor:
+<pre>
+    P = poln([2 -10 12], 'z')
+
+P: polynomial
+  2 z^2 - 10 z + 12
+</pre>
+
+<H5>Using special variables</H5>
+Special pre-defined variables <code>s</code>, <code>p</code>,
+<code>z</code>, <code>d</code> and <code>q</code>
+(realized as <code>m</code>-files) can also be used
+<pre>
+    P = 2*s^2 - 10*s + 12
+
+P: polynomial
+  2 s^2 - 10 s + 12
+</pre>
+
+<H5>Using roots</H5>
+Sometimes it is very important to specify roots of the polynomial
+instead of coefficients. Then, the second parameter should
+start with<code>'r'</code>:
+<pre>
+    P = poln ( [2 3], 'r' )
+
+P: polynomial
+  s^2 - 5 s + 6
+
+    P = poln ( [2 3], 'rz' )
+
+P: polynomial
+  z^2 - 5 z + 6
+  
+</pre>
+Roots of polynomials are stored as a data field of the object.
+If the roots are known exactly, such a representation
+makes it possible to enhance numerical properties of
+computation algorithms, for example, when cancelling a ratio of
+polynomials.
+
+<H2>Creating Quasipolynomials</H2>
+Using the same approach, it is possible to create
+<B>quasipolynomials</B>, i.e., rational functions
+having poles only at the origin. In this case, only variables
+<code>z</code>, <code>d</code> and <code>q</code> can be used.
+The third optional
+parameter of the constructor defines the so-called <I>shift</I>, i.e.,
+the least negative degree with inverse sign. For example,
+<pre>
+    P = poln ( [2 -10 12], 'z', 2 )
+
+P: quasipolynomial
+  2 - 10 z^-1 + 12 z^-2
+
+</pre>
+Special pre-defined variables <code>s</code>, <code>p</code>,
+<code>z</code>, <code>d</code> and <code>q</code> can be used:
+<pre>
+    Q = z + 1 + z^-1
+
+Q: quasipolynomial
+  z + 1 + z^-1
+</pre>
+
+Quasipolynomials can also be defined via roots:
+<pre>
+    Q = poln([2 3], 'rz', 2)
+
+Q: quasipolynomial
+  1 - 5 z^-1 + 6 z^-2
+</pre>
+
+
+
+%%-->

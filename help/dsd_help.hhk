@@ -1,0 +1,238 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML>
+<HEAD>
+<meta name="GENERATOR" content="Microsoft&reg; HTML Help Workshop 4.1">
+<!-- Sitemap 1.0 -->
+</HEAD><BODY>
+<UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="2-DOF sampled-data systems">
+		<param name="Name" value="2-DOF control :: Getting started (DirectSD Toolbox)">
+		<param name="Local" value="getstart\2dofstd.html">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="introduction">
+			<param name="Name" value="2-DOF control :: Getting started (DirectSD Toolbox)">
+			<param name="Local" value="getstart\2dofstd.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="optimal design">
+			<param name="Name" value=" 2-DOF optimal tracking  (DirectSD Toolbox)">
+			<param name="Local" value="examples\demo_2dof.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="preview control">
+			<param name="Name" value=" Optimal 2-DOF preview control  (DirectSD Toolbox)">
+			<param name="Local" value="examples\demo_2dofp.html">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="DirectSD Toolbox">
+		<param name="Local" value="dsd_product_page.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Filtering">
+		<param name="Name" value=" Reconstructing a first-order process  (DirectSD Toolbox)">
+		<param name="Local" value="examples\demo_fil1.html">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="AHinf-optimal prediction">
+			<param name="Name" value=" AHinf-optimal prediction  (DirectSD Toolbox)">
+			<param name="Local" value="examples\demo_filinf.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="first-order process">
+			<param name="Name" value=" Reconstructing a first-order process  (DirectSD Toolbox)">
+			<param name="Local" value="examples\demo_fil1.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="second-order process">
+			<param name="Name" value=" Reconstructing a second-order process  (DirectSD Toolbox)">
+			<param name="Local" value="examples\demo_fil3.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="time-delayed systems">
+			<param name="Name" value=" Sampled-data filtering with delay  (DirectSD Toolbox)">
+			<param name="Local" value="examples\demo_fil2.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="with generalized hold">
+			<param name="Name" value=" Using generalized hold  (DirectSD Toolbox)">
+			<param name="Local" value="examples\demo_hold.html">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Generalized hold">
+		<param name="Name" value=" Using generalized hold  (DirectSD Toolbox)">
+		<param name="Local" value="examples\demo_hold.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Norm">
+		<param name="Name" value="H2-norm :: Analysis (DirectSD Toolbox)">
+		<param name="Local" value="analysis\h2.html">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="associated Hinf-norm">
+			<param name="Name" value="Associated Hinf-norm :: Analysis (DirectSD Toolbox)">
+			<param name="Local" value="analysis\ahinf.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="H2-norm">
+			<param name="Name" value="H2-norm :: Analysis (DirectSD Toolbox)">
+			<param name="Local" value="analysis\h2.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Hinf-norm">
+			<param name="Name" value="Hinf norm :: Analysis (DirectSD Toolbox)">
+			<param name="Local" value="analysis\hinf.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="simple H2-norm">
+			<param name="Name" value="Simple H2-norm :: Analysis (DirectSD Toolbox)">
+			<param name="Local" value="analysis\h2simple.html">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Optimization">
+		<param name="Name" value="H2-optimization problem :: Polynomial design (DirectSD Toolbox)">
+		<param name="Local" value="poldesign\h2prob.html">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="AHinf-optimal controllers">
+			<param name="Name" value="AHinf-optimization problem :: Polynomial design (DirectSD Toolbox)">
+			<param name="Local" value="poldesign\ahinfprob.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="H2-optimal controllers">
+			<param name="Name" value="H2-optimization problem :: Polynomial design (DirectSD Toolbox)">
+			<param name="Local" value="poldesign\h2prob.html">
+			<param name="Name" value="H2-optimization problem :: State-space design (DirectSD Toolbox)">
+			<param name="Local" value="ssdesign\h2prob.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Hinf-optimal controllers">
+			<param name="Name" value="Hinf-optimization problem :: State-space design (DirectSD Toolbox)">
+			<param name="Local" value="ssdesign\hinfprob.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="L2-optimal controllers">
+			<param name="Name" value="L2-optimization problem :: Polynomial design (DirectSD Toolbox)">
+			<param name="Local" value="poldesign\l2prob.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="Mixed H2/AHinf control">
+			<param name="Name" value=" Mixed H2/AHinf-optimization  (DirectSD Toolbox)">
+			<param name="Local" value="examples\demo_hinf.html">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Polynomial equations">
+		<param name="Name" value="Polynomial equations :: Polynomials (DirectSD Toolbox)">
+		<param name="Local" value="polynom\poleq.html">
+		</OBJECT>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Polynomials">
+		<param name="Name" value=" Polynomials (DirectSD Toolbox)">
+		<param name="Local" value="polynom\polynom.html">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="common divisors">
+			<param name="Name" value="Common divisors :: Polynomials (DirectSD Toolbox)">
+			<param name="Local" value="polynom\gcd.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="creating">
+			<param name="Name" value="Creating polynomials :: Polynomials (DirectSD Toolbox)">
+			<param name="Local" value="polynom\create.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="derivatives">
+			<param name="Name" value="Derivatives :: Polynomials (DirectSD Toolbox)">
+			<param name="Local" value="polynom\derive.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="factorization">
+			<param name="Name" value="Factorization :: Polynomials (DirectSD Toolbox)">
+			<param name="Local" value="polynom\factor.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="functions">
+			<param name="Name" value="Miscellaneous functions :: Polynomials (DirectSD Toolbox)">
+			<param name="Local" value="polynom\misc.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="properties">
+			<param name="Name" value="Internal properties of polynomials :: Polynomials (DirectSD Toolbox)">
+			<param name="Local" value="polynom\props.html">
+			<param name="Name" value="Other properties of polynomials :: Polynomials (DirectSD Toolbox)">
+			<param name="Local" value="polynom\props2.html">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Preview control">
+		<param name="Name" value=" H2-optimal preview control  (DirectSD Toolbox)">
+		<param name="Local" value="examples\demo_h2p.html">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="2-DOF controllers">
+			<param name="Name" value=" Optimal 2-DOF preview control  (DirectSD Toolbox)">
+			<param name="Local" value="examples\demo_2dofp.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="H2-optimal controllers">
+			<param name="Name" value=" H2-optimal preview control  (DirectSD Toolbox)">
+			<param name="Local" value="examples\demo_h2p.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="L2-optimal controllers">
+			<param name="Name" value=" L2-optimal preview control  (DirectSD Toolbox)">
+			<param name="Local" value="examples\demo_l2p.html">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Reduced-order controllers">
+		<param name="Name" value="Reduced-order controllers :: Polynomial design (DirectSD Toolbox)">
+		<param name="Local" value="poldesign\modal.html">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="H2-optimal controllers">
+			<param name="Name" value=" Reduced-order H2-optimal control  (DirectSD Toolbox)">
+			<param name="Local" value="examples\demo_modh2.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="L2-optimal controllers">
+			<param name="Name" value=" Reduced-order L2-optimal control  (DirectSD Toolbox)">
+			<param name="Local" value="examples\demo_modl2.html">
+			</OBJECT>
+	</UL>
+	<LI> <OBJECT type="text/sitemap">
+		<param name="Name" value="Standard sampled-data system">
+		<param name="Name" value="Standard sampled-data system :: Getting started (DirectSD Toolbox)">
+		<param name="Local" value="getstart\sdstd.html">
+		</OBJECT>
+	<UL>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="deterministic problem">
+			<param name="Name" value="Deterministic problem :: Getting started (DirectSD Toolbox)">
+			<param name="Local" value="getstart\determstd.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="stabilization">
+			<param name="Name" value="Stabilization :: Analysis (DirectSD Toolbox)">
+			<param name="Local" value="analysis\stabil.html">
+			</OBJECT>
+		<LI> <OBJECT type="text/sitemap">
+			<param name="Name" value="stochastic problem">
+			<param name="Name" value="Stochastic problem :: Getting started (DirectSD Toolbox)">
+			<param name="Local" value="getstart\stochstd.html">
+			</OBJECT>
+	</UL>
+</UL>
+</BODY></HTML>

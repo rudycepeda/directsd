@@ -1,0 +1,79 @@
+<html><head><title>impulseplot (Control System Toolbox)</title>
+<!-- $Revision$  $Date$ -->
+
+<!-- DOCNAME: Control System Toolbox -->
+<!-- CHUNKNAME: impulseplot -->
+<!-- CHAPNAME: impulseplot -->
+<!-- HEADSTUFF -->
+<link rel=stylesheet href="docstyle1.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+<a name="364811">
+<!-- NAVBARTOP -->
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>Control System Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right><a href="impulse.html"><img src="b_prev.gif" alt="Previous page" border=0></a>&nbsp;&nbsp;&nbsp;<a href="initial.html"><img src="b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table><font size=+3 color="#990000">impulseplot</font>
+
+
+<!-- FNAME:impulseplot --><a name="364811"></a>
+
+<!-- SYNCHTO: refintro.html -->
+
+
+<!-- H2 --><a name="364887"></a><br>
+<p><a name="365268"></a>Compute the impulse response and return the plot handle</p>
+<a name="syntax"></a><!-- H2 --><a name="365356"></a><p><font size=+1 color="#990000"><b>Syntax</b></font><br class="hdr">
+<ul class=continued><li class=continued><pre><a name="365740"></a>h = impulseplot(sys)
+<a name="366946"></a>
+<a name="366446"></a>h = impulseplot(sys,Tfinal)
+<a name="373687"></a>h = <code>impulseplot(sys,t)
+</code><a name="373695"></a>h = <code>impulseplot(sys1,sys2,...,t)
+</code><a name="366456"></a>h = impulseplot(AX,...)
+<a name="366455"></a>h = impulseplot(..., plotoptions) 
+</pre></li></ul>
+<a name="description"></a><!-- H2 --><a name="365813"></a><p><font size=+1 color="#990000"><b>Description</b></font><br class="hdr">
+<p><a name="369552"></a><code>h = impulseplot(sys)</code> plots the impulse response of the LTI model <code>sys</code> (created with either <code><a href="tf.html">tf</a></code>, <code><a href="zpk.html">zpk</a></code>, or <code><a href="ss.html">ss</a></code>). For multiinput models, independent impulse commands are applied to each input channel. The time range and number of points are chosen automatically. For continuous systems with direct feedthrough, the infinite pulse at t=0 is disregarded. <code>impulseplot</code> also returns the plot handle, <code>h</code>. You can use this handle to customize the plot with the <code>getoptions</code> and <code>setoptions</code> commands. Type</p>
+<ul class=continued><li class=continued><pre><a name="366298"></a>help timeoptions 
+</pre></li></ul>
+<p><a name="366299"></a>for a list of available plot options.</p>
+<p><a name="366316"></a><code>impulseplot(sys)</code> plots the impulse response of the LTI model without returning the plot handle.</p>
+<p><a name="367444"></a><code>impulseplot(sys,Tfinal)</code> simulates the impulse response from t=0 to the final time <code>t=Tfinal</code>. For discrete-time systems with unspecified sampling time, <code>Tfinal</code> is interpreted as the number of samples.</p>
+<p><a name="367465"></a><code>impulseplot(sys,t)</code> uses the user-supplied time vector <code>t</code> for simulation. For discrete-time models, <code>t</code> should be of the form <code>Ti:Ts:Tf</code>, where <code>Ts</code> is the sample time. For continuous-time models, <code>t</code> should be of the form <code>Ti:dt:Tf</code>, where <code>dt</code> becomes the sample time of a discrete approximation to the continuous system. The impulse is always assumed to arise at <code>t=0 </code>(regardless of <code>Ti</code>). </p>
+<p><a name="367505"></a><code>impulseplot(sys1,sys2,...,t)</code> plots the impulse response of multiple LTI models <code>sys1</code>,<code>sys2</code>,... on a single plot. The time vector <code>t</code> is optional. You can also specify a color, line style, and marker for each system, as in </p>
+<ul class=continued><li class=continued><pre><a name="366338"></a>impulseplot(sys1,'r',sys2,'y--',sys3,'gx')
+</pre></li></ul>
+<p><a name="366340"></a><code>impulseplot(AX,...)</code> plots into the axes with handle <code>AX</code>.</p>
+<p><a name="366342"></a><code>impulseplot(..., plotoptions)</code> plots the impulse response with the options specified in <code>plotoptions</code>. Type </p>
+<ul class=continued><li class=continued><pre><a name="368206"></a>help timeoptions 
+</pre></li></ul>
+<p><a name="368207"></a>for more detail.</p>
+<a name="example"></a><a name="exmpl_sec"></a><!-- H2 --><a name="366350"></a><p><font size=+1 color="#990000"><b>Example</b></font><br class="hdr">
+<p><a name="367643"></a>Normalize the impulse response of a third-order system.</p>
+<ul class=continued><li class=continued><pre><a name="367597"></a>sys = rss(3);
+<a name="366352"></a>h = impulseplot(sys);
+<a name="366353"></a>% Normalize responses
+<a name="366314"></a>setoptions(h,'Normalize','on');
+</pre></li></ul>
+<a name="see_also"></a><a name="seeal_sec"></a><!-- H2 --><a name="367646"></a><p><font size=+1 color="#990000"><b>See Also</b></font><br class="hdr">
+<code><a href="getoptions.html">getoptions</a></code><font face=sansserif><code>&nbsp;&nbsp;</code>Get plot options
+</font>
+<p><code><a href="impulse.html">impulse</a></code><font face=sansserif><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code>Plot impulse responses
+</font>
+<p><code><a href="setoptions.html">setoptions</a></code><font face=sansserif><code>&nbsp;&nbsp;</code>Set plot options
+</font>
+<p>
+<br>
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0><tr valign=top><td align=left width=20><a href="impulse.html"><img src="b_prev.gif" alt="Previous page" border=0 align=bottom></a>&nbsp;</td><td align=left>&nbsp;impulse</td><td>&nbsp;</td><td align=right>initial&nbsp;</td><td align=right width=20><a href="initial.html"><img src="b_next.gif" alt="Next page" border=0 align=bottom></a></td></tr></table>
+<p class="copy">&copy; 1994-2005 The MathWorks, Inc.</p>
+
+<br>
+<!-- Copyright (c) 2005 by The MathWorks, Inc. -->
+<!-- Last updated: Wed Jan 26 14:33:11 2005 -->
+</body>
+</html>
+
+

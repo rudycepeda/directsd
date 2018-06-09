@@ -1,0 +1,78 @@
+<!--%%page.i
+&secname=sdnorm
+&name=
+&next=sdsim.html
+&nextname=sdsim
+&prev=sdmargin.html
+&prevname=sdmargin
+&content=
+<H4>sdnorm</H4>
+
+<H3>Syntax</H3>
+<p class="code">val = sdnorm ( sys, K )</p>
+<p class="code">val = sdnorm ( sys, K, type )</p>
+
+<H3>Description</H3>
+<code>sdnorm</code> returns a norm of sampled-data system
+with generalized plant <code>sys</code> and controller <code>K</code>.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">sys</td>
+<td>model of a continuous-time LTI plant associated with the
+<A HREF="../getstart/sdstd.html">standard sampled-data system</A>.
+</td></tr>
+<tr>
+<td class="cc">K</td>
+<td>discrete-time feedback controller</td></tr>
+<tr>
+<td class="cc">type</td>
+<td>type of norm:
+<ul>
+<LI><code>&nbsp;'gh2'</code> -<A HREF="../analysis/h2.html"> generalized <I>H</I><SUB>2</SUB>-norm</A> (default)
+<LI><code>&nbsp;'sh2'</code> - <A HREF="../analysis/h2simple.html">simple <I>H</I><SUB>2</SUB>-norm</A>
+<LI><code>&nbsp;'inf'</code> -
+<A HREF="../analysis/hinf.html">
+<!--%%hinf.i%%-->-norm</A> (<I>L</I><SUB>2</SUB>-induced norm)
+<LI><code>'ainf'</code> -
+<A HREF="../analysis/ahinf.html"> associated
+<!--%%hinf.i%%-->-norm</A>
+</ul>
+</td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">val</TD>
+<TD>value of the norm</TD></tr>
+</table>
+
+<H3>Example</H3>
+<pre>
+    F = tf(1, [1 1 0]);
+    sys = [F F;-F -F];
+    T = 0.1;
+    K = zpk( 0.45, -0.89, 380, T);
+    normH2 = sdnorm(sys, K)
+    normH20 = sdnorm(sys, K, 'sh2')
+    normHinf = sdnorm(sys, K, 'inf')
+    normAHinf = sdnorm(sys, K, 'ainf')
+
+normH2 =
+    0.0287
+normH20 =
+    0.0375
+normHinf =
+    0.0092
+normAHinf =
+    0.0092
+</pre>
+
+<H3>See also</H3>
+<!--%%funref.i&name=sdh2norm&text=<code>&nbsp;</code><I>H</I><SUB>2</SUB>-norm of sampled-data systems.%%-->
+<!--%%funref.i&name=sdhinorm&text=<code>&nbsp;</code><I>H</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT=""></SUB>-norm (<I>L</I><SUB>2</SUB>-induced norm) of sampled-data systems.%%-->
+<!--%%funref.i&name=sdahinorm&text=<I>AH</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT=""></SUB>-norm of sampled-data systems.%%-->
+
+%%-->

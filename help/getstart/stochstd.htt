@@ -1,0 +1,130 @@
+<!--%%page.i
+&secname=:: Getting started
+&name=Stochastic problem
+&next=2dofstd.html
+&nextname=2-DOF control
+&prev=determstd.html
+&prevname=Deterministic problem
+&content=
+<H2>Stochastic problem</H2>
+The augmented continuous-time plant of the <A HREF="sdstd.html">standard
+system</A> must incorporate all shaping filters
+(generators of external signals) and weighting functions.
+For stochastic problems, the input signal is a vector
+white noise with identity spectral density matrix. This
+causes no loss of generality, is the
+the input signal has a rational spectral density matrix.
+Then, the corresponding shaping filter must be included
+in the augmented plant.
+<p>
+Consider the ship course stabilization system with the block-diagramm
+shown in the figure:
+<CENTER><IMG SRC="../images/stabsch.gif" WIDTH=332 HEIGHT=120 ALT=""></CENTER>
+Here continuous-time plant is represented by a
+linearized model with transfer function
+<span class=tms>F</span>(<span class=tms>s</span>).
+The signals are:
+<ul>
+<LI><span class=tms>&#966;<SUB>0</SUB></span> - desired course, assumed zero
+<LI><span class=tms>&#966;</span> - actual course
+<LI><span class=tms>u</span> - control signal
+</ul>
+Disturbance caused by sea wave is modelled as a
+stationary continuous-time stochastic process with a known
+spectral density
+<span class=tms>S<SUB>w</SUB></span>(<span class=tms>s</span>), which can be
+represented in the form
+<CENTER><IMG SRC="../images/swfw.gif" WIDTH=168 HEIGHT=25 ALT=""></CENTER>
+where
+<span class=tms>F<SUB>w</SUB></span>(<span class=tms>s</span>)
+denotes transfer function of the
+shaping filter. Therefore, the input signal <span class=tms>w</span>
+(see the block-diagram above) is modelled as a unit white noise.
+<p>
+In this case all continuous-time signals in the system, including
+stabilization error and control, are periodically non-stationary
+processes such that their variances are <span class=tms>T</span>-periodic functions
+of time <span class=tms>t</span> <A HREF="#ref1">[1]</A>.
+It is required to minimize the cost function that
+characterize continuous-time system behaviour
+<CENTER><IMG SRC="../images/jstoch.gif" WIDTH=109 HEIGHT=28 ALT=""></CENTER>
+where
+<CENTER><IMG SRC="../images/barvar.gif" WIDTH=355 HEIGHT=47 ALT=""></CENTER>
+are <I>average</I> variances of stabilization error and
+control signal, respectively.
+<p>
+Introducing the output vector
+<span class=tms>&#949;</span>&nbsp;=&nbsp;[<span class=tms>&#966;&nbsp;&nbsp;&#961;u</span>]', this cost
+can be written in the standard form:
+<CENTER><IMG SRC="../images/barj0.gif" WIDTH=204 HEIGHT=53 ALT=""></CENTER>
+Therefore, the generalized plant can be described by
+operator equations
+<CENTER><IMG SRC="../images/opereq.gif" WIDTH=163 HEIGHT=45 ALT=""></CENTER>
+where
+<CENTER><IMG SRC="../images/p1112s.gif" WIDTH=289 HEIGHT=51 ALT=""></CENTER>
+<CENTER><IMG SRC="../images/p2122s.gif" WIDTH=244 HEIGHT=22 ALT=""></CENTER>
+
+<H3>Example</H3>
+Consider the system with
+<CENTER><IMG SRC="../images/simstd_ffw.gif" WIDTH=270 HEIGHT=48 ALT=""></CENTER>
+and a zero-order hold. Assume that the sampling
+period is <span class=tms>T&nbsp;=&nbsp;1</span> and choose
+<span class=tms>&#961;&nbsp;=&nbsp;0.2</span>.
+These data can be entered as
+<pre>
+   F  = tf ( 1, [25 1 0] );
+   Fw = tf ( 2, [1 2] );
+   rho = 0.2;
+   T  = 1;
+</pre>
+The plant for the standard system has the form
+<pre>
+    sys = [ F*Fw  F
+             0    rho
+           -F*Fw  -F]
+
+sys: transfer function 3 x 2
+
+    !           2                   1     !
+    ! ---------------------    ---------- !
+    ! 25 s^3 + 51 s^2 + 2 s    25 s^2 + s !
+    !                                     !
+    !           0                  0.2    !
+    !                                     !
+    !           -2                 -1     !
+    ! ---------------------    ---------- !
+    ! 25 s^3 + 51 s^2 + 2 s    25 s^2 + s !
+
+</pre>
+The optimal discrete-time controller is computed
+using <A HREF="../functions/sdh2.html">sdh2</A>
+<pre>
+   K = sdh2 ( sys, T )
+
+K: zero-pole-gain model 1 x 1
+ 
+      24.5807 (z-0.7472) (z-0.1357)  
+      -----------------------------  
+          (z+0.5917) (z-0.0724)      
+ 
+Sampling time: 1
+
+</pre>
+The cost function is the squared <I>H</I><SUB>2</SUB>-norm,
+which is returned by
+<A HREF="../functions/sdh2norm.html">sdh2norm</A>
+<pre>
+   sdh2norm ( sys, K )^2
+
+ans =
+    0.0328
+</pre>
+
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Rosenwasser, E.N., and B.P. Lampe,
+<I>Computer Controlled Systems: Analysis and Design with
+Process-orientated Models</I>. London: Springer-Verlag, 2000.
+</p>
+
+%%--><span class=tms>&#961;&nbsp;=&nbsp;0.2</span>

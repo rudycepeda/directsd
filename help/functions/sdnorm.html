@@ -1,0 +1,115 @@
+<html><head><title> sdnorm (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="sdmargin.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="sdsim.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H4>sdnorm</H4>
+
+<H3>Syntax</H3>
+<p class="code">val = sdnorm ( sys, K )</p>
+<p class="code">val = sdnorm ( sys, K, type )</p>
+
+<H3>Description</H3>
+<code>sdnorm</code> returns a norm of sampled-data system
+with generalized plant <code>sys</code> and controller <code>K</code>.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">sys</td>
+<td>model of a continuous-time LTI plant associated with the
+<A HREF="../getstart/sdstd.html">standard sampled-data system</A>.
+</td></tr>
+<tr>
+<td class="cc">K</td>
+<td>discrete-time feedback controller</td></tr>
+<tr>
+<td class="cc">type</td>
+<td>type of norm:
+<ul>
+<LI><code>&nbsp;'gh2'</code> -<A HREF="../analysis/h2.html"> generalized 
+<I>H</I><SUB>2</SUB>-norm</A> (default)
+<LI><code>&nbsp;'sh2'</code> - <A HREF="../analysis/h2simple.html">simple 
+<I>H</I><SUB>2</SUB>-norm</A>
+<LI><code>&nbsp;'inf'</code> -
+<A HREF="../analysis/hinf.html">
+
+<I>H</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="" border=0></SUB>-norm</A> 
+(<I>L</I><SUB>2</SUB>-induced norm)
+<LI><code>'ainf'</code> -
+<A HREF="../analysis/ahinf.html"> associated
+
+<I>H</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="" border=0></SUB>-norm</A>
+</ul>
+</td></tr>
+</table>
+
+<H3>Return 
+values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">val</TD>
+<TD>value of the norm</TD></tr>
+</table>
+
+<H3>Example</H3>
+<pre>
+    F = tf(1, [1 1 0]);
+    sys = [F F;-F -F];
+    T = 0.1;
+    K = zpk( 0.45, -0.89, 380, T);
+    normH2 = sdnorm(sys, K)
+    normH20 = sdnorm(sys, K, 'sh2')
+    normHinf = sdnorm(sys, K, 'inf')
+    normAHinf = sdnorm(sys, K, 'ainf')
+
+normH2 =
+    0.0287
+normH20 =
+    0.0375
+normHinf =
+    0.0092
+normAHinf =
+    0.0092
+</pre>
+
+<H3>See also</H3>
+
+<p class=fref><code><a 
+href=sdh2norm.html>sdh2norm</a>&nbsp;&nbsp;</code><code>&nbsp;</code><I>H</I><SUB>2</SUB>-norm of 
+sampled-data systems.</p>
+<p class=fref><code><a 
+href=sdhinorm.html>sdhinorm</a>&nbsp;&nbsp;</code><code>&nbsp;</code><I>H</I><SUB><IMG 
+SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT=""></SUB>-norm (<I>L</I><SUB>2</SUB>-induced norm) 
+of sampled-data systems.</p>
+<p class=fref><code><a href=sdahinorm.html>sdahinorm</a>&nbsp;&nbsp;</code><I>AH</I><SUB><IMG 
+SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT=""></SUB>-norm of sampled-data systems.</p>
+
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="sdmargin.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;sdmargin</td><td>&nbsp;</td>
+<td align=right>sdsim&nbsp;</td>
+<td align=right width=20><a href="sdsim.html"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+

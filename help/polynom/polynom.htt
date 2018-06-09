@@ -1,0 +1,64 @@
+<!--%%spage.i
+&secname=Polynomials
+&name=
+&next=create.html
+&next=create.html
+&nextname=Creating polynomials
+&prev=getstart\2dofstd.html
+&prev=getstart\2dofstd.html
+&prevname=2-DOF control
+&content=
+<H1>Polynomials</H1><hr>
+<table width=100% border=0>
+<TR>
+<TD class="ref"><A HREF="create.html">Creating polynomials</A></TD>
+<TD>
+How to create polynomials and quasipolynomials as Matlab objects?
+</TD>
+</TR>
+<TR>
+<TD class="ref"><A HREF="props.html">Internal properties of polynomials</A></TD>
+<TD>
+How to get internal properties of polynomial objects?
+</TD>
+</TR>
+<TR>
+<TD class="ref"><A HREF="props2.html">Other properties of polynomials</A></TD>
+<TD>
+How to get other properties realized as Matlab functions?
+</TD>
+</TR>
+<TR>
+<TD class="ref"><A HREF="gcd.html">Common divisors</A></TD>
+<TD>
+How to find and extarct common divisors of polynomials?
+</TD>
+</TR>
+<TR>
+<TD class="ref"><A HREF="derive.html">Derivatives</A></TD>
+<TD>
+How to find polynomial derivatives?
+</TD>
+</TR>
+<TR>
+<TD class="ref"><A HREF="factor.html">Factorization</A></TD>
+<TD>
+How to factorize polynomials?
+</TD>
+</TR>
+<TR>
+<TD class="ref"><A HREF="misc.html">Miscellaneous functions</A></TD>
+<TD>
+How to construct reciprocal polynomials, transform to
+zero-pole-gain form, discretize a polynomial?
+</TD>
+</TR>
+<TR>
+<TD class="ref"><A HREF="poleq.html">Polynomial equations</A></TD>
+<TD>
+How to solve polynomial equations and systems of polynomial equations?
+</TD>
+</TR>
+</table>
+
+%%-->

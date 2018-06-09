@@ -1,0 +1,101 @@
+<html><head><title> improper (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="hinfreg.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="modsdh2.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H4>improper</H4>
+
+<H3>Syntax</H3>
+<p class="code">[p,f0] = improper ( f )</p>
+<p class="code">[p,f0] = improper ( f, type )</p>
+
+<H3>Description</H3>
+<code>improper</code> extract improper part of a scalar transfer function.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">f</td><td>scalar LTI model</td></tr>
+<tr>
+<td class="cc">type</td><td>type of separation:
+<UL>
+<LI><code>&nbsp;&nbsp;'p'&nbsp;</code> - <code>f0</code> is proper but not necessarily strictly 
+proper
+<LI><code>&nbsp;'sp'&nbsp;</code> - <code>f0</code> is strictly proper (default)
+<LI><code>'symm'</code> - <code>f0</code> is strictly proper and Hermitian self-conjugate
+(like spectral density)
+</UL>
+</td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">p</TD><TD>improper part (a polynomial)</TD></tr>
+<tr>
+<TD class="cc">f0</TD><TD>proper or strictly proper part</TD></tr>
+</table>
+
+<H3>Examples</H3>
+<B>Example 1.</B> Extract improper and strictly proper terms.
+<pre>
+   f = tf([5 2 3],[1 2]);
+   [p,f0] = improper ( f )
+
+p: polynomial
+  5 s - 8
+
+f0: transfer function 1 x 1
+
+        19
+      -----
+      s + 2
+</pre>
+<B>Example 2.</B> Extract improper and proper terms.
+<pre>
+   f = tf([5 2 3],[1 2]);
+   [p,f0] = improper ( f, 'p' )
+
+p: polynomial
+  5 s
+
+f0: transfer function 1 x 1
+
+      -8 s + 3
+      --------
+        s + 2
+</pre>
+
+<H3>See also</H3>
+
+<p class=fref><code><a href=tf2nd.html>tf2nd</a>&nbsp;&nbsp;</code>Numerator and denonminator of a 
+transfer function.</p>
+
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="hinfreg.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;hinfreg</td><td>&nbsp;</td>
+<td align=right>modsdh2&nbsp;</td>
+<td align=right width=20><a href="modsdh2.html"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+

@@ -1,0 +1,51 @@
+<!--%%page.i
+&secname=delzero
+&name=
+&next=dhinf.html
+&nextname=dhinf
+&prev=deg.html
+&prevname=deg
+&content=
+<H4>delzero</H4>
+
+<H3>Syntax</H3>
+<p class="code">[q,nz] = delzero ( p )</p>
+<p class="code">[q,nz] = delzero ( p, tol )</p>
+
+<H3>Description</H3>
+<code>delzero</code> removes all zeros of a polynomial
+at the origin.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">p</td><td>a polynomial </td></tr>
+<tr>
+<td class="cc">tol</td><td>tolerance (default <I>eps</I>) </td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">q</TD><TD>reduced polynomial</TD></tr>
+<tr>
+<TD class="cc">nz</TD><TD>number of removed zeros</TD></tr>
+</table>
+
+<H3>Example</H3>
+<pre>
+   a = poln( [1 2 0 0], 'z' )
+
+a: polynomial
+  z^3 + 2 z^2
+
+   [b,nz] = delzero ( a )
+
+b: polynomial
+  z + 2
+nz =
+     2
+</pre>
+
+
+%%-->

@@ -1,0 +1,129 @@
+<!--%%epage.i
+&secname=:: Getting started
+&name=2-DOF control
+&next=polynom\polynom.html
+&nextname=Polynomials
+&prev=stochstd.html
+&prevname=Stochastic problem
+&content=
+<H2>2-DOF control</H2>
+In systems with a single controller only one target can be
+reached, because they have one degree-of-freedom.
+Nevertheless, control systems should always be designed
+to satisfy a set of various requirements, some of which
+can be contradictory to another. In order to cope with this problem
+it was proposed to use 2-DOF (two-degrees-of-freedom)
+controllers, where one block (feedback controller <span class=tms>K</span>) is placed inside the loop
+and another (reference controller <span class=tms>K</span><SUB>R</SUB>) performs feedforward
+correction to improve tracking capabilities
+<A HREF="#ref1">[1]</A>. The simplest structure is shown in the following figure:
+<CENTER><IMG SRC="../images/2dof.gif" WIDTH=316 HEIGHT=132 ALT=""></CENTER>
+There are several equivalent structures, which can be
+transformed to one another and differs only in realization
+<A HREF="#ref2">[2]</A>.
+In <A HREF="#ref1">[1]</A> yet another structure was proposed,
+which is called the 2&#189;-DOF system:
+<CENTER><IMG SRC="../images/25dof.gif" WIDTH=321 HEIGHT=135 ALT=""></CENTER>
+In order to investigate all similar structures in a
+unified framework, the standard  sampled-data system with a 2-DOF controller
+was proposed in <A HREF="#ref3">[3]</A>:
+<CENTER><IMG SRC="../images/std2dof.gif" WIDTH=217 HEIGHT=214 ALT=""></CENTER>
+Due to the zero block in the plant, the feedforward controller
+<span class=tms>K</span><SUB>R</SUB> is outside the loop.
+<p>
+It is proved that if
+<I>P</I><SUB>210</SUB>(s)&nbsp;=&nbsp;<span class=tms>k</span>&nbsp;<I>P</I><SUB>211</SUB>(s),
+where <span class=tms>k</span> is a constant, the minimal value of the
+integral tracking error is independent of the feedback controller.
+Therefore, loop properties (robustness, disturbance rejection)
+and tracking properties can be formed independently.
+<p>
+Assume that the reference signal
+<span class=tms>r<SUB>0</SUB></span>(<span class=tms>t</span>)
+can be described by signal generator
+<span class=tms>R</span>(<span class=tms>s</span>),
+such that
+<span class=tms>r<SUB>0</SUB>&nbsp;=&nbsp;R</span>(<span class=tms>s</span>)&nbsp;<span class=tms>w</span>,
+where
+<span class=tms>w</span>(<span class=tms>t</span>) is a unit impulse (Dirac delta-function).
+Then, operator equations for the simplest 2-DOF system
+have the form
+<CENTER><IMG SRC="../images/oper2dof.gif" WIDTH=144 HEIGHT=70 ALT="" VSPACE="5"></CENTER>
+so that
+<CENTER><IMG SRC="../images/pij2dof.gif" WIDTH=330 HEIGHT=54 ALT=""></CENTER>
+The ony difference of the 2&#189;-DOF system is that
+<I>P</I><SUB>210</SUB>(s) = <I>P</I><SUB>211</SUB>(s) = <I>R</I>
+instead of zero.
+
+<H3>Example</H3>
+Consider the 2-DOF system with sampling period
+<span class=tms>T&nbsp;=&nbsp;0.2</span>, zero-order hold and
+<CENTER><IMG SRC="../images/2dof_frk.gif" WIDTH=356 HEIGHT=44 ALT=""></CENTER>
+The aim is to find the optimal feedforward controller
+<span class=tms>K<SUB>R</SUB></span> minimizing the
+integral quadratic error.
+<P>
+Known data can be entered as follows:
+<pre>
+   F = tf ( 1, [1 -1] );
+   R = tf ( 1, [1 0] );
+   T = 0.2;
+   K = tf ( [0.4 0.4], [1 -0.4], T );
+</pre>
+The plant in the standard system has the form
+<pre>
+   sys2 = [R  -F
+           R   0
+           0  -F]
+
+sys2: transfer function 3 x 2
+
+    ! 1      -1  !
+    ! -    ----- !
+    ! s    s - 1 !
+    !            !
+    ! 1          !
+    ! -      0   !
+    ! s          !
+    !            !
+    !        -1  !
+    ! 0    ----- !
+    !      s - 1 !
+
+</pre>
+The optimal reference controler is computed by
+<A HREF="../functions/sd2dof.html">sd2dof</A>
+<pre>
+   KR = sd2dof ( sys2, K )
+
+KR: zero-pole-gain model 1 x 1
+ 
+      5.7241 (z-0.8678) (z-0.665)  
+      ---------------------------  
+           (z+0.2673) (z-0.4)      
+ 
+Sampling time: 0.2
+
+</pre>
+The cost function for the 2-DOF system is given by
+<A HREF="../functions/sd2doferr.html">sd2doferr</A>
+<pre>
+    sd2doferr ( sys2, K, KR )
+
+ans =
+    0.0611
+</pre>
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Grimble M.J., <I>Robust Industrial Control: Optimal Design
+Approach for Polynomial Systems</I>. UK: Prentice-Hall, Hemel Hempstead, 1994.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;&#197;str&#246;m, K. J. and Wittenmark, B.,
+<I>Computer Controlled Systems: Theory and Design</I>,
+Prentice-Hall}, Englewood Cliffs, 1997.
+</p>
+<p><A name="ref3"></A>[3]&nbsp;Polyakov, K.Yu., Polynomial Design of Optimal
+Sampled-data Control Systems, Dr. Sc. Thesis, State University of Ocean Technology,
+St. Petersburg, 2006 [in Russian].
+</p>
+
+%%-->

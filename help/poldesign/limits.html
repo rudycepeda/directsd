@@ -1,0 +1,66 @@
+<html><head><title>Limitations :: Polynomial design (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="modal.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+
+<H2>Limitations</H2>
+Polynomial design methods for sampled-data systems
+developed in <A HREF="#ref1">[1]</A> and <A HREF="#ref2">[2]</A>
+have some limitations:
+<ol>
+<li>Controller <span class=tms>K</span> is a SISO system.
+<LI> Transfer matrices <I>P</I><SUB>11</SUB>(s), <I>P</I><SUB>21</SUB>(s),
+and <I>P</I><SUB>22</SUB>(s) must be strictly proper,
+<I>P</I><SUB>12</SUB>(s) must be at least proper.
+</ol>
+The most restrictive is the first assumption. The reason is that
+polynomial design techniques are most effective for
+scalar problems. As for designing multivariable controllers,
+it is much miore reliable to use the state-space methods
+<A HREF="#ref3">[3]</A>.
+<p>
+The second limitation ensures that the problems under consideration
+are well-posed. This means that the inputs are affacted only
+by finite signals and the outputs are finite also (no
+impulsive modes).
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Rosenwasser, E.N., and B.P. Lampe,
+<I>Computer Controlled Systems: Analysis and Design with
+Process-orientated Models</I>. London: Springer-Verlag, 2000.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Polyakov, K.Yu., Polynomial Design of Optimal
+Sampled-data Control Systems, Dr. Sc. Thesis, State University of Ocean Technology,
+St. Petersburg, 2006 [in Russian].
+</p>
+<p><A name="ref3"></A>[3]&nbsp;Chen, T., and B.A. Francis,
+<I>Optimal Sampled-Data Control Systems</I>.
+Berlin Heidelberg New York: Springer-Verlag, 1995.
+</p>
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="modal.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;Reduced-order controllers</td><td>&nbsp;</td>
+<td align=right>&nbsp;</td>
+<td align=right width=20>&nbsp;</td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+
+

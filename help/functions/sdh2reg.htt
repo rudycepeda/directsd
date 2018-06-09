@@ -1,0 +1,117 @@
+<!--%%page.i
+&secname=sdh2reg
+&name=
+&next=sdh2simple.html
+&nextname=sdh2simple
+&prev=sdh2norm.html
+&prevname=sdh2norm
+&content=
+<H4>sdh2reg</H4>
+
+<H3>Syntax</H3>
+<p class="code">[K,cost,p] = sdh2reg ( sys, T )</p>
+<p class="code">[K,cost,p] = sdh2reg ( sys, T, nmeas, ncon )</p>
+<p class="code">[K,cost,p] = sdh2reg ( sys, T, nmeas, ncon, options )</p>
+
+
+<H3>Description</H3>
+<code>sdh2reg</code> constructs the <I>H</I><SUB>2</SUB>-optimal
+digital controller <code>K</code> for
+<A HREF="../getstart/sdstd.html">standard sampled-data system</A>
+using state-space techniques <A HREF="#ref1">[1]</A>, <A HREF="#ref2">[2]</A>.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">sys</td>
+<td>model of an LTI plant associated with the
+<A HREF="../getstart/sdstd.html">standard sampled-data system</A>.
+</td></tr>
+<tr>
+<td class="cc">T</td>
+<td>the sampling period</td></tr>
+<tr>
+<td class="cc">nmeas</td><td>number of measured signals (default 1)</td></tr>
+<tr>
+<td class="cc">ncon</td><td>number of control signals (default 1)</td></tr>
+<tr>
+<td class="cc">options</td><td>structure with the following fields:
+<br><code>&nbsp;&nbsp;options.method</code> - method of constructing equivalent:
+<ul>
+<LI><code>&nbsp;'gh2'</code> - generalized <I>H</I><SUB>2</SUB>-equivalent model (default)
+<LI><code>&nbsp;'sh2'</code> - simple <I>H</I><SUB>2</SUB>-equivalent model
+<LI><code>'fast'</code> - model based on fast discretization
+</ul>
+<br><code>&nbsp;&nbsp;options.Nfast</code> - frequency multiplication factor for fast discretization
+(default 5)
+</td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">K</TD>
+<TD>discrete LTI model of controller</TD></tr>
+<tr>
+<TD class="cc">cost</TD><TD>value of the cost function</TD></tr>
+<tr>
+<TD class="cc">p</TD><TD>roots of the closed-loop system characteristic polynomial
+in the <code>'z'</code>-plane</TD></tr>
+</table>
+
+<H3>Limitations</H3>
+<ul>
+<LI>Only for delay-free systems.
+<LI>Only for systems with zero-order hold.
+<LI> Transfer matrices <I>P</I><SUB>11</SUB>(s),
+<I>P</I><SUB>21</SUB>(s),
+and <I>P</I><SUB>22</SUB>(s) must be strictly proper,
+<I>P</I><SUB>12</SUB>(s) must be at least proper.
+</ul>
+
+<H3>Example</H3>
+<pre>
+    F = tf(1, [1 1 0]);
+    sys = [F F;-F -F];
+    T = 0.1;
+    [K,cost,p] = sdh2reg(sys, T);
+    K = zpk(K)
+    cost
+    p
+
+K: zero-pole-gain model 1 x 1
+
+      366.55 (z-0.4577)
+      -----------------
+          (z+0.873)
+
+Sampling time: 0.1
+
+cost =
+    0.0285
+
+p =
+   -0.4305
+   -0.2678
+   -0.0431
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Chen, T., and B.A. Francis,
+<I>Optimal Sampled-Data Control Systems</I>.
+Berlin Heidelberg New York: Springer-Verlag, 1995.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Hagiwara T., M. Araki, FR-operator approach to the
+<I>H</I><SUB>2</SUB>-analysis
+and synthesis of sampled-data systems // <I>IEEE Trans. Automat. Control</I>,
+vol.&nbsp;AC-40, no.&nbsp;8, 1995.
+</p>
+
+<H3>See also</H3>
+<!--%%funref.i&name=sdfast&text=<code>&nbsp;&nbsp;&nbsp;&nbsp;</code>Fast-discretization of sampled-data systems.%%-->
+<!--%%funref.i&name=sdh2simple&text=Equivalent discrete model in simple <I>H</I><SUB>2</SUB>-problem for sampled-data systems.%%-->
+<!--%%funref.i&name=sdgh2mod&text=<code>&nbsp;&nbsp;</code>Equivalent discrete model in generalized <I>H</I><SUB>2</SUB>-problem for sampled-data systems.%%-->
+<!--%%funref.i&name=sdh2&text=<code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><I>H</I><SUB>2</SUB>-optimization of sampled-data systems.%%-->
+<!--%%funref.i&name=sdhinfreg&text=<code>&nbsp;</code>State-space <I>H</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT=""></SUB>-optimization of sampled-data systems.%%-->
+
+%%-->

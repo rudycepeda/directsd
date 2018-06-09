@@ -1,0 +1,53 @@
+<!--%%page.i
+&secname=:: Analysis
+&name=Stochastic analysis
+&next=hinf.html
+&nextname=Hinf norm
+&prev=quaderr.html
+&prevname=Integral quadratic error
+&content=
+<H2>Stochastic analysis</H2>
+If the input <span class=tms>w</span> is a stationary stochastic vector signal,
+the error <span class=tms>&#949;</span> is a periodically non-stationary process
+and its variance
+<CENTER><IMG SRC="../images/vart.gif" WIDTH=149 HEIGHT=23 ALT=""></CENTER>
+where E{&#183;} denotes mathematical expectation,
+is periodic with respect to <span class=tms>t</span>
+<CENTER><IMG SRC="../images/varper.gif" WIDTH=125 HEIGHT=21 ALT=""></CENTER>
+where <span class=tms>T</span> is the sampling period. Therefore, to evaluate
+continuous-time behaviour of a periodically nonstationary system
+it is reasonable to employ the <I>average variance</I>
+over continuous time:
+<CENTER><IMG SRC="../images/meanvar.gif" WIDTH=140 HEIGHT=45 ALT=""></CENTER>
+It can be shoen that this value equals the square of
+the <A HREF="h2.html">generalized <I>H</I><SUB>2</SUB>-norm</A> of
+the sampled-data system. Therefore, it can be computed
+using the function <A HREF="../functions/sdnorm.html">sdnorm</A>
+<pre>
+    F = tf(1, [1 1 0]);
+    sys = [F F;-F -F];
+    T = 0.1;
+    K = zpk ( 0.45, -0.89, 380, T );
+    av = sdh2norm (sys, K)^2
+
+av =
+  8.2180e-004
+
+</pre>
+or, for a system with a scalar controller,
+by means of the function <A HREF="../functions/sdh2norm.html">sdh2norm</A>:
+<pre>
+   av = sdh2norm(sys, K)^2
+
+av =
+  8.2180e-004
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Rosenwasser, E.N., and B.P. Lampe,
+<I>Computer Controlled Systems: Analysis and Design with
+Process-orientated Models</I>. London: Springer-Verlag, 2000.
+</p>
+
+%%-->
+

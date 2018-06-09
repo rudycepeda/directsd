@@ -1,0 +1,82 @@
+<html><head><title> c2z (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="c2d.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="ch2.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H4>c2z</H4>
+
+<H3>Syntax</H3>
+<p class="code">q = c2z ( p )</p>
+<p class="code">q = c2z ( p, T )</p>
+<p class="code">q = c2z ( p, T, var )</p>
+
+<H3>Description</H3>
+<code>c2z</code> discretize a polynomial by changing its roots
+for their discretized version. A root <code>a<SUB>i</SUB></code> is changed
+for <code>z<SUB>i</SUB>=exp(a<SUB>i</SUB>*T)</code>.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">p</td><td>a polynomial </td></tr>
+<tr>
+<td class="cc">T</td><td>sampling period (default 1) </td></tr>
+<tr>
+<td class="cc">var</td><td>variable: <code>'z'</code> (default), <code>'d'</code>
+or <code>'q'</code></td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">q</TD><TD>discretized polynomial</TD></tr>
+</table>
+
+<H3>Example</H3>
+<pre>
+   a = poln([-1 -2 -3],'r')
+
+a: polynomial
+  s^3 + 6 s^2 + 11 s + 6
+
+   b = c2z(a, 1)
+
+b: polynomial
+   z^3 - 0.553 z^2 + 0.074841 z - 0.0024788
+
+   roots(b)
+
+ans =
+    0.3679
+    0.1353
+    0.0498
+</pre>
+
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="c2d.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;c2d</td><td>&nbsp;</td>
+<td align=right>ch2&nbsp;</td>
+<td align=right width=20><a href="ch2.html"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+

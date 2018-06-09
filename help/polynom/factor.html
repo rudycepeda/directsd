@@ -1,0 +1,146 @@
+<html><head><title>Factorization :: Polynomials (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="derive.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="misc.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H2>Factorization</H2>
+<H5>Spectral factorization</H5>
+In many optimal design procedures it is required to
+find a spectral factor of a Hermitian self-conjugate
+polynomial (or quasipolynomial) with respect to the imaginary axis or unit circle.
+Using the DirectSD Toolbox, this can be done with
+the following two functions:
+<A HREF="../functions/sfactor.html">sfactor</A> and
+<A HREF="../functions/sfactfft.html">sfactfft</A>.
+The first of them is applicable to
+continuous-time polynomials
+<pre>
+   s = poln([1 0 2 0 9]);
+   fs = sfactor ( s )
+
+fs: polynomial
+  s^2 + 2 s + 3
+
+</pre>
+and symmetric quasipolynomials
+<pre>
+   s = 3*z^2 + 8*z + 14 + 8*z^-1 + 3*z^-2;
+   fs = sfactor ( s )
+
+fs: polynomial
+  z^2 + 2 z + 3
+
+   fs = sfactor ( s, 'z' )
+
+fs: polynomial
+  3 z^2 + 2 z + 1
+
+</pre>
+If the second (optional) parameter is omitted or equals
+<code>'d'</code>, the function
+returns the factor having all poles outside the unit disk.
+If the second parameter is <code>'z'</code>, the function
+returns the factor having all poles inside the unit disk.
+<p>
+Function <A HREF="../functions/sfactfft.html">sfactfft</A>
+implements a reliable method of factorizing discrete-time
+polynomials on the basis of FFT algorithm:
+<pre>
+   s = 3*z^2 + 8*z + 14 + 8*z^-1 + 3*z^-2;
+   fs = sfactfft ( s )
+
+fs: polynomial
+  z^2 + 2 z + 3
+
+   fs = sfactfft ( s, 'z' )
+
+fs: polynomial
+  3 z^2 + 2 z + 1
+</pre>
+
+<H5>General factorization</H5>
+General factorization is applicable to any polynomial
+(ot necessarily Hermitian self-conjugate), which can
+always be factorized onto stable, antistable and neutral cofactors.
+This can be done by means of the function <A HREF="../functions/factor.html">factor</A>
+for continuous-time polynomials
+<pre>
+   a = poln( [-1 2 0], 'r' )
+
+a: polynomial
+  s^3 - s^2 - 2 s
+
+   [ps,pu,p0] = factor ( a )
+
+ps: polynomial
+  s + 1
+pu: polynomial
+  s - 2
+p0: polynomial
+  s
+</pre>
+discrete-time polynomials:
+<pre>
+   a = poln( [0.3 1.5 1], 'rz' )
+
+a: polynomial
+  z^3 - 2.8 z^2 + 2.25 z - 0.45
+
+   [ps,pu,p0] = factor ( a )
+
+ps: polynomial
+  z - 1.5
+pu: polynomial
+  z - 0.3
+p0: polynomial
+  z - 1
+</pre>
+and quasipolynomials
+(shift is assigned to the antistable cofactor):
+<pre>
+   a = poln( [0.3 1.5 1], 'rz', 1 )
+
+a: polynomial
+  z^3 - 2.8 z^2 + 2.25 z - 0.45
+
+   [ps,pu,p0] = factor ( a )
+
+ps: polynomial
+  z - 1.5
+pu: quasipolynomial
+  1 - 0.3 z^-1
+p0: polynomial
+  z - 1
+</pre>
+
+
+   
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="derive.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;Derivatives</td><td>&nbsp;</td>
+<td align=right>Miscellaneous functions&nbsp;</td>
+<td align=right width=20><a href="misc.html"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+
+

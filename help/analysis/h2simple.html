@@ -1,0 +1,96 @@
+<html><head><title>Simple H2-norm :: Analysis (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="stabil.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="h2.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H2>Simple <I>H</I><SUB>2</SUB> norm</H2>
+The notion of simple <I>H</I><SUB>2</SUB>-norm
+is introduced in analogy with the <I>H</I><SUB>2</SUB>-norm
+of LTI continuous-time system, which equals
+<CENTER><IMG SRC="../images/jh2simple.gif" WIDTH=375 HEIGHT=64 ALT=""></CENTER>
+where
+<span class=tms>&#949;<SUB>i</SUB></span> denotes system response to a
+Dirac delta-function
+<span class=tms>&#948;</span>(<span class=tms>t</span>) applied to
+<span class=tms>i<SUP>th</SUP></span>
+input (<span class=tms>i&nbsp;=&nbsp;1,...,m</span>). This value can be 
+used for <A HREF="../getstart/sdstd.html">standard sampled-data systems</A>
+provided that <I>P</I><SUB>11</SUB>(s) and <I>P</I><SUB>21</SUB>(s)
+are strictly proper <A HREF="#ref1">[1]</A>, <A HREF="#ref2">[2]</A>.
+<p>
+For systems with a scalar input this norm can be used
+as a cost function for optimal design with integral quadratic
+criterion <A HREF="#ref3">[3]</A>.
+
+<H3>Computation</H3>
+Function <A HREF="../functions/sdnorm.html">sdnorm</A>
+with optional parameter <code>'sh2'</code> returns the
+simple <I>H</I><SUB>2</SUB>-norm of the <A HREF="../getstart/sdstd.html">standard sampled-data 
+system</A>
+with continuous-time plant <code>sys</code> and discrete-time controller
+<code>K</code>:
+<pre>
+    F = tf(1, [1 1 0]);
+    sys = [F F;-F -F];
+    T = 0.1;
+    K = zpk ( 0.45, -0.89, 380, T );
+    v = sdnorm(sys, K, 'sh2')
+
+v =
+    0.0375
+
+</pre>
+For a system with scalar input this value can be computed
+in another way by means of the function <A HREF="../functions/sdl2err.html">sdl2err</A>,
+which returns the <A HREF="quaderr.html">integral quadratic error</A>, i.e., the square of
+the simple <I>H</I><SUB>2</SUB>-norm:
+<pre>
+   v = sqrt ( sdl2err(sys, K) )
+
+v =
+    0.0375
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Chen T., and Francis B.A.,
+<I>H</I><SUB>2</SUB>-optimal sampled-data control //
+<I>IEEE Trans. Automat. Contr.</I>, vol.&nbsp;AC-36, no.&nbsp;1,
+pp.&nbsp;387-397, 1991.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Chen, T., and B.A. Francis,
+<I>Optimal Sampled-Data Control Systems</I>.
+Berlin Heidelberg New York: Springer-Verlag, 1995.
+</p>
+<p><A name="ref3"></A>[3]&nbsp;Rosenwasser, E.N., and B.P. Lampe,
+<I>Computer Controlled Systems: Analysis and Design with
+Process-orientated Models</I>. London: Springer-Verlag, 2000.
+</p>
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="stabil.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;Stabilization</td><td>&nbsp;</td>
+<td align=right>H2-norm&nbsp;</td>
+<td align=right width=20><a href="h2.html"><img src="../images/b_next.gif" alt="Next page" border=0 
+align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+
+

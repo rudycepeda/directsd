@@ -1,0 +1,72 @@
+<html><head><title> recip (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="quaderr.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="sd2dof.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H4>recip</H4>
+
+<H3>Syntax</H3>
+<p class="code">r = recip ( x )</p>
+
+<H3>Description</H3>
+<code>recip</code> returns the
+reciprocal polynomial (the polynomial with inverse order of coefficients)
+such that for
+<CENTER><IMG SRC="../images/invpol1.gif" WIDTH=263 HEIGHT=19 ALT=""></CENTER>
+the reciprocal polynomial is
+<CENTER><IMG SRC="../images/invpol2.gif" WIDTH=266 HEIGHT=20 ALT=""></CENTER>
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">x</td>
+<td>a polynomial </td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">r</TD><TD>the reciprocal polynomial</TD></tr>
+</table>
+
+<H3>Example</H3>
+<pre>
+   a = poln( [1 2 3 4], 'z' )
+
+a: polynomial
+  z^3 + 2 z^2 + 3 z + 4
+
+   b = recip ( a )
+
+b: polynomial
+  4 z^3 + 3 z^2 + 2 z + 1
+</pre>
+
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="quaderr.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;quaderr</td><td>&nbsp;</td>
+<td align=right>sd2dof&nbsp;</td>
+<td align=right width=20><a href="sd2dof.html"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+

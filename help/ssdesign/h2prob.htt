@@ -1,0 +1,75 @@
+<!--%%page.i
+&secname=:: State-space design
+&name=H2-optimization problem
+&next=hinfprob.html
+&nextname=Hinf-optimization problem
+&prev=ssdesign.html
+&prevname=State-space design
+&content=
+<H2><I>H</I><SUB>2</SUB>-optimization problem</H2>
+The goal of the optimization is to minimize the
+the <A HREF="../analysis/h2.html"><I>H</I><SUB>2</SUB>-norm</A> of
+the sampled-data system <A HREF="#ref1">[1]</A>, which
+is similar to the <I>H</I><SUB>2</SUB>-norm of
+LTI systems. In <A HREF="../analysis/stoch.html">stochastic setting</A>,
+this equals the average output variance under
+the input described as a centered white noise with unit
+spectral density <A HREF="#ref2">[2]</A>.
+<p>
+State-space algorithms for solving this problems were
+developed in <A HREF="#ref1">[1]</A> and
+<A HREF="#ref3">[3]</A>-<A HREF="#ref5">[5]</A> using various
+approaches. Unfortunately, they can hardly cope with
+time-delayed systems.
+<p>
+The idea bases on construction of an equivalent discrete-time
+model of the problem. The function
+<A HREF="../functions/sdh2reg.html">sdh2reg</A>
+returns the optimal digital controller and the minimal attainable
+value of the cost function:
+<pre>
+   F = tf(1, [1 1 0]);
+   sys = [F F;-F -F];
+   T = 0.1;
+   [K,cost] = sdh2reg ( sys, T );
+   K = zpk(K)
+   cost
+
+K: zero-pole-gain model 1 x 1
+
+      366.55 (z-0.4577)
+      -----------------
+          (z+0.873)
+
+Sampling time: 0.1
+cost =
+    0.0285
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Chen, T., and B.A. Francis,
+<I>Optimal Sampled-Data Control Systems</I>.
+Berlin Heidelberg New York: Springer-Verlag, 1995.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Rosenwasser, E.N., and B.P. Lampe,
+<I>Computer Controlled Systems: Analysis and Design with
+Process-orientated Models</I>. London: Springer-Verlag, 2000.
+</p>
+<p><A name="ref3"></A>[3]&nbsp;Hagiwara T., Araki M.,
+FR-operator approach to the <I>H</I><SUB>2</SUB>-analysis
+and synthesis of sampled-data systems //
+<I>IEEE Trans. Automat. Contr.</I>,
+vol.&nbsp;AC-40, no.&nbsp;8, pp.&nbsp;1411-1421, 1995.
+</p>
+<p><A name="ref4"></A>[4]&nbsp;Bamieh B.A., Pearson J.B.,
+The <I>H</I><SUB>2</SUB>-problem for sampled-data
+systems //  S<I>yst. Contr. Lett.</I>, vol.&nbsp;19, no.&nbsp;1, pp.&nbsp;1-12, 1992.
+</p>
+<p><A name="ref5"></A>[5]&nbsp;Khargonekar P.P., Sivashankar N.,
+<I>H</I><SUB>2</SUB>-optimal control for
+sampled-data systems //  <I>Syst. Contr. Lett.</I>, vol.&nbsp;18, pp.&nbsp;627-631,
+1992.
+</p>
+
+%%-->
+

@@ -1,0 +1,96 @@
+<html><head><title> charpol (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="ch2.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="coprime.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H4>charpol</H4>
+
+<H3>Syntax</H3>
+<p class="code">p = charpol ( sys, K )</p>
+<p class="code">p = charpol ( sys, K, H )</p>
+
+<H3>Description</H3>
+<code>charpol</code> returns the characteristic polynomial of the
+control loop of the
+<A HREF="../getstart/sdstd.html">standard sampled-data system</A>
+<A HREF="#ref1">[1]</A>.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">sys</td>
+<td>model of an LTI plant associated with the
+<A HREF="../getstart/sdstd.html">standard sampled-data system</A>.
+</td></tr>
+<tr>
+<td class="cc">K</td>
+<td>feedback discrete-time controller</td></tr>
+<tr>
+<td class="cc">H</td>
+<td><A HREF="../getstart/sdstd.html#hold">generalized hold</A> given as an
+LTI continuous-time model.
+</td></tr>
+</table>
+<p>
+If the hold is not given, a zero-order hold is used by default.
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">p</TD>
+<TD>characteristic polynomial of the closed loop</TD></tr>
+</table>
+
+<H3>Example</H3>
+<pre>
+   sys = rss(2, 2, 2);
+   T = 1;
+   K = zpk([], [], 1, T);
+   H = rss(1, 1, 1);
+   H.d = 0;
+   charpol( sys, K, H )
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Chen, T., and B.A. Francis,
+<I>Optimal Sampled-Data Control Systems</I>.
+Berlin Heidelberg New York: Springer-Verlag, 1995.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Rosenwasser, E.N., and B.P. Lampe,
+<I>Computer Controlled Systems: Analysis and Design with
+Process-orientated Models</I>. London: Springer-Verlag, 2000.
+</p>
+
+<H3>See also</H3>
+
+<p class=fref><code><a href=sdmargin.html>sdmargin</a>&nbsp;&nbsp;</code>Stability margin of 
+sampled-data systems.</p>
+
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="ch2.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;ch2</td><td>&nbsp;</td>
+<td align=right>coprime&nbsp;</td>
+<td align=right width=20><a href="coprime.html"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+

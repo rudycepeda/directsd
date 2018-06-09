@@ -1,0 +1,86 @@
+<html><head><title>Hinf norm :: Analysis (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="stoch.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="ahinf.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H2><I>H</I><SUB>&#8734;</SUB> norm</H2>
+The following <I>L</I><SUB>2</SUB>-induced norm
+<CENTER><IMG SRC="../images/l2indnorm.gif" WIDTH=265 HEIGHT=47 ALT=""></CENTER>
+is usually meant by the
+
+<I>H</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="" border=0></SUB>-norm 
+of a sampled-data system. This equals
+the supremum of <I>L</I><SUB>2</SUB>-norm of the output for
+all inputs with bounded <I>L</I><SUB>2</SUB>-norm.
+<p>
+For sampled-data systems with time delays computation of the
+
+<I>H</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="" border=0></SUB>-norm 
+and solution of the corresponding
+optimization problem can be problematic. As an alternative,
+the <A HREF="ahinf.html">associated
+
+<I>H</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="" border=0></SUB>-norm</A> 
+can be used.
+
+<H3>Computation</H3>
+Function <A HREF="../functions/sdhinorm.html">sdhinorm</A> returns the
+
+<I>H</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="" border=0></SUB>-norm 
+of the <A HREF="../getstart/sdstd.html">standard sampled-data system</A>
+with continuous-time plant <code>sys</code> and discrete-time controller
+<code>K</code>:
+<pre>
+    F = tf(1, [1 1 0]);
+    sys = [F F;-F -F];
+    T = 0.1;
+    K = zpk ( 0.45, -0.89, 380, T );
+    v = sdhinorm(sys, K)
+
+v =
+    0.0092
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Chen, T., and B.A. Francis,
+<I>Optimal Sampled-Data Control Systems</I>.
+Berlin Heidelberg New York: Springer-Verlag, 1995.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Bamieh B.A., Pearson J.B.,
+A general framework for linear periodic systems
+with applications to
+
+<I>H</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="" border=0></SUB> 
+sampled-data control //
+<I>IEEE Trans. Automat. Contr.</I>, vol.&nbsp;AC-37,
+no.&nbsp;4, pp.&nbsp;418-435, 1992.
+</p>
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="stoch.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;Stochastic analysis</td><td>&nbsp;</td>
+<td align=right>Associated Hinf-norm&nbsp;</td>
+<td align=right width=20><a href="ahinf.html"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+
+

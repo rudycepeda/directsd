@@ -1,0 +1,165 @@
+<html><head><title> sdh2hinf (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="sdh2.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="sdh2norm.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H4>sdh2hinf</H4>
+
+<H3>Syntax</H3>
+<p class="code">[K,cost] = sdh2hinf ( sys, T, rho, o1, i1  )</p>
+<p class="code">[K,cost] = sdh2hinf ( sys, T, rho, o1, i1, H  )</p>
+
+<H3>Description</H3>
+<code>sdh2hinf</code> solves the mixed <I>H</I><SUB>2</SUB> /
+<I>AH</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT=""></SUB>-optimal
+problem for standard sampled-data system
+and returns the optimal controller <code>K</code>
+and the minimal value of the cost function
+<code>cost</code>. The standard system is given in the form
+<CENTER><IMG SRC="../images/stdh2hinf.gif" WIDTH=211 HEIGHT=162 ALT=""></CENTER>
+The goal is to minimize <I>H</I><SUB>2</SUB>-norm of the operator
+<I>U</I><SUB>2</SUB> from <span class=tms>w</span><SUB>2</SUB> to
+&#949;<SUB>2</SUB> while keeping the
+<I>AH</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT=""></SUB>-norm
+of the operator
+<I>U</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT=""></SUB>
+from
+<span class=tms>w</span><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT=""></SUB> to
+&#949;<SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT=""></SUB>
+below a specified level.
+<p>
+A compromise can be reached by varying weight coefficient
+<code>rho</code> in the interval [0,1]. If <code>rho=1</code>,
+the function returns the <I>H</I><SUB>2</SUB>-optimal controller.
+If <code>rho=0</code>, the result coincides with the
+<I>AH</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT=""></SUB>-optimal
+controller.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">sys</td>
+<td>model of an LTI plant associated with the
+<A HREF="../getstart/sdstd.html">standard sampled-data system</A>.
+</td></tr>
+<tr>
+<td class="cc">T</td>
+<td>the sampling period</td></tr>
+<tr>
+<td class="cc">rho</td>
+<td>weight coefficient in [0,1]</td></tr>
+<tr>
+<td class="cc">o1</td>
+<td>dimensions of output of <I>H</I><SUB>2</SUB>-block</td></tr>
+<tr>
+<td class="cc">i1</td>
+<td>dimensions of input of <I>H</I><SUB>2</SUB>-block</td></tr>
+<tr>
+<td class="cc">H</td>
+<td><A HREF="../getstart/sdstd.html#hold">generalized hold</A> given as an
+LTI continuous-time model.
+</td></tr>
+</table>
+<p>
+Dimensions of the signals
+<span class=tms>w</span><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT=""></SUB> and
+&#949;<SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT=""></SUB>
+are computed automatically, taking into account that <I>y</I>
+and <I>u</I> are scalar signals. If these dimensions are zero,
+it is assumed that
+<span class=tms>w</span><SUB>2</SUB> = <span class=tms>w</span><SUB><IMG SRC="../images/inf.gif" 
+WIDTH=16 HEIGHT=15 ALT=""></SUB>
+and/or
+&#949;<SUB>2</SUB> = &#949;<SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT=""></SUB>.
+<p>
+If the hold is not given, a zero-order hold is used by default.
+        
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">K</TD>
+<TD>discrete LTI model of controller</TD>
+</tr>
+<tr>
+<TD class="cc">cost</TD>
+<TD>minimal value of the cost function</TD>
+</tr>
+</table>
+
+<H3>Limitations</H3>
+<ul>
+<li>Controller <span class=tms>K</span> is a SISO system.
+<LI> Transfer matrices <I>P</I><SUB>11</SUB>(s), <I>P</I><SUB>21</SUB>(s),
+<I>P</I><SUB>21</SUB>(s), <I>P</I><SUB>22</SUB>(s),
+<I>P</I><SUB>31</SUB>(s), <I>P</I><SUB>32</SUB>(s),
+and <I>P</I><SUB>33</SUB>(s) must be strictly proper,
+<I>P</I><SUB>13</SUB>(s) and <I>P</I><SUB>23</SUB>(s) must be at least proper.
+</ul>
+
+<H3>Example</H3>
+<pre>
+    Q = 1;
+    R = tf(1, [1 0]);
+    F = tf(1, [1 1 1]);
+    sys = [-R*Q F;R*Q -F];
+    T = 1;
+    [K,cost] = sdh2hinf(sys,T,0.5)
+
+K: zero-pole-gain model 1 x 1
+
+      2.7815 (z+0.4498) (z^2  - 0.7859z + 0.3679)
+      -------------------------------------------
+              (z+0.4489) (z+0.6382) (z-1)
+
+Sampling time: 1
+cost =
+    1.0784
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Polyakov, K.Yu.,
+Polynomial design of optimal sampled-data tracking systems.
+II. Robust optimization, <I>Automation and Remote Control</I>,
+vol.&nbsp;62, no.&nbsp;3, pp.&nbsp;430-442, 2001.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Polyakov, K.Yu., Polynomial Design of Optimal
+Sampled-data Control Systems, Dr. Sc. Thesis, State University of Ocean Technology,
+St. Petersburg, 2006 [in Russian].
+</p>
+
+<H3>See also</H3>
+
+<p class=fref><code><a 
+href=sdh2.html>sdh2</a>&nbsp;&nbsp;</code><code>&nbsp;&nbsp;&nbsp;</code><I>H</I><SUB>2</SUB>-optimization of sampled-data systems.</p>
+<p class=fref><code><a href=sdahinf.html>sdahinf</a>&nbsp;&nbsp;</code>Minimization of 
+<I>AH</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT=""></SUB>-norm of sampled-data 
+systems.</p>
+
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="sdh2.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;sdh2</td><td>&nbsp;</td>
+<td align=right>sdh2norm&nbsp;</td>
+<td align=right width=20><a href="sdh2norm.html"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+

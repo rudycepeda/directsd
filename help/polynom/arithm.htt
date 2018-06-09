@@ -1,0 +1,84 @@
+<!--%%page.i
+&secname=
+&name=
+&next=
+&nextname=Next page
+&prev=
+&prevname=Previous page
+&content=
+<H2>Arithmetic</H2>
+All basic arithmetic operations are overloaded
+in the DirectSD Toolbox for polynomial objects:
+<ul>
+<LI>addition <code>+</code>
+<LI>subtraction <code>-</code>
+<LI>multiplication <code>*</code>
+<LI>division <code>/</code>
+<LI>exponentiation by an integer <code>^</code>
+</ul>
+For the polynomials
+<pre>
+   a = s^2 + 2*s + 3;
+   b = 5*s + 6;
+</pre>
+these arithmetic operations are as follows:
+<pre>
+   w = a + b
+
+w: polynomial
+  s^2 + 7 s + 9
+
+   w = a - b
+
+w: polynomial
+  s^2 - 3 s - 3
+
+   w = a * b
+
+w: polynomial
+  5 s^3 + 16 s^2 + 27 s + 18
+
+   w = a^2
+
+w: polynomial
+  s^4 + 4 s^3 + 10 s^2 + 12 s + 9
+</pre>
+<H5>Division</H5>
+Division is performed without a remainder
+<pre>
+   w = a / b
+
+w: polynomial
+  0.2 s + 0.16
+
+   w = b / a
+
+w: polynomial
+  0
+</pre>
+If it is necessary, remainder can be found using
+the function <code>quorem</code>:      
+<pre>
+   [q,r] = quorem ( a, b )
+
+q: polynomial
+  0.2 s + 0.16
+r: polynomial
+  2.04
+</pre>
+
+%%-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+

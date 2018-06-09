@@ -1,0 +1,66 @@
+<!--%%page.i
+&secname=whquad
+&name=
+&next=ztrm.html
+&nextname=ztrm
+&prev=vec.html
+&prevname=vec
+&content=
+<H4>whquad</H4>
+
+<H3>Syntax</H3>
+<p class="code">[K,cost] = whquad ( A, B, E, D22 )</p>
+
+<H3>Description</H3>
+<code>whquad</code> solves quadratic minimization problem
+<CENTER><IMG SRC="../images/h2prob.gif" WIDTH=224 HEIGHT=47 ALT=""></CENTER>
+for a frequency domain integrand
+<CENTER><IMG SRC="../images/x.gif" WIDTH=486 HEIGHT=26 ALT=""></CENTER>
+where the function
+<CENTER><IMG SRC="../images/m.gif" WIDTH=193 HEIGHT=45 ALT=""></CENTER>
+is determined by the controller to be chosen.
+<p>
+Solution method is based on the Wiener-Hopf approach of <A HREF="#ref1">[1]</A>.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="ccw">A, B, E</td>
+<td>functions in the backward shift operator &#950;</A>.
+</td></tr>
+<tr>
+<td class="ccw">D22</td>
+<td>discrete-time model of the plant in the loop with hold curcuit</td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="ccw">K</TD>
+<TD>discrete LTI model of controller</TD></tr>
+<tr>
+<TD class="ccw">cost</TD>
+<TD>the minimal value of the functional</TD></tr>
+</table>
+
+<H3>Limitations</H3>
+<ul>
+<li>Controller <span class=tms>K</span> is a SISO system.
+<LI>It is more reliable to use
+<A HREF="polquad.html">polquad</A> or
+<A HREF="ssquad.html">ssquad</A>
+instead.
+</ul>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Rosenwasser, E.N., and B.P. Lampe,
+<I>Computer Controlled Systems: Analysis and Design with
+Process-orientated Models</I>. London: Springer-Verlag, 2000.
+</p>
+
+<H3>See also</H3>
+<!--%%funref.i&name=polquad&text=Polynomial minimization of a quadratic cost functional.%%-->
+<!--%%funref.i&name=ssquad&text=<code>&nbsp;</code>State-space minimization of a quadratic cost functional.%%-->
+<!--%%funref.i&name=quaderr&text=Computation of a quadratic cost functional.%%-->
+
+%%-->

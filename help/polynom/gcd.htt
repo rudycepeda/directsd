@@ -1,0 +1,57 @@
+<!--%%page.i
+&secname=:: Polynomials
+&name=Common divisors
+&next=derive.html
+&nextname=Derivatives
+&prev=props2.html
+&prevname=Other properties of polynomials
+&content=
+<H2>Common divisors</H2>
+For many problems it is important to find
+common divisors of two or more polynomials.
+Function <A HREF="../functions/gcd.html">gcd</A> returns the greatest common
+divisors of several polynomials:
+<pre>
+   a = poln ( [1 2 3], 'r' );
+   b = poln ( [2 3 4], 'r' );
+   c = poln ( [3 4 5], 'r' );
+   g = gcd ( a, b, c )
+
+g: polynomial
+  s - 3
+
+</pre>
+To extract this divisor from two or three polynomials,
+one can use functions <A HREF="../functions/coprime.html">coprime</A> and
+<A HREF="../functions/triple.html">triple</A>, respectively. For the polynomials
+defined above:
+<pre>
+   [a1,b1,g] = coprime ( a, b )
+
+a1: polynomial
+  s - 1
+b1: polynomial
+  s - 4
+g: polynomial
+  s^2 - 5 s + 6
+
+</pre>
+and also
+<pre>
+   [a2,b2,c2,g] = triple ( a, b, c )
+
+a2: polynomial
+  s^2 - 3 s + 2
+b2: polynomial
+  s^2 - 6 s + 8
+c2: polynomial
+  s^2 - 9 s + 20
+g: polynomial
+  s - 3
+</pre>
+
+
+
+
+%%-->
+

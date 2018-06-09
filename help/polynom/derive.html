@@ -1,0 +1,111 @@
+<html><head><title>Derivatives :: Polynomials (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="gcd.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="factor.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H2>Derivatives</H2>
+<H5>Derivative of a polynomial</H5>
+Function <code>derive</code> returns the derivative of a
+polynomial. The second (optional) parameter is the order of
+derivative:
+<pre>
+   a = 2*s^2 + 3*s + 4
+
+a: polynomial
+  2 s^2 + 3 s + 4
+
+   derive ( a )
+
+ans: polynomial
+  4 s + 3
+
+   derive ( a, 2 )
+
+ans: polynomial
+  4
+
+</pre>
+This function is also applicable for quasipolynomials:
+<pre>
+   a = 2*z^2 + 3*z^-1 + 4*z^-2
+
+a: quasipolynomial
+  2 z^2 + 3 z^-1 + 4 z^-2
+
+   derive ( a )
+
+ans: quasipolynomial
+  4 z - 3 z^-2 - 8 z^-3
+
+   derive ( a, 2 )
+
+ans: quasipolynomial
+  4 + 6 z^-3 + 24 z^-4
+</pre>
+
+<H5>Value of a derivative</H5>
+The overloaded function <code>polyder</code>
+returns the value of a derivative of a
+polynomial or quasipolynomial for a given value of the variable:
+The third (optional) parameter is the order of
+derivative:
+<pre>
+   a = 2*s^3 + 3*s^2 + 4
+
+a: polynomial
+  2 s^3 + 3 s^2 + 4
+
+   polyder ( a, 3 )
+
+ans =
+    72
+</pre>
+Second-order derivative at the point <code>s=3</code>:
+<pre>
+   polyder ( a, 3, 2 )
+   
+ans =
+    42
+</pre>
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="gcd.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;Common divisors</td><td>&nbsp;</td>
+<td align=right>Factorization&nbsp;</td>
+<td align=right width=20><a href="factor.html"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,82 @@
+<!--%%page.i
+&secname=triple
+&name=
+&next=vec.html
+&nextname=vec
+&prev=tf2nd.html
+&prevname=tf2nd
+&content=
+<H4>triple</H4>
+
+<H3>Syntax</H3>
+<p class="code">[a0,b0,c0,g] = triple ( a, b, c )</p>
+<p class="code">[a0,b0,c0,g] = triple ( a, b, c, tol )</p>
+
+<H3>Description</H3>
+<code>triple</code> extracts common factors of three polynomials.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="ccw">a, b, c</td><td>given polynomials as arrays of coefficients or polynomial objects</td></tr>
+<tr>
+<td class="cc">tol</td><td>tolerance (default 1e-8)</td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="ccw">a0, b0, c0</TD>
+<TD>triple of reduced polynomials</TD></tr>
+<tr>
+<TD class="ccw">g</TD>
+<TD>the prime greatest common divisor such that <code>a=a<SUB>0</SUB>g</code>,
+<code>b=b<SUB>0</SUB>g</code>, and <code>c=c<SUB>0</SUB>g</code></TD>
+</tr>
+</table>
+
+<H3>Examples</H3>
+<B>Example 1.</B> Initial data as arrays of coefficients.
+<pre>
+   a = poly([1 2 3]);
+   b = poly([2 3 4]);
+   c = poly([3 4 5]);
+   [a0,b0,g] = triple(a, b, c)
+
+a0 =
+    1.0000   -3.0000    2.0000
+b0 =
+    1.0000   -6.0000    8.0000
+c0 =
+    1.0000   -9.0000   20.0000
+g =
+    1.0000   -3.0000
+    
+</pre>
+<B>Example 2.</B> Polynomial form of initial data.
+<pre>
+   a = poln([1 2 3], 'r');
+   b = poln([2 3 4], 'r');
+   c = poln([3 4 5], 'r');
+   [a0,b0,g] = triple(a, b, c)
+
+a0: polynomial
+  s^2 - 3 s + 2
+b0: polynomial
+  s^2 - 6 s + 8
+c0: polynomial
+  s^2 - 9 s + 20
+g: polynomial
+  s - 3
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Kucera V., Discrete Linear Control,
+New York: Wiley, 1979.
+</p>
+
+<H3>See also</H3>
+<!--%%funref.i&name=gcd&text=<code>&nbsp;&nbsp;&nbsp;&nbsp;</code>Greatest common divisor of several polynomials.%%-->
+<!--%%funref.i&name=coprime&text=Extraction of a common factor of two polynomials.%%-->
+
+%%-->

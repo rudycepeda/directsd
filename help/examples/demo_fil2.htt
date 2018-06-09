@@ -1,0 +1,139 @@
+<!--%%page.i
+&secname=:: Examples
+&name=Sampled-data filtering with delay 
+&next=demo_fil3.html
+&nextname=Reconstructing a second-order process 
+&prev=demo_fil1.html
+&prevname=Reconstructing a first-order process 
+&content=
+<H2>Example: Sampled-data filtering with delay</H2>
+<H3>Statement of the problem</H3>
+Consider again the sampled-data filtering problem
+investigated in the <A HREF="demo_fil1.html">previous example</A>.
+<CENTER><IMG SRC="images/fil2_scheme.gif" WIDTH=382 HEIGHT=105 ALT=""></CENTER>
+This time we assume that there is delay
+caused by performing calculations in digital part
+(computational delay) <span class=tms>&#964; = 0.051</span>.
+
+<H3>Preparing data</H3>
+The delay
+can be assigned to the contimuous-time element <I>F</I>
+so that the known data can be entered as follows:
+<pre>
+   Sr = tf ( 4, [-1 0 4] );
+   Fr = sfactor ( Sr );
+   Fn = 1;
+   F = tf ( 1, [1 1] );
+   F.iodelay = 0.051;
+</pre>
+(see the <A HREF="demo_fil1.html">previous example</A> for details).
+Then, the plant for the standard system has the form
+<pre>
+   sys = [Fr 0  -F
+          Fr Fn  0]
+
+sys: transfer function 2 x 3
+
+    !   -2                            1   !
+    ! -----    0    exp(-0.051*s) * ----- !
+    ! s + 2                         s + 1 !
+    !                                     !
+    !   2                                 !
+    ! -----    1                      0   !
+    ! s + 2                               !
+</pre>
+
+<H3>Optimization</H3>
+Choose a sampling period:
+<pre>
+   T = 0.1;
+</pre>
+Since system output is a continuous-time signal,
+it is reasonable to minimize average variance of the error.
+For this purpose we use
+<A HREF="../functions/sdh2.html">sdh2</A>
+<pre>
+   K = sdh2 ( sys, T )
+
+K: zero-pole-gain model 1 x 1
+
+       3.7544 z (z-0.9048)
+      ---------------------
+      (z+0.2678) (z-0.5201)
+
+Sampling time: 0.1
+</pre>
+<H3>Analysis</H3>
+Compute the average error using
+<A HREF="../functions/sdh2norm.html">sdh2norm</A>
+<pre>
+   err = sdh2norm ( sys, K )
+
+err =
+    0.7879
+</pre>
+Setting the third optional parameter to 0, we
+compute the error at the sampling instants:
+<pre>
+   err0 = sdh2norm ( sys, K, 0 )
+
+err0 =
+    0.7735
+</pre>
+
+<H3>Comparison with discrete-time optimization</H3>
+For comparison, we find the filter that minimize
+the error at the sampling instants:
+<pre>
+   K0 = sdh2 ( sys, T, 0 )
+
+K0: zero-pole-gain model 1 x 1
+
+        6.245 z (z-0.9048)
+      ---------------------
+      (z+0.9901) (z-0.5201)
+
+Sampling time: 0.1
+</pre>
+Notice that this filter is quite different from
+the previous. Average error
+<pre>
+   err = sdh2norm ( sys, K0 )
+
+err =
+    1.8466
+</pre>
+is a much higher than for the optimal filter,
+though the error at the sampling points
+<pre>
+   err0 = sdh2norm ( sys, K0, 0 )
+
+err0 =
+    0.7577
+</pre>
+is lower than for the previous variant.
+Computing the error for the time grid over the
+sampling interval, we can compare the curves for
+the two filters:
+<pre>
+   t = [0:0.025:1]*T;
+   err_t = sdh2norm ( sys, K, t )
+   err_t0 = sdh2norm ( sys, K0, t );
+   plot ( t, err_t, t, err_t0, '--' );
+</pre>
+<CENTER><IMG SRC="images/fil2_varcmp.jpg" vspace="5" WIDTH=327 HEIGHT=311 ALT=""></CENTER>
+The curves show that the filter <span class=tms>K<SUB>0</SUB></span>
+causes intersample ripples, and the variance is very
+high inside the interval. Therefore, it is recommended
+to use direct design methods.
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;
+Y.N. Rosenwasser, K.Y. Polyakov, and B.P. Lampe,
+Optimal discrete filtering for time-delayed
+systems with respect to mean-square continuous-time
+error criterion,
+<I>Int. J. Adapt. Contr. Signal Proc.</I>,
+1998, vol. 12, pp. 389-406.
+</p>
+%%-->

@@ -1,0 +1,101 @@
+<!--%%epage.i
+&secname=:: Analysis
+&name=Associated Hinf-norm
+&next=poldesign\poldesign.html
+&nextname=Polynomial design
+&prev=hinf.html
+&prevname=Hinf norm
+&content=
+<H2>Associated <I>H</I><SUB>&#8734;</SUB> norm</H2>
+The notion of associated
+<!--%%ahinf.i%%-->-norm
+is motivated by well-known relations between
+<I>H</I><SUB>2</SUB> and
+<I>H</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT=""></SUB>
+norms of linear time-invariant systems.
+For a discrete-time system with transfer function
+<span class=tms>F</span>(<span class=tms>&#950;</span>)
+(where <span class=tms>&#950;</span> denotes the unit backward shift
+operator) these norms are given by
+<!--%%eqn.i&name=dh2norm&w=213&h=50&no=1%%-->
+<!--%%eqn.i&name=dinfnorm&w=256&h=40&no=2%%-->
+where
+<!--%%eqn.i&name=xff&w=163&h=28&no=3%%-->
+and <span class=tms>&#915;</span> denotes the unit circle
+passed in an anti-clockwise fashion.
+<p>
+For sampled-data systems it is known
+<a href="#ref2">[2]</a> that <I>H</I><SUB>2</SUB> and <I>L</I><SUB>2</SUB>
+problems can also be reduced, in the frequency domain,
+to a functional of the form (1), where
+<span class=tms>X</span>(<span class=tms>&#950;</span>)
+is a Hermitian self-conjugate function free of poles at
+the unit circle. Therefore, a stable function
+<span class=tms>F</span>(<span class=tms>&#950;</span>)
+can be found such that (3) holds. This function can be considered
+as transfer function of an equivalent discrete-time system, and
+<!--%%hinf.i%%-->-norm of this function defined by (2) can be taken as a measure of
+robustness for the sampled-data system under consideration.
+This value is called the <i>associated</i>
+<!--%%hinf.i%%-->-norm of the sampled-data system
+<a href="#ref1">[1]</a>, <a href="#ref2">[2]</a>:
+<CENTER><IMG SRC="../images/ahinorm.gif" WIDTH=167 HEIGHT=26 ALT=""></CENTER>
+where U denotes the causal periodically nonstationary operator
+corresponding to the sampled-data system. The constant factor
+ensures appropriate scaling in such a way that this norm
+equals the <I>L</I><SUB>2</SUB>-induced norm for the
+case <I>P</I><SUB>11</SUB>(s)=0.
+
+<H3>Advantages</H3>
+<ul>
+<LI>
+<!--%%ahinf.i%%--> norm can be computed effectively in the
+frequency domain for a wide class of sampled-data systems,
+including time-delay systems.
+<li>
+<!--%%ahinf.i%%--> norm coincides with the classical
+<I>L</I><SUB>2</SUB>-induced norm <A HREF="#ref3">[3]</A> for systems
+with <I>P</I><SUB>11</SUB>(s)=0.
+</ul>
+
+<H3>Disadvantages</H3>
+<ul>
+<li>
+<!--%%ahinf.i%%--> norm is different from the classical
+<I>L</I><SUB>2</SUB>-induced norm <A HREF="#ref3">[3]</A> for systems
+<I>P</I><SUB>11</SUB>(s)&#8800;0.
+</ul>
+
+<H3>Computation</H3>
+Function <A HREF="../functions/sdahinorm.html">sdahinorm</A> returns the
+<!--%%ahinf.i%%-->-norm of the <A HREF="../getstart/sdstd.html">standard sampled-data system</A>
+with continuous-time plant <code>sys</code> and discrete-time controller
+<code>K</code>:
+<pre>
+    F = tf(1, [1 1 0]);
+    sys = [F F;-F -F];
+    T = 0.1;
+    K = zpk ( 0.45, -0.89, 380, T );
+    v = sdahinorm(sys, K)
+
+v =
+    0.0092
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Polyakov K., Rosenwasser E., and Lampe B.,
+Associated
+<!--%%hinf.i%%--> problem for sampled-data systems //  Proc. 3rd IFAC
+Symposium on Robust Control Design, Prague, June 21-23, 2000.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Rosenwasser, E.N., and B.P. Lampe,
+<I>Computer Controlled Systems: Analysis and Design with
+Process-orientated Models</I>. London: Springer-Verlag, 2000.
+</p>
+<p><A name="ref3"></A>[3]&nbsp;Chen, T., and B.A. Francis,
+<I>Optimal Sampled-Data Control Systems</I>.
+Berlin Heidelberg New York: Springer-Verlag, 1995.
+</p>
+
+%%-->
+

@@ -1,0 +1,221 @@
+<html><head><title>Optimal 2-DOF preview control  :: Examples (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="demo_l2p.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="demo_modh2.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H2>Example: Optimal 2-DOF preview control</H2>
+<H3>Statement of the problem</H3>
+Consider the following 2-DOF sampled-data tracking system:
+<CENTER><IMG SRC="images/2dofp_scheme.gif" WIDTH=524 HEIGHT=114 ALT=""></CENTER>
+Here <span class=tms>w</span>(t) is a unit impulse,
+blocks <span class=tms>F</span> and <span class=tms>R</span> denote a
+plant and model of the reference signal, respectively,
+with transfer functions
+<CENTER><IMG SRC="images/2dofp_rf.gif" WIDTH=252 HEIGHT=43 ALT=""></CENTER>
+Preview block
+<SUB><IMG SRC="images/h2p_pi.gif" WIDTH=21 HEIGHT=18 ALT=""></SUB>
+generates a "previewed" signal
+(future value of <span class=tms>r</span>(<span class=tms>t</span>)),
+where <span class=tms>&#960;</span>&nbsp;>&nbsp;0 is a preview interval.
+<p>
+Digital computer has a sampling unit with period <span class=tms>T</span>&nbsp;=&nbsp;1,
+discrete feedback controller <span class=tms>K</span>,
+reference controller <span class=tms>K<SUB>R</SUB></span>
+and a zero-order hold <span class=tms>H</span>.
+Control delay by <span class=tms>&#964;</span>&nbsp;=&nbsp;1.5 should be taken into account.
+Moreover, <span class=tms>k</span> is a constant gain
+(typically 0 or 1).
+<p>
+Feedback controler <span class=tms>K</span> is assumed to be known.
+It is required to find the reference controller
+<span class=tms>K<SUB>R</SUB></span>
+such that the output of the system be as close as possible to the
+output of the reference system:
+<CENTER><IMG SRC="images/l2_csheme.gif" WIDTH=165 HEIGHT=49 ALT=""></CENTER>
+where
+<CENTER><IMG SRC="images/l2p_q.gif" WIDTH=122 HEIGHT=42 ALT=""></CENTER>
+The cost function to be minimized is the integral squared
+error
+<CENTER><IMG SRC="images/l2err0.gif" WIDTH=156 HEIGHT=47 ALT=""></CENTER>
+i.e., the <I>L</I><SUB>2</SUB>-norm
+of the signal:
+<CENTER><IMG SRC="images/l2_eps.gif" WIDTH=144 HEIGHT=24 ALT=""></CENTER>
+which is the difference between the outputs of the systems.
+In this example we compare 1-DOF and 2-DOF control with preview.
+
+<H3>Preparing data</H3>
+First, we enter the models of the command signal, plant and
+reference system:
+<pre>
+   R = tf ( 1, [1 1 0] );
+   F = tf ( 1, [5 1] );
+   F.iodelay = 1.5;
+   Q = tf ( 1, [0.1 1] );
+   T = 1;
+</pre>
+Let the preview interval <span class=tms>&#960;</span> be equal to 2:
+<pre>
+   preview = 2;
+</pre>
+Then, we represent the preview in the form
+<CENTER><IMG SRC="images/l2p_pi.gif" WIDTH=92 HEIGHT=22 ALT=""></CENTER>
+where <span class=tms>&#963;</span> is a non-negative integer and
+0&nbsp;&#8804;&nbsp;<span class=tms>&#952;</span>&nbsp;&nbsp;<I><span class=tms>T</span></I>.
+It can be shown that non-causal preview block can be removed
+and the equal delay be added to the ideal operator
+<I><span class=tms>Q</span></I>.
+In addition, a pure delay by <span class=tms>&#952;</span> should be added to
+the reference block (see <A HREF="#ref1">[1]</A>-<A HREF="#ref2">[2]</A>
+for details). Therefore,
+<pre>
+   sigma = ceil(preview/T);
+   theta = sigma*T - preview;
+   R.iodelay = theta;
+   Q.iodelay = preview;
+</pre>
+Consider the 1-DOF control with <span class=tms>k</span>&nbsp;=&nbsp;1
+and <span class=tms>K<SUB>R</SUB></span>&nbsp;=&nbsp;0.
+Operator equations for the
+<A HREF="../getstart/sdstd.html">standard sampled-data system</A>.
+have the form
+<CENTER><IMG SRC="images/l2p_op.gif" WIDTH=233 HEIGHT=50 ALT=""></CENTER>
+Then, blocks of the plant in the standard system have the form
+<CENTER><IMG SRC="images/l2p_pij.gif" WIDTH=315 HEIGHT=56 ALT=""></CENTER>
+Such a system can be formed as
+<pre>
+   sys = [Q*R -F
+            R -F];
+
+</pre>
+For the 2-DOF control we take <span class=tms>k</span>&nbsp;=&nbsp;0.
+Then, operator equations can be written as
+<CENTER><IMG SRC="images/2dofp_op.gif" WIDTH=248 HEIGHT=74 ALT=""></CENTER>
+and the blocks of the <A HREF="../getstart/2dofstd.html">standard 2-DOF system</A>
+have the form
+<CENTER><IMG SRC="images/2dofp_pij.gif" WIDTH=398 HEIGHT=55 ALT=""></CENTER>
+This plant can be defined as
+<pre>
+   sys2 = [Q*R -F
+             R  0
+             0 -F];
+</pre>
+
+<H3>1-DOF controller</H3>
+To minimize the <I>L</I><SUB>2</SUB>-norm of the output
+we use <A HREF="../functions/sdl2.html">sdl2</A>
+<pre>
+   K = sdl2 ( sys, T )
+
+K: zero-pole-gain model 1 x 1
+
+          14.7471 z^2 (z-0.9039) (z-0.2681)
+      ----------------------------------------
+      (z-1) (z-0.2725) (z^2  + 1.943z + 1.248)
+
+Sampling time: 1
+
+</pre>
+Compute the cost function using
+<A HREF="../functions/sdl2err.html">sdl2err</A>
+<pre>
+   sdl2err ( sys, K )
+
+ans =
+    2.7072
+
+</pre>
+Step response of the optimal 1-DOF system (solid line
+in the figure below) is far from the reference process
+(dashed line).
+<CENTER><IMG SRC="images/2dofp_bad.jpg" vspace=5 WIDTH=338 HEIGHT=314 ALT=""></CENTER>
+Dependence of the minimal value of the cost function
+<span class=tms>J<SUB>min</SUB></span> on preview interval
+<span class=tms>&#960;</span> is shown below:
+<CENTER><IMG SRC="images/l2p_curve2.jpg" vspace=5 WIDTH=360 HEIGHT=341 ALT=""></CENTER>
+This form of the curve is explained by the fact that the controller is to
+perform two conflicting tasks: 1) to stabilize the plant and
+2) to minimize the cost function. The dashed green line denote
+the limiting periodic curve to which the function
+<span class=tms>J<SUB>min</SUB></span>(<span class=tms>&#960;</span>) tends
+asymptotiically.
+
+<H3>2-DOF controller</H3>
+Then, we use 2-DOF control, assuming that the feedback
+controller <span class=tms>K</span> is fixed as defined above.
+Using <A HREF="../functions/sd2dof.html">sd2dof</A>, we
+find the optimal reference controller:
+<pre>
+   KR = sd2dof ( sys2, K )
+
+KR: zero-pole-gain model 1 x 1
+
+      6.2878 z (z+6.675e-006) (z-9.713e-005) (z-0.0896) (z-0.8187)
+      ------------------------------------------------------------
+         (z-1) (z-0.2725) (z-4.54e-005) (z^2  + 1.943z + 1.248)
+
+Sampling time: 1
+
+</pre>
+Compute the cost function using
+<A HREF="../functions/sd2doferr.html">sd2doferr</A>
+<pre>
+   sd2doferr ( sys2, K, KR )
+
+ans =
+    0.0602
+
+</pre>
+This is 45 times smaller than for the 1-DOF system.
+<p>
+The output signal in the 2-DOF optimal system (solid)
+is very close to the reference signal (dashed):
+<CENTER><IMG SRC="images/2dofp_good.jpg" vspace=5 WIDTH=306 HEIGHT=269 ALT=""></CENTER>
+<p>
+Dependence of the minimal value of the cost function
+<span class=tms>J<SUB>min</SUB></span> on preview interval
+<span class=tms>&#960;</span> is shown below:
+<CENTER><IMG SRC="images/2dofp_curve.jpg" vspace=5 WIDTH=350 HEIGHT=324 ALT=""></CENTER>
+This curve is very much like that for 1-DOF optimization
+with a stable plant (see <A HREF="demo_l2p.html">1-DOF example</A>).
+It should be noted that the curve is independent on
+the feedback controller <span class=tms>K</span>.
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;
+Polyakov K., Rosenwasser E., and Lampe B.,
+Optimal design of 2-DOF digital controller for sampled-data tracking
+systems with preview, Proc. 43th CDC, Bahama Isl., USA,
+pp. 2352--2357, 2004.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Polyakov, K.Yu., Polynomial Design of Optimal
+Sampled-data Control Systems, Dr. Sc. Thesis, State University of Ocean Technology,
+St. Petersburg, 2006 [in Russian].
+</p>
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="demo_l2p.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;L2-optimal preview control </td><td>&nbsp;</td>
+<td align=right>Reduced-order H2-optimal control &nbsp;</td>
+<td align=right width=20><a href="demo_modh2.html"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+

@@ -1,0 +1,58 @@
+<!--%%page.i
+&secname=:: Polynomial design
+&name=H2-optimization problem
+&next=ahinfprob.html
+&nextname=AHinf-optimization problem
+&prev=l2prob.html
+&prevname=L2-optimization problem
+&content=
+<H2><I>H</I><SUB>2</SUB>-optimization problem</H2>
+Fro the engineering point of view, the <I>H</I><SUB>2</SUB>-problem
+for sampled-data systems is more understandable in
+<A HREF="../analysis/stoch.html">stochastic setting</A>.
+The design goal is to minimize the value
+<CENTER><IMG SRC="../images/barj.gif" WIDTH=273 HEIGHT=54 ALT=""></CENTER>
+where
+E{&#183;} denotes mathematical expectation and
+the input signal <span class=tms>w</span> is described as centered white noise
+with unit spectral density <A HREF="#ref1">[1]</A>.
+In deterministic setting this equals
+the <A HREF="../analysis/h2.html"><I>H</I><SUB>2</SUB>-norm</A> of the system <A HREF="#ref2">[2]</A>.
+<p>
+Polynomial method of solving the <I>H</I><SUB>2</SUB>-problem
+for sampled-data systems <A HREF="#ref3">[3]</A> is realized in the function
+<A HREF="../functions/sdh2.html">sdh2</A>, which returns the optimal
+digital controller and the minimal attainable value of the cost function:
+<pre>
+   F = tf(1, [1 1 0]);
+   sys = [F F;-F -F];
+   T = 0.1;
+   [K,cost] = sdl2 ( sys, T )
+
+K: zero-pole-gain model 1 x 1
+
+      366.55 (z-0.4577)
+      -----------------
+          (z+0.873)
+
+Sampling time: 0.1
+cost =
+    0.0286
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Rosenwasser, E.N., and B.P. Lampe,
+<I>Computer Controlled Systems: Analysis and Design with
+Process-orientated Models</I>. London: Springer-Verlag, 2000.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Chen, T., and B.A. Francis,
+<I>Optimal Sampled-Data Control Systems</I>.
+Berlin Heidelberg New York: Springer-Verlag, 1995.
+</p>
+<p><A name="ref3"></A>[3]&nbsp;Polyakov, K.Yu., Polynomial Design of Optimal
+Sampled-data Control Systems, Dr. Sc. Thesis, State University of Ocean Technology,
+St. Petersburg, 2006 [in Russian].
+</p>
+
+%%-->
+

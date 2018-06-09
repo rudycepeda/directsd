@@ -1,0 +1,95 @@
+<!--%%page.i
+&secname=sdgh2mod
+&name=
+&next=sdh2.html
+&nextname=sdh2
+&prev=sdfast.html
+&prevname=sdfast
+&content=
+<H4>sdgh2mod</H4>
+
+<H3>Syntax</H3>
+<p class="code">[dsys,gamma] = sdgh2mod ( sys, T )</p>
+<p class="code">[dsys,gamma] = sdgh2mod ( sys, T, nmeas, ncon )</p>
+
+
+<H3>Description</H3>
+<code>sdgh2mod</code> constructs a discrete-time equivalent model of the
+<A HREF="../getstart/sdstd.html">standard sampled-data system</A>
+in generalized <I>H</I><SUB>2</SUB>-problem <A HREF="#ref1">[1]</A>, <A HREF="#ref2">[2]</A>.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">sys</td>
+<td>model of an LTI plant associated with the
+<A HREF="../getstart/sdstd.html">standard sampled-data system</A>.
+</td></tr>
+<tr>
+<td class="cc">T</td>
+<td>the sampling period</td></tr>
+<tr>
+<td class="cc">nmeas</td><td>number of measured signals (default 1)</td></tr>
+<tr>
+<td class="cc">ncon</td><td>number of control signals (default 1)</td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">dsys</TD><TD>generalized plant for an equivalent
+discrete-time standard system</TD></tr>
+<tr>
+<TD class="cc">gamma</TD><TD>additional term in computation of <I>H</I><SUB>2</SUB>-norm
+of sampled-data system</TD></tr>
+</table>
+
+<H3>Limitations</H3>
+<ul>
+<LI>Only for delay-free systems.
+<LI>Only for systems with zero-order hold.
+<LI> Transfer matrices <I>P</I><SUB>11</SUB>(s),
+<I>P</I><SUB>21</SUB>(s),
+and <I>P</I><SUB>22</SUB>(s) must be strictly proper,
+<I>P</I><SUB>12</SUB>(s) must be at least proper.
+</ul>
+
+<H3>Example</H3>
+<pre>
+    F = tf(1, [1 1 0]);
+    sys = [F F;-F -F];
+    T = 0.1;
+    [dsys,gamma] = sdgh2mod ( sys, T );
+    K = zpk(h2reg ( dsys ))
+    cost = sqrt(norm(lft(dsys,K))^2 + gamma)
+
+K: zero-pole-gain model 1 x 1
+
+      366.55 (z-0.4577)
+      -----------------
+          (z+0.873)
+
+Sampling time: 0.1
+
+cost =
+    0.0285
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Chen, T., and B.A. Francis,
+<I>Optimal Sampled-Data Control Systems</I>.
+Berlin Heidelberg New York: Springer-Verlag, 1995.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Hagiwara T., M. Araki, FR-operator approach to the
+<I>H</I><SUB>2</SUB>-analysis
+and synthesis of sampled-data systems // <I>IEEE Trans. Automat. Control</I>,
+vol.&nbsp;AC-40, no.&nbsp;8, 1995.
+</p>
+
+<H3>See also</H3>
+<!--%%funref.i&name=sdfast&text=<code>&nbsp;&nbsp;&nbsp;&nbsp;</code>Fast-discretization of sampled-data systems.%%-->
+<!--%%funref.i&name=sdh2simple&text=Equivalent discrete model in simple <I>H</I><SUB>2</SUB>-problem for sampled-data systems.%%-->
+<!--%%funref.i&name=sdh2reg&text=<code>&nbsp;&nbsp;&nbsp;</code>State-space <I>H</I><SUB>2</SUB>-optimization of sampled-data systems.%%-->
+<!--%%funref.i&name=sdh2&text=<code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><I>H</I><SUB>2</SUB>-optimization of sampled-data systems.%%-->
+
+%%-->

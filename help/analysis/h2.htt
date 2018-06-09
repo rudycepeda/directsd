@@ -1,0 +1,84 @@
+<!--%%page.i
+&secname=:: Analysis
+&name=H2-norm
+&next=quaderr.html
+&nextname=Integral quadratic error
+&prev=h2simple.html
+&prevname=Simple H2-norm
+&content=
+<H2><I>H</I><SUB>2</SUB>-norm</H2>
+For LTI systems, one of the most popular is
+the problem of minimizing the <I>H</I><SUB>2</SUB>-norm
+of closed-loop transfer function <A HREF="#ref1">[1]</A>.
+The notion of transfer function is senseless for
+sampled-data systems, because they are periodically
+nonstationary systems. A family of values
+<CENTER><IMG SRC="../images/jtau.gif" WIDTH=393 HEIGHT=60 ALT=""></CENTER>
+can be considered, where
+where
+<span class=tms>&#949;<SUB>i&#964;</SUB></span> denotes
+system response to a delayed
+Dirac delta-function
+<span class=tms>&#948;</span>(<span class=tms>t-&#964;</span>) applied to
+the <span class=tms>i<SUP>th</SUP></span>
+input (<span class=tms>i&nbsp;=&nbsp;1,...,m</span>).
+For LTI systems this value is independent of
+<span class=tms>&#964;</span>, but
+for sampled-data systems this is a periodic function of
+<span class=tms>&#964;</span>.     
+Therefore, the following <I>generalized</I>
+<I>H</I><SUB>2</SUB>-measure
+(or <I>H</I><SUB>2</SUB>-norm) can be used
+<CENTER><IMG SRC="../images/barjtau.gif" WIDTH=169 HEIGHT=53 ALT=""></CENTER>
+which characterize system behaviour in continuous-time
+<A HREF="#ref2">[2]</A>-<A HREF="#ref4">[4]</A>.
+<p>
+It can be proved that this value is equal to average variance of
+stochastic error signal under centered unit white noise at the input.
+
+<H3>Computation</H3>
+Function <A HREF="../functions/sdnorm.html">sdnorm</A>
+with optional parameter <code>'gh2'</code> returns the
+<I>H</I><SUB>2</SUB>-norm of the <A HREF="../getstart/sdstd.html">standard sampled-data system</A>
+with continuous-time plant <code>sys</code> and discrete-time controller
+<code>K</code>:
+<pre>
+    F = tf(1, [1 1 0]);
+    sys = [F F;-F -F];
+    T = 0.1;
+    K = zpk ( 0.45, -0.89, 380, T );
+    v = sdnorm(sys, K, 'gh2')
+
+v =
+    0.0287
+
+</pre>
+For a system with scalar controller this value can be computed
+in another way by means of the function <A HREF="../functions/sdh2norm.html">sdh2norm</A>:
+<pre>
+   v = sdh2norm(sys, K)
+
+v =
+    0.0287
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Zhou K., Doyle J.C., Glover K., <I>Robust and Optimal Control</I>.
+New Jersey: Prentice Hall, 1996.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Chen, T., and B.A. Francis,
+<I>Optimal Sampled-Data Control Systems</I>.
+Berlin Heidelberg New York: Springer-Verlag, 1995.
+</p>
+<p><A name="ref3"></A>[3]&nbsp;Bamieh B.A., Pearson J.B.,
+The <I>H</I><SUB>2</SUB>-problem for sampled-data
+systems //  S<I>yst. Contr. Lett.</I>, vol.&nbsp;19, no.&nbsp;1, pp.&nbsp;1-12, 1992.
+</p>
+<p><A name="ref4"></A>[4]&nbsp;Khargonekar P.P., Sivashankar N.,
+<I>H</I><SUB>2</SUB>-optimal control for
+sampled-data systems //  <I>Syst. Contr. Lett.</I>, vol.&nbsp;18, pp.&nbsp;627-631,
+1992.
+</p>
+
+%%-->
+

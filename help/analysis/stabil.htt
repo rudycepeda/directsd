@@ -1,0 +1,92 @@
+<!--%%page.i
+&secname=:: Analysis
+&name=Stabilization
+&next=h2simple.html
+&nextname=Simple H2-norm
+&prev=analysis.html
+&prevname=Analysis
+&content=
+<H2>Stability</H2>
+<H3>Characteristic polynomial</H3>
+Stability of sampled-data system is determined by
+characteristic polynomial on the basis of discrete-time model
+of the block <I>P</I><SUB>22</SUB> with hold <I>H</I>
+in the <A HREF="../getstart/sdstd.html">standard sampled-data system</A>.
+<p>
+Function <A HREF="../functions/charpol.html">charpol</A> returns
+the characteristic polynomial in the <code>z</code>-plane of
+the standard sampled-data system
+with continuous-time plant <code>sys</code> and
+discrete-time controller
+<code>K</code>:
+<pre>
+    F = tf(1, [1 1 0]);
+    sys = [F F;-F -F];
+    T = 0.1;
+    K = zpk ( 0.45, -0.89, 380, T );
+    p = charpol(sys, K)
+
+p: polynomial
+  z^3 + 0.82338 z^2 + 0.16029 z + 0.0052236
+
+</pre>
+For stability of the closed loop it is necessary and sufficient that
+all roots of the characteristic polynomial be located inside
+the unit circle. For the above example we find:
+<pre>
+   rts = roots ( p )
+
+rts =
+   -0.5485
+   -0.2342
+   -0.0407
+
+</pre>
+so that the system is stable.
+
+<H3>Stability margin</H3>
+To find the stability margin, it is necessary to extract
+the uncertainty block as shown below:
+<CENTER><IMG SRC="../images/sysdelta.gif" WIDTH=177 HEIGHT=162 ALT=""></CENTER>
+Then, the stability margin is defined as the inverse
+of the
+<!--%%hinf.i%%-->-norm of the standard sampled-data system
+(without the &#916;-block). This value equals the maximal
+admissible <I>L</I><SUB>2</SUB>-induced norm of the
+periodically nonstationary perturbations described by the
+&#916;-block, under which the closed-loop system remains stable.
+<p>
+Function <A HREF="../functions/sdmargin.html">sdmargin</A>
+returns the stability margin for
+the standard sampled-data system
+with continuous-time plant <code>sys</code> and
+discrete-time controller
+<code>K</code>:
+<pre>
+    F = tf(1, [1 1 0]);
+    sys = [F F;-F -F];
+    T = 0.1;
+    K = zpk ( 0.45, -0.89, 380, T );
+    g = sdmargin (sys, K)
+
+g =
+  108.8637
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Chen, T., and B.A. Francis,
+<I>Optimal Sampled-Data Control Systems</I>.
+Berlin Heidelberg New York: Springer-Verlag, 1995.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Sivashankar N., Khargonekar P.P., Robust stability and performance
+analysis of sampled-data systems //
+<I>IEEE Trans. Automat. Contr.</I>, vol.&nbsp;AC-38,
+no.&nbsp;1, pp.&nbsp;58-69, 1993.
+</p>
+<p><A name="ref3"></A>[3]&nbsp;Hagiwara T., Araki M., Robust stability of sampled-data systems under possibly
+unstable additive/multiplicative perturbations // <i>IEEE Trans. Automat.
+Contr.</i>, vol.&nbsp;AC-43, no.&nbsp;9, pp.&nbsp;1340-1346, 1998.
+</p>
+
+%%-->
+

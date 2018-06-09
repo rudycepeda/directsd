@@ -1,0 +1,111 @@
+<!--%%page.i
+&secname=:: Getting started
+&name=Deterministic problem
+&next=stochstd.html
+&nextname=Stochastic problem
+&prev=sdstd.html
+&prevname=Standard sampled-data system
+&content=
+<H2>Deterministic problem</H2>
+The augmented continuous-time plant of the <A HREF="sdstd.html">standard
+system</A> must incorporate all shaping filters
+(generators of external signals) and weighting functions.
+For deterministic problems, the input signal is a scalar
+unit impulse (Dirac delta-function). This causes no loss of generality,
+if the input signal can be described by a Laplace image.
+Then, the corresponding filter must be included in the
+augmented plant.
+<p>
+Consider the ship course tracking system with the block-diagramm
+shown in the figure:
+<CENTER><IMG SRC="../images/tracksch.gif" WIDTH=399 HEIGHT=89 ALT=""></CENTER>
+Here continuous-time plant is represented by two linear
+blocks with transfer functions <span class=tms>F<SUB>1</SUB></span>(<span class=tms>s</span>)
+(actuator) and
+<span class=tms>F<SUB>2</SUB></span>(<span class=tms>s</span>) (linearized model
+of the ship). The signals are:
+<ul>
+<LI><span class=tms>&#966;<SUB>0</SUB></span> - desired course
+<LI><span class=tms>&#966;</span> - actual course
+<LI><span class=tms>e</span> - tracking error
+<LI><span class=tms>u</span> - control signal
+<LI><span class=tms>&#948;</span> - rudder angle
+</ul>
+It is required to minimize the cost function
+<CENTER><IMG SRC="../images/jtrack.gif" WIDTH=270 HEIGHT=46 ALT=""></CENTER>
+under unit step reference signal
+<span class=tms>&#966;<SUB>0</SUB>(t)=<B>1</B></span>(<span class=tms>t</span>).
+The latter signal can be described by signal generator
+<span class=tms>R</span>(<span class=tms>s</span>)&nbsp;=&nbsp;1/<span class=tms>s</span>,
+where <span class=tms>s</span> denotes the variable in
+Laplace transform.
+<p>
+Introducing the output vector
+<span class=tms>&#949;</span>&nbsp;=&nbsp;[<span class=tms>e&nbsp;&nbsp;&#961;u</span>]', this cost
+can be written in the standard form:
+<CENTER><IMG SRC="../images/l2err0.gif" WIDTH=156 HEIGHT=47 ALT=""></CENTER>
+Therefore, the generalized plant can be described by
+operator equations
+<CENTER><IMG SRC="../images/opereq.gif" WIDTH=163 HEIGHT=45 ALT=""></CENTER>
+where <span class=tms>w</span>(<span class=tms>t</span>) is a unit impulse (Dirac delta-function) and
+<CENTER><IMG SRC="../images/p1112.gif" WIDTH=298 HEIGHT=50 ALT=""></CENTER>
+<CENTER><IMG SRC="../images/p2122.gif" WIDTH=230 HEIGHT=26 ALT=""></CENTER>
+
+<H3>Example</H3>
+Consider the system with
+<CENTER><IMG SRC="../images/determ_ffr.gif" WIDTH=319 HEIGHT=49 ALT=""></CENTER>
+and a zero-order hold. Let the sampling period be
+<span class=tms>T&nbsp;=&nbsp;1</span> and
+<span class=tms>&#961;&nbsp;=&nbsp;0.2</span>. These data can be
+entered as follows:
+<pre>
+   F1 = tf ( 1, [25 1] );
+   F2 = tf ( 1, [1 0] );
+   R = tf ( 1, [1 0] );
+   rho = 0.2;
+   T  = 1;
+
+</pre>
+The plant for the standard system is
+<pre>
+   sys = [R  -F2*F1
+          0    rho
+          R  -F2*F1];
+
+sys: transfer function 3 x 2
+
+    ! 1        -1     !
+    ! -    ---------- !
+    ! s    25 s^2 + s !
+    !                 !
+    ! 0        0.2    !
+    !                 !
+    ! 1        -1     !
+    ! -    ---------- !
+    ! s    25 s^2 + s !
+
+</pre>
+The optimal discrete-time controller is computed
+using <A HREF="../functions/sdl2.html">sdl2</A>
+<pre>
+   K = sdl2 ( sys, T )                     
+
+K: zero-pole-gain model 1 x 1
+
+      3.7201 (z-0.9608)
+      -----------------
+          (z-0.4596)
+
+Sampling time: 1
+
+</pre>
+and the cost function is returned by
+<A HREF="../functions/sdl2err.html">sdl2err</A>
+<pre>
+   sdl2err ( sys, K )
+
+ans =
+    3.2049
+</pre>
+
+%%-->

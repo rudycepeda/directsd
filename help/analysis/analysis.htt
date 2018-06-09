@@ -1,0 +1,66 @@
+<!--%%spage.i
+&secname=Analysis
+&name=
+&next=stabil.html
+&next=stabil.html
+&nextname=Stabilization
+&prev=polynom\poleq.html
+&prev=polynom\poleq.html
+&prevname=Polynomial equations
+&content=
+<H1>Analysis</H1><hr>
+<table width=100% border=0>
+<TR>
+<TD class="ref"><A HREF="stabil.html">Stability</A></A></TD>
+<TD>
+How to check stability of a sampled-data system and
+find stability margin?
+</TD>
+</TR>
+<TR>
+<TD class="ref"><A HREF="h2simple.html">Simple <I>H</I><SUB>2</SUB>-norm</A></A></TD>
+<TD>
+What is the simple <I>H</I><SUB>2</SUB>-norm of sampled-data
+system and how to compute it?
+</TD>
+</TR>
+<TR>
+<TD class="ref"><A HREF="h2.html"><I>H</I><SUB>2</SUB>-norm</A></TD>
+<TD>
+What is the generalized <I>H</I><SUB>2</SUB>-norm of sampled-data
+system and how to compute it?
+</TD>
+</TR>
+<TR>
+<TD class="ref"><A HREF="quaderr.html">Integral quadratic error</A></A></TD>
+<TD>
+How to compute integral quadratic error for sampled-data systems?
+</TD>
+</TR>
+<TR>
+<TD class="ref"><A HREF="stoch.html">Stochastic analysis</A></A></TD>
+<TD>
+What are special features of sampled-data systems under stochastic
+disturbances and how to compute average variance of
+continuous-time signals?
+</TD>
+</TR>
+<TR>
+<TD class="ref"><A HREF="hinf.html"><I>H</I><SUB>&#8734;</SUB> norm</A></A></TD>
+<TD>
+What is the
+<!--%%hinf.i%%-->-norm (<I>L</I><SUB>2</SUB>-induced norm) of sampled-data
+system and how to compute it?
+</TD>
+</TR>
+<TR>
+<TD class="ref"><A HREF="ahinf.html">Associated <I>H</I><SUB>&#8734;</SUB> norm</A></A></TD>
+<TD>
+What is the
+<!--%%ahinf.i%%-->-norm of sampled-data
+system and how to compute it?
+</TD>
+</TR>
+</table>
+
+%%-->

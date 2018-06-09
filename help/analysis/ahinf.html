@@ -1,0 +1,158 @@
+<html><head><title>Associated Hinf-norm :: Analysis (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="hinf.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+
+<H2>Associated <I>H</I><SUB>&#8734;</SUB> norm</H2>
+The notion of associated
+
+<I>AH</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="" border=0></SUB>-norm
+is 
+motivated by well-known relations between
+<I>H</I><SUB>2</SUB> and
+<I>H</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT=""></SUB>
+norms of linear time-invariant systems.
+For a discrete-time system with transfer function
+<span class=tms>F</span>(<span class=tms>&#950;</span>)
+(where <span class=tms>&#950;</span> denotes the unit backward shift
+operator) these norms are given by
+
+<table width=100% border=0>
+<tr><td align=center>
+<IMG SRC="../images/dh2norm.gif" WIDTH=213 HEIGHT=50 ALT="">
+</td>
+<td width=30 align=center>(1)</td>
+</tr>
+</table>
+<table width=100% border=0>
+<tr><td align=center>
+<IMG SRC="../images/dinfnorm.gif" WIDTH=256 HEIGHT=40 ALT="">
+</td>
+<td width=30 align=center>(2)</td>
+</tr>
+</table>
+where
+<table width=100% border=0>
+<tr><td align=center>
+<IMG SRC="../images/xff.gif" WIDTH=163 HEIGHT=28 ALT="">
+</td>
+<td width=30 align=center>(3)</td>
+</tr>
+</table>
+and 
+<span class=tms>&#915;</span> denotes the unit circle
+passed in an anti-clockwise fashion.
+<p>
+For sampled-data systems it is known
+<a href="#ref2">[2]</a> that <I>H</I><SUB>2</SUB> and <I>L</I><SUB>2</SUB>
+problems can also be reduced, in the frequency domain,
+to a functional of the form (1), where
+<span class=tms>X</span>(<span class=tms>&#950;</span>)
+is a Hermitian self-conjugate function free of poles at
+the unit circle. Therefore, a stable function
+<span class=tms>F</span>(<span class=tms>&#950;</span>)
+can be found such that (3) holds. This function can be considered
+as transfer function of an equivalent discrete-time system, and
+
+<I>H</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="" border=0></SUB>-norm 
+of this function defined by (2) can be taken as a measure of
+robustness for the sampled-data system under consideration.
+This value is called the <i>associated</i>
+
+<I>H</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="" border=0></SUB>-norm 
+of the sampled-data system
+<a href="#ref1">[1]</a>, <a href="#ref2">[2]</a>:
+<CENTER><IMG SRC="../images/ahinorm.gif" WIDTH=167 HEIGHT=26 ALT=""></CENTER>
+where U denotes the causal periodically nonstationary operator
+corresponding to the sampled-data system. The constant factor
+ensures appropriate scaling in such a way that this norm
+equals the <I>L</I><SUB>2</SUB>-induced norm for the
+case <I>P</I><SUB>11</SUB>(s)=0.
+
+<H3>Advantages</H3>
+<ul>
+<LI>
+
+<I>AH</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="" border=0></SUB> 
+norm can be computed effectively in the
+frequency domain for a wide class of sampled-data systems,
+including time-delay systems.
+<li>
+
+<I>AH</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="" border=0></SUB> 
+norm coincides with the classical
+<I>L</I><SUB>2</SUB>-induced norm <A HREF="#ref3">[3]</A> for systems
+with <I>P</I><SUB>11</SUB>(s)=0.
+</ul>
+
+<H3>Disadvantages</H3>
+<ul>
+<li>
+
+<I>AH</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="" border=0></SUB> 
+norm is different from the classical
+<I>L</I><SUB>2</SUB>-induced norm <A HREF="#ref3">[3]</A> for systems
+<I>P</I><SUB>11</SUB>(s)&#8800;0.
+</ul>
+
+<H3>Computation</H3>
+Function <A HREF="../functions/sdahinorm.html">sdahinorm</A> returns the
+
+<I>AH</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="" border=0></SUB>-norm 
+of the <A HREF="../getstart/sdstd.html">standard sampled-data system</A>
+with continuous-time plant <code>sys</code> and discrete-time controller
+<code>K</code>:
+<pre>
+    F = tf(1, [1 1 0]);
+    sys = [F F;-F -F];
+    T = 0.1;
+    K = zpk ( 0.45, -0.89, 380, T );
+    v = sdahinorm(sys, K)
+
+v =
+    0.0092
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Polyakov K., Rosenwasser E., and Lampe B.,
+Associated
+
+<I>H</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="" border=0></SUB> 
+problem for sampled-data systems //  Proc. 3rd IFAC
+Symposium on Robust Control Design, Prague, June 21-23, 2000.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Rosenwasser, E.N., and B.P. Lampe,
+<I>Computer Controlled Systems: Analysis and Design with
+Process-orientated Models</I>. London: Springer-Verlag, 2000.
+</p>
+<p><A name="ref3"></A>[3]&nbsp;Chen, T., and B.A. Francis,
+<I>Optimal Sampled-Data Control Systems</I>.
+Berlin Heidelberg New York: Springer-Verlag, 1995.
+</p>
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="hinf.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;Hinf norm</td><td>&nbsp;</td>
+<td align=right>&nbsp;</td>
+<td align=right width=20>&nbsp;</td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+
+

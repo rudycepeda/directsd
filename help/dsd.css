@@ -1,0 +1,109 @@
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: x-small;
+}
+td   {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: x-small;
+}
+pre  {
+	font-family: "Courier New", Courier, monospace;
+	font-size: x-small;
+}
+code  {
+	font-family: "Courier New", Courier, monospace;
+	font-size: small;
+}
+p.copy  {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: x-small;
+	font-style: italic;
+}
+h1 {
+	margin-top: 1ex;
+	margin-bottom: 0.0ex;
+	font-size: 200%;
+}
+h2 {
+	margin-top: 1ex;
+	margin-bottom: 0.0ex;
+	margin-bottom: 0.5ex;
+	font-size: 150%;
+	font-weight: bold;
+	color: #990000;
+}
+h3 {
+	font-size: 120%;
+	font-weight: bold;
+	color: #990000;
+	margin-bottom: 0.5ex;
+}
+h4 {
+   font-family: "Courier New", Courier, monospace;
+	font-weight: 100%; 
+   font-size: 200%; 
+	color: #990000;
+	margin-bottom: 0.5ex;
+}
+h5 {
+	font-size: 110%;
+	font-weight: bold;
+	color: #000000;
+	margin-bottom: 0.5ex;
+}
+code {
+   font-family: "Courier New", Courier, monospace;
+   font-weight: bold;
+}
+pre {
+   margin-left: 1.5em;
+   margin-top: 0.5ex; margin-bottom: 0.5ex;
+   font-family: "Courier New", Courier, monospace;
+}
+p.fref {margin-top: 0.0ex; margin-bottom: 0.0ex;}
+p.code {font-family: "Courier New", Courier, monospace;
+	font-size: x-small;
+	margin-left: 2.5em;
+	margin-top: 0.0ex; margin-bottom: 0.0ex;}
+span.code {font-family: "Courier New", Courier, monospace;}
+td.cc {
+	vertical-align: top;
+	text-align: center;
+	font-weight: bold;
+	font-family: "Courier New", Courier, monospace;
+	width: 50px;
+}
+td.ccw {
+	vertical-align: top;
+	text-align: center;
+	font-weight: bold;
+	font-family: "Courier New", Courier, monospace;
+	width: 75px;
+}
+ul {
+	margin-left: 2.5em;
+	margin-top: 0.2ex; 
+        margin-bottom: 0.2ex;
+}
+ul li{
+	margin-top: 0.5ex; margin-bottom: 0.5ex;
+}
+
+span.in {
+	font-family: "Courier New", Courier, monospace;
+	color: Navy;
+}
+td.ref {
+	vertical-align: top;
+	width: 200px;
+}
+.tms   {
+	font-family: "Times New Roman", Times, serif;
+	font-style: italic;
+	font-size: small;
+}
+.ex   {
+	margin-left: 2.5em;
+	margin-top: 0ex; 
+        margin-bottom: 0ex;
+}

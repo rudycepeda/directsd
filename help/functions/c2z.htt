@@ -1,0 +1,59 @@
+<!--%%page.i
+&secname=c2z
+&name=
+&next=ch2.html
+&nextname=ch2
+&prev=c2d.html
+&prevname=c2d
+&content=
+<H4>c2z</H4>
+
+<H3>Syntax</H3>
+<p class="code">q = c2z ( p )</p>
+<p class="code">q = c2z ( p, T )</p>
+<p class="code">q = c2z ( p, T, var )</p>
+
+<H3>Description</H3>
+<code>c2z</code> discretize a polynomial by changing its roots
+for their discretized version. A root <code>a<SUB>i</SUB></code> is changed
+for <code>z<SUB>i</SUB>=exp(a<SUB>i</SUB>*T)</code>.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">p</td><td>a polynomial </td></tr>
+<tr>
+<td class="cc">T</td><td>sampling period (default 1) </td></tr>
+<tr>
+<td class="cc">var</td><td>variable: <code>'z'</code> (default), <code>'d'</code>
+or <code>'q'</code></td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">q</TD><TD>discretized polynomial</TD></tr>
+</table>
+
+<H3>Example</H3>
+<pre>
+   a = poln([-1 -2 -3],'r')
+
+a: polynomial
+  s^3 + 6 s^2 + 11 s + 6
+
+   b = c2z(a, 1)
+
+b: polynomial
+   z^3 - 0.553 z^2 + 0.074841 z - 0.0024788
+
+   roots(b)
+
+ans =
+    0.3679
+    0.1353
+    0.0498
+</pre>
+
+
+%%-->

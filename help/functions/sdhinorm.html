@@ -1,0 +1,164 @@
+<html><head><title> sdhinorm (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="sdhinfreg.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="sdl2.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H4>sdhinorm</H4>
+
+<H3>Syntax</H3>
+<p class="code">[cost,gamD11] = sdhinorm ( sys, K )</p>
+<p class="code">[cost,gamD11] = sdhinorm ( sys, K, tol )</p>
+<p class="code">[cost,gamD11] = sdhinorm ( sys, K, method )</p>
+<p class="code">[cost,gamD11] = sdhinorm ( sys, K, tol, method )</p>
+
+<H3>Description</H3>
+<code>sdhinorm</code> returns the
+
+<I>H</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="" border=0></SUB>-norm 
+(<I>L</I><SUB>2</SUB>-induced norm) of
+<A HREF="../getstart/sdstd.html">standard sampled-data system</A>
+with zero-order hold.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">sys</td>
+<td>model of a continuous-time LTI plant associated with the
+<A HREF="../getstart/sdstd.html">standard sampled-data system</A>.
+</td></tr>
+<tr>
+<td class="cc">K</td>
+<td>discrete-time feedback controller</td></tr>
+<tr>
+<td class="cc">tol</td>
+<td>tolerance (default 1e-6)</td></tr>
+<tr>
+<td class="cc">method</td>
+<td>method of constructing the
+
+<I>H</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="" border=0></SUB>-equivalent 
+discrete-time model:
+<ul>
+<LI>'ch' - formulas by Chen and Francis
+<LI>'ba' - formulas by Bamieh and Pearson
+<LI>'ca' - formulas by Cantoni and Glover
+<LI>'ha' - formulas by Hayakawa, Hara and Yamamoto
+<LI>'mi' - formulas by Mirkin and Palmor (default)
+</ul>
+</td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">cost</TD>
+<TD>
+
+<I>H</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="" border=0></SUB>-norm 
+(<I>L</I><SUB>2</SUB>-induced norm) of the sampled-data system </TD>
+</tr>
+<tr>
+<TD class="cc">gamD11</TD>
+<TD>
+
+<I>H</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="" border=0></SUB>-norm 
+of the operator D11 <A HREF="#ref1">[1]</A> </TD>
+</tr>
+</table>
+
+<H3>Limitations</H3>
+<ul>
+<LI>Only for delay-free systems.
+<LI>Only for systems with zero-order hold.
+<LI> Transfer matrices <I>P</I><SUB>11</SUB>(s),
+<I>P</I><SUB>21</SUB>(s),
+and <I>P</I><SUB>22</SUB>(s) must be strictly proper,
+<I>P</I><SUB>12</SUB>(s) must be at least proper.
+</ul>
+
+<H3>Example</H3>
+<pre>
+    F = tf(1, [1 1 0]);
+    sys = [F F;-F -F];
+    T = 0.1;
+    K = zpk( 0.45, -0.89, 380, T);
+    [cost,gamD11] = sdhinorm(sys, K)
+
+cost =
+    0.0092
+gamD11 =
+    0.0028
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Chen, T., and B.A. Francis,
+<I>Optimal Sampled-Data Control Systems</I>.
+Berlin Heidelberg New York: Springer-Verlag, 1995.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Bamieh B.A., Pearson J.B., A general framework for
+linear periodic systems with applications to
+
+<I>H</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="" border=0></SUB> 
+sampled-data control //
+<I>IEEE Trans. Automat. Contr.</I>, vol.&nbsp;AC-37, no.&nbsp;4, pp.&nbsp;418-435, 1992.
+</p>
+<p><A name="ref3"></A>[3]&nbsp; Cantoni M.W., and Glover K.,
+
+<I>H</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="" border=0></SUB> 
+sampled-data synthesis and
+related numerical issues, <I>Automatica</I>, vol.&nbsp;33, no.&nbsp;12,
+pp.&nbsp;2233-2241, 1997.
+</p>
+<p><A name="ref4"></A>[4]&nbsp;Hayakawa Y., Hara S., and Yamamoto Y.,
+
+<I>H</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="" border=0></SUB> 
+type problem for
+sampled-data control systems - a solution via minimum energy
+characterization // <I>IEEE Trans. Automat. Contr.</I>, vol.&nbsp;AC-39, no.&nbsp;11,
+pp.&nbsp;2278-2284, 1994.
+</p>
+<p><A name="ref5"></A>[5]&nbsp;Mirkin L., and Tadmor G.,
+Yet another
+
+<I>H</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="" border=0></SUB>-discretization 
+// <i>IEEE Trans. Automat. Contr.</i>,
+vol.&nbsp;AC-48, no.&nbsp;5, pp.&nbsp;891-894, 2003.
+</p>
+
+
+<H3>See also</H3>
+
+<p class=fref><code><a href=sdahinorm.html>sdahinorm</a>&nbsp;&nbsp;</code><I>AH</I><SUB><IMG 
+SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT=""></SUB>-norm of sampled-data systems.</p>
+<p class=fref><code><a 
+href=sdh2norm.html>sdh2norm</a>&nbsp;&nbsp;</code><code>&nbsp;</code><I>H</I><SUB>2</SUB>-norm of 
+sampled-data systems.</p>
+
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="sdhinfreg.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;sdhinfreg</td><td>&nbsp;</td>
+<td align=right>sdl2&nbsp;</td>
+<td align=right width=20><a href="sdl2.html"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+

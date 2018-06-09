@@ -1,0 +1,123 @@
+<html><head><title>Creating polynomials :: Polynomials (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="polynom.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="props.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H1>Creating polynomials</H1><hr>
+<H2>Creating polynomials</H2>
+<H5>Using array of coefficients</H5>
+Polynomials can be created using
+array of coefficients or roots. For example, the command
+<pre>
+    P = poln ( [2 -10 12] )
+</pre>
+creates the polynomial
+<pre>
+P: polynomial
+  2 s^2 - 10 s + 12
+</pre>
+By default, the variable <code>s</code> is used. Other possible variables
+(<code>s</code>, <code>p</code>, <code>z</code>, <code>d</code> and <code>q</code> are allowed) can 
+be
+specified as the second parameter of the constructor:
+<pre>
+    P = poln([2 -10 12], 'z')
+
+P: polynomial
+  2 z^2 - 10 z + 12
+</pre>
+
+<H5>Using special variables</H5>
+Special pre-defined variables <code>s</code>, <code>p</code>,
+<code>z</code>, <code>d</code> and <code>q</code>
+(realized as <code>m</code>-files) can also be used
+<pre>
+    P = 2*s^2 - 10*s + 12
+
+P: polynomial
+  2 s^2 - 10 s + 12
+</pre>
+
+<H5>Using roots</H5>
+Sometimes it is very important to specify roots of the polynomial
+instead of coefficients. Then, the second parameter should
+start with<code>'r'</code>:
+<pre>
+    P = poln ( [2 3], 'r' )
+
+P: polynomial
+  s^2 - 5 s + 6
+
+    P = poln ( [2 3], 'rz' )
+
+P: polynomial
+  z^2 - 5 z + 6
+  
+</pre>
+Roots of polynomials are stored as a data field of the object.
+If the roots are known exactly, such a representation
+makes it possible to enhance numerical properties of
+computation algorithms, for example, when cancelling a ratio of
+polynomials.
+
+<H2>Creating Quasipolynomials</H2>
+Using the same approach, it is possible to create
+<B>quasipolynomials</B>, i.e., rational functions
+having poles only at the origin. In this case, only variables
+<code>z</code>, <code>d</code> and <code>q</code> can be used.
+The third optional
+parameter of the constructor defines the so-called <I>shift</I>, i.e.,
+the least negative degree with inverse sign. For example,
+<pre>
+    P = poln ( [2 -10 12], 'z', 2 )
+
+P: quasipolynomial
+  2 - 10 z^-1 + 12 z^-2
+
+</pre>
+Special pre-defined variables <code>s</code>, <code>p</code>,
+<code>z</code>, <code>d</code> and <code>q</code> can be used:
+<pre>
+    Q = z + 1 + z^-1
+
+Q: quasipolynomial
+  z + 1 + z^-1
+</pre>
+
+Quasipolynomials can also be defined via roots:
+<pre>
+    Q = poln([2 3], 'rz', 2)
+
+Q: quasipolynomial
+  1 - 5 z^-1 + 6 z^-2
+</pre>
+
+
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="polynom.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;Polynomials</td><td>&nbsp;</td>
+<td align=right>Internal properties of polynomials&nbsp;</td>
+<td align=right width=20><a href="props.html"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+

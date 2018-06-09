@@ -1,0 +1,124 @@
+<html><head><title> ch2 (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="c2z.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="charpol.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H4>ch2</H4>
+
+<H3>Syntax</H3>
+<p class="code">[K,cost] = ch2 ( sys )</p>
+<p class="code">[K,cost] = ch2 ( sys, method )</p>
+
+<H3>Description</H3>
+<code>ch2</code> returns the <I>H</I><SUB>2</SUB>-optimal controller
+<code>K</code> for standard continuous-time system
+and the minimal value of the cost function
+<code>cost</code>. As distinct from
+<A HREF="h2reg.html">h2reg</A>, this function makes it possible to
+design controllers with imptoper transfer functions.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">sys</td>
+<td>model of an LTI plant associated with the
+standard continuous-time system.
+</td></tr>
+<tr><td class="cc">method</td>
+<td>
+optional parameter
+that specifies solution algorithm. There are three possible
+methods:
+<ul>
+<LI><code>'ss'&nbsp;</code> - state-space solution
+<A HREF="#ref1">[1]</A>;
+<LI><code>'wh'&nbsp;</code> - Wiener-Hopf method;
+<LI><code>'pol'</code> - polynomial design method <A HREF="#ref2">[2]</A> (default).
+</ul></td></tr>
+</table>
+<p>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">K</TD>
+<TD>optimal continuous-time controller as an LTI model</TD>
+</tr>
+<tr>
+<TD class="cc">cost</TD>
+<TD>minimal value of the cost function</TD>
+</tr>
+</table>
+
+<H3>Limitations</H3>
+<ul>
+<li>Controller <span class=tms>K</span> is a SISO system.
+</ul>
+
+<H3>Example</H3>
+<pre>
+   F = tf ( [1], [5 1 0] );
+   Q = tf ( 1, [1 1] );
+   R = tf ( 1, [1 0] );
+   sys = [Q*R -F; R -F];
+   [K,cost] = ch2 ( sys )
+
+K: zero-pole-gain model 1 x 1
+
+      5 (s+0.2)
+
+cost =
+     0
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;
+Zhou K., Doyle J.C., Glover K., <I>Robust and Optimal Control</I>,
+New Jersey: Prentice Hall, 1996.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Polyakov, K.Yu., Polynomial Design of Optimal
+Sampled-data Control Systems, Dr. Sc. Thesis, State University of Ocean Technology,
+St. Petersburg, 2006 [in Russian].
+</p>
+
+<H3>See also</H3>
+
+<p class=fref><code><a 
+href=h2reg.html>h2reg</a>&nbsp;&nbsp;</code><code>&nbsp;&nbsp;&nbsp;</code>Minimization of 
+<I>H</I><SUB>2</SUB>-norm of LTI systems.</p>
+<p class=fref><code><a 
+href=hinfreg.html>hinfreg</a>&nbsp;&nbsp;</code><code>&nbsp;</code><I>H</I><SUB><IMG 
+SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT=""></SUB>-optimization of LTI systems.</p>
+<p class=fref><code><a 
+href=sdl2.html>sdl2</a>&nbsp;&nbsp;</code><code>&nbsp;&nbsp;&nbsp;&nbsp;</code><I>L</I><SUB>2</SUB>-optimization of sampled-data systems.</p>
+<p class=fref><code><a 
+href=sdh2.html>sdh2</a>&nbsp;&nbsp;</code><code>&nbsp;&nbsp;&nbsp;&nbsp;</code><I>H</I><SUB>2</SUB>-optimization of sampled-data systems.</p>
+
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="c2z.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;c2z</td><td>&nbsp;</td>
+<td align=right>charpol&nbsp;</td>
+<td align=right width=20><a href="charpol.html"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+

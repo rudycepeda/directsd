@@ -1,0 +1,57 @@
+<!--%%page.i
+&secname=:: Analysis
+&name=Integral quadratic error
+&next=stoch.html
+&nextname=Stochastic analysis
+&prev=h2.html
+&prevname=H2-norm
+&content=
+<H2>Integral quadratic error</H2>
+Integral quadratic error
+<CENTER><IMG SRC="../images/l2err0.gif" WIDTH=156 HEIGHT=47 ALT=""></CENTER>
+for a given input signal is a widely used performance
+criterion.
+<p>
+Without loss of generality, it can be assumed that
+signal generator is incorporated into the augmented plant
+of the <A HREF="../getstart/sdstd.html">standard sampled-data system</A> so that
+the input <span class=tms>w</span> is a scalar impulse
+<span class=tms>&#948;</span>(<span class=tms>t</span>) (Dirac
+delta-function). In this case, it can be proved that the
+integral quadratic error
+<span class=tms>J</span> coincides with the square
+of the <A HREF="h2simple.html">simple <I>H</I><SUB>2</SUB>-norm</A>.
+Therefore, this value can be computed using the
+function <A HREF="../functions/sdnorm.html">sdnorm</A>
+with optional parameter <code>'sh2'</code>:
+<pre>
+   F = tf(1, [1 1 0]);
+   sys = [F F;-F -F];
+   T = 0.1;
+   K = zpk ( 0.45, -0.89, 380, T );
+   v = sdnorm(sys, K, 'sh2')^2
+
+v =
+    0.0014
+
+</pre>
+or by means of the function <A HREF="../functions/sdl2err.html">sdl2err</A>:
+<pre>
+   v = sdl2err(sys, K)
+
+v =
+    0.0014
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Chen, T., and B.A. Francis,
+<I>Optimal Sampled-Data Control Systems</I>.
+Berlin Heidelberg New York: Springer-Verlag, 1995.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Rosenwasser, E.N., and B.P. Lampe,
+<I>Computer Controlled Systems: Analysis and Design with
+Process-orientated Models</I>. London: Springer-Verlag, 2000.
+</p>
+
+%%-->
+

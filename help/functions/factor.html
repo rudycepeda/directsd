@@ -1,0 +1,142 @@
+<html><head><title> factor (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="dtfm2.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="gcd.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H4>factor</H4>
+
+<H3>Syntax</H3>
+<p class="code">[ps,pu,p0] = factor ( p )</p>
+<p class="code">[ps,pu,p0] = factor ( p, type )</p>
+
+<H3>Description</H3>
+<code>factor</code> performs factorization of a
+(quasi)polynomial with respect to the imaginary axis or
+the unit circle. The function returns stable, antistable
+and neutral cofactors.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">p</td>
+<td>a (quasi)polynomial in the form of array of coefficients
+or polynomial object</td></tr>
+<tr>
+<td class="cc">type</td>
+<td>type of factorization:
+<ul>
+<LI><code>'s'</code> - with respect to the imaginary axis, stability region
+is the left half-plane (default for
+continuous-time models)
+<LI><code>'z'</code> - with respect to the unit circle, stability region
+is inside the unit disk
+<LI><code>'d'</code> - with respect to the unit circle, stability region
+is outside the unit disk (default for discrete-time models)
+</ul>
+</td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">ps</TD><TD>stable factor</TD></tr>
+<tr>
+<TD class="cc">pu</TD><TD>monic antistable factor</TD></tr>
+<tr>
+<TD class="cc">p0</TD><TD>monic neutral factor</TD></tr>
+</table>
+
+<H3>Examples</H3>
+<B>Example 1.</B> Continuous-time polynomial.
+<pre>
+a = poln( [-1 2 0], 'r' )
+<I>a: polynomial
+  s^3 - s^2 - 2 s</I>
+[ps,pu,p0] = factor ( a )
+<I>ps: polynomial
+  s + 1
+pu: polynomial
+  s - 2
+p0: polynomial
+  s
+</I>
+</pre>
+<B>Example 2.</B> Discrete-time polynomial.
+<pre>
+a = poln( [0.3 1.5 1], 'rz' )
+<I>a: polynomial
+  z^3 - 2.8 z^2 + 2.25 z - 0.45
+</I>
+[ps,pu,p0] = factor ( a )
+<I>ps: polynomial
+  z - 1.5
+pu: polynomial
+  z - 0.3
+p0: polynomial
+  z - 1
+</I>
+</pre>
+<B>Example 3.</B> Discrete-time quasipolynomial
+(shift is assigned to the antistable cofactor).
+<pre>
+a = poln( [0.3 1.5 1], 'rz', 1 )
+<I>a: polynomial
+  z^3 - 2.8 z^2 + 2.25 z - 0.45
+</I>
+[ps,pu,p0] = factor ( a )
+<I>ps: polynomial
+  z - 1.5
+pu: quasipolynomial
+  1 - 0.3 z^-1
+p0: polynomial
+  z - 1
+</I>
+</pre>
+<B>Example 4.</B> Polynomial as an array.
+<pre>
+a = [1 -2.8 2.25 -0.45];
+[ps,pu,p0] = factor ( a, 'z' )
+<I>ps =
+    1.0000   -1.3000    0.3000
+pu =
+    1.0000   -1.5000
+p0 =
+     1
+</I>
+</pre>
+
+<H3>See also</H3>
+
+<p class=fref><code><a href=sfactor.html>sfactor</a>&nbsp;&nbsp;</code><code>&nbsp;</code>Spectral 
+factorization for polynomials and rational functions.</p>
+<p class=fref><code><a href=sfactfft.html>sfactfft</a>&nbsp;&nbsp;</code>FFT factorization of 
+discrete-time polynomials.</p>
+
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="dtfm2.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;dtfm2</td><td>&nbsp;</td>
+<td align=right>gcd&nbsp;</td>
+<td align=right width=20><a href="gcd.html"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+

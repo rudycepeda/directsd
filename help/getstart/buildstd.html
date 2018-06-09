@@ -1,0 +1,74 @@
+<html><head><title>Deterministic problem
+ :: Introduction
+ (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="%%prev%%"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="%%next%%"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H2>Deterministic problem</H2>
+The augmented continuous-time plant of the <A HREF="sdstd.html">standard
+system</A> must incorporate all shaping filters
+(generators of external signals) and weighting functions.
+For deterministic problems, the input signal is a scalar
+unit impulse (Dirac delta-function).
+<p>
+Consider the ship course tracking system with the block-diagramm
+shown in the figure:
+<CENTER><IMG SRC="../images/tracksch.gif" WIDTH=399 HEIGHT=89 ALT=""></CENTER>
+Here continuous-time plant is represented by two linear
+blocks with transfer functions <I>F</I><SUB>1</SUB>(s)
+(actuator) and <I>F</I><SUB>2</SUB>(s) (linearized model
+of the ship). The signals are:
+<ul>
+<LI>&#966;<SUB>0</SUB> - desired course
+<LI>&#966; - actual course
+<LI>e - tracking error
+<LI>u - control signal
+<LI>&#948; - rudder angle
+</ul>
+It is required to minimize the cost function
+<CENTER><IMG SRC="../images/jtrack.gif" WIDTH=270 HEIGHT=46 ALT=""></CENTER>
+under unit step reference signal &#966;<SUB>0</SUB>(t)=<B>1</B>(t).
+The latter signal can be described by signal generator
+<I>R</I>(s)=1/s, where <I>s</I> denotes the variable in
+Laplace transform.
+<p>
+Introducing the output vector &#949; = [e&nbsp;&nbsp;&#961;u]', this cost
+can be written in the standard form:
+<CENTER><IMG SRC="../images/l2err0.gif" WIDTH=156 HEIGHT=47 ALT=""></CENTER>
+Therefore, the generalized plant can be described by
+operator equations
+<CENTER><IMG SRC="../images/opereq.gif" WIDTH=163 HEIGHT=45 ALT=""></CENTER>
+where <I>w</I>(t) is a unit impulse (Dirac delta-function) and
+<CENTER><IMG SRC="../images/p1112.gif" WIDTH=298 HEIGHT=50 ALT=""></CENTER>
+<CENTER><IMG SRC="../images/p2122.gif" WIDTH=230 HEIGHT=26 ALT=""></CENTER>
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="%%prev%%"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;Previous page
+</td><td>&nbsp;</td>
+<td align=right>Next page
+&nbsp;</td>
+<td align=right width=20><a href="%%next%%"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy">&copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+

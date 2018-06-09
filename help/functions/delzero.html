@@ -1,0 +1,74 @@
+<html><head><title> delzero (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="deg.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="dhinf.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H4>delzero</H4>
+
+<H3>Syntax</H3>
+<p class="code">[q,nz] = delzero ( p )</p>
+<p class="code">[q,nz] = delzero ( p, tol )</p>
+
+<H3>Description</H3>
+<code>delzero</code> removes all zeros of a polynomial
+at the origin.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">p</td><td>a polynomial </td></tr>
+<tr>
+<td class="cc">tol</td><td>tolerance (default <I>eps</I>) </td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">q</TD><TD>reduced polynomial</TD></tr>
+<tr>
+<TD class="cc">nz</TD><TD>number of removed zeros</TD></tr>
+</table>
+
+<H3>Example</H3>
+<pre>
+   a = poln( [1 2 0 0], 'z' )
+
+a: polynomial
+  z^3 + 2 z^2
+
+   [b,nz] = delzero ( a )
+
+b: polynomial
+  z + 2
+nz =
+     2
+</pre>
+
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="deg.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;deg</td><td>&nbsp;</td>
+<td align=right>dhinf&nbsp;</td>
+<td align=right width=20><a href="dhinf.html"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+

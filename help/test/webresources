@@ -1,0 +1,64 @@
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr> 
+      <td width="250" align="left" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+       <!-- BEGIN WEB-RESOURCES (1st COLUMN) -->
+      <tr> 
+      <td width="15"><div align="center"><img src="images/bullet_orange.gif" width="6" height="6"></div></td>
+      <td> 
+      <a href="http://www.mathworks.com/products/control/demos.jsp" style="color:#FFFFFF;"><b> <font size="3" face="Arial, Helvetica, sans-serif"> 
+      Demos</font></b></a></td></tr>
+      <!-- .......................................... -->
+      <tr> 
+      <td><div align="center"><img src="images/bullet_orange.gif" width="6" height="6"></div></td>
+      <td> 
+     <a href="http://www.matlab.com/matlabcentral/" style="color:#FFFFFF;"><b> <font size="3" face="Arial, Helvetica, sans-serif"> 
+     MATLAB Central</font></b></a></td></tr>
+      <!-- .......................................... -->
+      <tr> 
+      <td><div align="center"><img src="images/bullet_orange.gif" width="6" height="6"></div></td>
+      <td> 
+     <a href="http://www.mathworks.com/products/control/" style="color:#FFFFFF;"><strong><font size="3" face="Arial, Helvetica, sans-serif"> 
+     Product Page</font></strong></a></td></tr>
+      <!-- .......................................... -->
+      <tr> 
+      <td><div align="center"><img src="images/bullet_orange.gif" width="6" height="6"></div></td>
+      <td> 
+     <a href="http://www.mathworks.com/products/control/requirements.jsp" style="color:#FFFFFF;"><b><font size="3" face="Arial, Helvetica, sans-serif"> 
+     Platforms &amp; Requirements</font></b></a></td>
+	  </tr>
+      </table>
+   </td>
+
+<!-- END WEB-RESOURCES BULLETS (1st COLUMN) -->
+
+<!-- BEGIN WEB-RESOURCES BULLETS (2nd COLUMN) -->
+
+   <td>
+      <table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr> 
+      <td width="15"><div align="center"><img src="images/bullet_orange.gif" width="6" height="6"></div></td>
+      <td> 
+     <a href="http://www.mathworks.com/products/control/books.jsp" style="color:#FFFFFF;"><b> <font size="3" face="Arial, Helvetica, sans-serif"> 
+     Related Books</font></b></a></td>
+	  </tr>
+      <!-- .......................................... -->
+      <tr> 
+      <td><div align="center"><img src="images/bullet_orange.gif" width="6" height="6"></div></td>
+      <td> 
+     <a href="http://www.mathworks.com/products/control/related.jsp" style="color:#FFFFFF;"><b> <font size="3" face="Arial, Helvetica, sans-serif"> 
+     Related Products</font></b></a></td></tr>
+      <!-- .......................................... -->
+      <tr> 
+      <td><div align="center"><img src="images/bullet_orange.gif" width="6" height="6"></div></td>
+      <td> 
+      <a href="http://www.mathworks.com/support/product/product.html?product=CT" style="color:#FFFFFF;"><b><font size="3" face="Arial, Helvetica, sans-serif"> 
+      Technical Support</font></b></a></td></tr>
+      <!-- .......................................... -->
+      <tr> 
+      <td><div align="center"></div></td>
+      <td class="a12"> <a href="http://www.mathworks.com/products/control/requirements.jsp" style="color:#FFFFFF;"> 
+                     </a></td>
+      <!-- END WEB-RESOURCES BULLETS (2nd COLUMN) -->
+      </tr>
+      </table>
+   

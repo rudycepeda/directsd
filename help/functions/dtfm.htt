@@ -1,0 +1,73 @@
+<!--%%page.i
+&secname=dtfm
+&name=
+&next=dtfm2.html
+&nextname=dtfm2
+&prev=diophsys2.html
+&prevname=diophsys2
+&content=
+<H4>dtfm</H4>
+
+<H3>Syntax</H3>
+<p class="code">D = dtfm ( F, T, t )</p>
+<p class="code">D = dtfm ( F, T, t, type )</p>
+<p class="code">D = dtfm ( F, T, t, H )</p>
+<p class="code">D = dtfm ( F, T, t, type, H )</p>
+
+<H3>Description</H3>
+<code>dtfm</code> returns the discrete  Laplace transform
+for <I>F</I>(s)&nbsp;<I>H</I>(s), where <I>F</i>(s)
+is a proper function and <I>H</I>(s) is transfer function of a hold
+<A HREF="#ref1">[1]</A>.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">F</td>
+<td>model of a continuous-time LTI plant with proper transfer function
+</td></tr>
+<tr>
+<td class="cc">T</td><td>sampling period</td></tr>
+<tr>
+<td class="cc">t</td><td>time parameter</td></tr>
+<tr>
+<td class="cc">H</td>
+<td><A HREF="../getstart/sdstd.html#hold">generalized hold</A> given as an
+LTI continuous-time model.
+</td></tr>
+<tr>
+<td class="cc">type</td>
+<td>class of return value: <code>'tf'</code>, <code>'ss'</code> or
+<code>'zpk'</code> (default)
+</td></tr>
+</table>
+<p>
+If the hold is not given, a zero-order hold is used by default.
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">D</TD>
+<TD>discrete Laplace transform with a hold curcuit</TD></tr>
+</table>
+
+<H3>Example</H3>
+<pre>
+    F = rss(2,1,1);
+    T = 1;
+    H = rss(1,1,1);
+    H.d = 0;
+    dtfm(F, T, 0, H)
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Rosenwasser, E.N., and B.P. Lampe,
+<I>Computer Controlled Systems: Analysis and Design with
+Process-orientated Models</I>. London: Springer-Verlag, 2000.
+</p>
+
+<H3>See also</H3>
+<!--%%funref.i&name=ztrm&text=<code>&nbsp;</code>Discrete Laplace transform.%%-->
+<!--%%funref.i&name=dtfm2&text=Symmetric discrete Laplace transform with a hold.%%-->
+
+%%-->

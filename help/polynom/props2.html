@@ -1,0 +1,162 @@
+<html><head><title>Other properties of polynomials
+  :: Polynomials
+  (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="props.html
+ "><img src="../images/b_prev.gif" alt="Previous page" border=0></a>&nbsp;&nbsp;&nbsp;<a href="gcd.html
+ "><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+ <H2>Other properties of polynomials</H2>
+ Miscellaneous properties of polynomials can be obtained
+ using the following functions.
+ <H5>Degree of a polynomial</H5>
+ Function <code>deg</code> returns the degree of a polynomial
+ <pre>
+    p = poln ( [2 3 4], 'r' )
+ 
+ p: polynomial
+   s^3 - 9 s^2 + 26 s - 24
+ 
+    dg = deg ( p )
+ 
+ dg =
+      3
+ </pre>
+ For a quasipolynomial, this function returns
+ maximal positive power and minimal negative power of the
+ independent variable:
+ <pre>
+    p = poln ( [2 3 4], 'rz', 1 )
+ 
+ p: quasipolynomial
+   z^2 - 9 z + 26 - 24 z^-1
+ 
+    [dg,dm] = deg ( p )
+ 
+ dg =
+      2
+ dm =
+      1
+ </pre>
+ 
+ 
+ <H5>Roots of a polynomial</H5>
+ Function <code>roots</code> returns the roots
+ (zeros) of a polynomial or quasipolynomial:
+ <pre>
+    p = poln ( [2 3 4], 'r' )
+ 
+ p: polynomial
+   s^3 - 9 s^2 + 26 s - 24
+ 
+    r = roots ( p )
+ 
+ r =
+      2
+      3
+      4
+ </pre>
+ 
+ <H5>Value of a polynomial</H5>
+ The overloaded function <code>polyval</code>
+ returns the value of polynomial or quasipolynomial for a
+ given value of the variable:
+ <pre>
+    a = 2*s^2 + 3
+ 
+ a: polynomial
+   2 s^2 + 3
+ 
+    v = polyval ( a, 2 )
+ 
+ v =
+     11
+ </pre>
+ 
+ <H5>Continuous and discrete polynomials</H5>
+ Depending on the variable, polynomials can be considered as
+ models continuous-time or discrete-time systems.
+ Polynomials in the variables <code>s</code> and <code>p</code>
+ are continuous, while polynomials in <code>z</code>,
+ <code>d</code>, or <code>q</code> are called discrete.
+ <p>
+ Logical functions <code>isct</code> and <code>isdt</code>
+ return <code>1</code> if the polynomial is continuous-time
+ or discrete-time, respectively:
+ <pre>
+    p = poln ( [1 2 3 )
+ 
+ p: polynomial
+   s^2 + 2 s + 3
+ 
+    isct ( p )
+ 
+ ans =
+      1
+ 
+    isdt ( p )
+ 
+ ans =
+      0
+ 
+    p = poln ( [1 2 3, 'z' )
+ 
+ p: polynomial
+   z^2 + 2 z + 3
+ 
+    isct ( p )
+ 
+ ans =
+      0
+ 
+    isdt ( p )
+ 
+ ans =
+      1
+ </pre>
+ 
+ 
+ 
+ 
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="props.html
+ "><img src="../images/b_prev.gif" alt="Previous page" border=0 align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;Internal properties of polynomials
+ </td><td>&nbsp;</td>
+<td align=right>Common divisors
+ &nbsp;</td>
+<td align=right width=20><a href="gcd.html
+ "><img src="../images/b_next.gif" alt="Next page" border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

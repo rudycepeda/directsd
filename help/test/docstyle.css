@@ -1,0 +1,91 @@
+body {background-color: white; color: black;}
+a:link {color: #0000FF;}
+a:active {color: #0000FF;}
+a:visited {color: #840084;}
+
+table.nav  {background-color: #E7EBF7;}
+table.note {background-color: #E7EBF7;}
+li table.note {margin-top:.8ex; margin-bottom:1ex;}
+
+ul li p {margin-top:0ex; margin-bottom:.5ex; padding:0}
+li p.listimage {margin-top:.8ex; margin-bottom:1ex; padding:0}
+ol li p {margin-top:0ex; margin-bottom:.5ex; padding:0}
+
+/* name of ref pg */
+h1.reftitle {color:#990000}
+h1.reftitle {font-size:3.7ex; margin-top:0; margin-bottom:0; font-weight:normal}
+/* margin-top was 1ex, margin-bottom was .8ex */
+
+/* chaptertitle */
+h1.title {color:black; font-size:4ex; margin-top:1ex; font-weight:bold}
+
+/* sect1 */
+h2.title {color:#990000; margin-top:1ex; margin-bottom:.8ex; font-weight:bold; font-size:3ex}
+
+/* sect2 */
+h3.title {color:#990000; margin-top:1ex; margin-bottom:.8ex; font-weight:bold; font-size:2.5ex}
+
+/* sect3 */
+h4.title {color:#990000; margin-top:1ex; margin-bottom:.8ex; font-weight:bold; font-size:2ex}
+
+/* refsect1 */
+h2 {color:#990000; margin-top:1ex; margin-bottom:.8ex; font-weight:bold; font-size:2.5ex}
+/* refsect2 */
+h3 {color:#990000; margin-top:1ex; margin-bottom:.8ex; font-weight:bold; font-size:2ex} 
+
+i.comment {color:red}
+
+/* Match indentation for programlisting and graphic inside an example or informalexample */
+pre.programlisting {margin-left:32px;}
+p.synopsis {margin-left:32px;}
+p.programlistingindent {margin-left:32px;}
+p.listprogramlistingindent {margin-left:32px; margin-top:.8ex; margin-bottom:1ex; padding:0;}
+
+/* Vertical space in tables other than the header and footer banners */
+table.body {margin-top:2ex; margin-bottom:2ex;}
+
+/* Some table cells need middle alignment */ 
+td.super {vertical-align: middle; }
+
+/* Underline the keyboard accelerator. */
+span.accel {text-decoration:underline;}
+
+/* Left-align table headers. <th> is centered by default. */
+th {text-align: left;}
+ 
+/* Make superscripts/subscripts smaller and further up/down. */
+sup {font-size: 75%; position:relative; top:-3px;}
+sub {font-size: 75%; position:relaive; bottom:3px;}
+
+/* Change spacing in glossary */
+dt.glossary {padding:-1.2ex; padding-top:0; padding-left:0; padding-right:0;}
+dd.glossary {margin-left:0;}
+
+p.copy { margin:0; }
+
+/* Permit color-coded text. */
+.blue {color:blue;}
+.red {color:red;}
+.green {color:green;}
+.violet {color:blueviolet;}
+.black {color:black;}
+
+/* Vertically align inline images, especially equations. */
+img.baseline1 {position:relative; top: 1pt;}
+img.baseline2 {position:relative; top: 2pt;}
+img.baseline3 {position:relative; top: 3pt;}
+img.baseline4 {position:relative; top: 4pt;}
+img.baseline5 {position:relative; top: 5pt;}
+img.baseline6 {position:relative; top: 6pt;}
+img.baseline7 {position:relative; top: 7pt;}
+img.baseline8 {position:relative; top: 8pt;}
+img.baseline9 {position:relative; top: 9pt;}
+img.baseline10 {position:relative; top: 10pt;}
+img.baseline11 {position:relative; top: 11pt;}
+img.baseline12 {position:relative; top: 12pt;}
+img.baseline13 {position:relative; top: 13pt;}
+img.baseline14 {position:relative; top: 14pt;}
+img.baseline15 {position:relative; top: 15pt;}
+
+
+/* Copyright 2002-2004 The MathWorks, Inc. */ 

@@ -1,0 +1,89 @@
+<!--%%page.i
+&secname=separtf
+&name=
+&next=sfactfft.html
+&nextname=sfactfft
+&prev=separss.html
+&prevname=separss
+&content=
+<H4>separtf</H4>
+
+<H3>Syntax</H3>
+<p class="code">[fs,fu,f0] = separtf ( f )</p>
+<p class="code">[fs,fu,f0] = separtf ( f, type )</p>
+<p class="code">[fs,fu,f0] = separtf ( f, type, stype )</p>
+
+
+<H3>Description</H3>
+<code>separtf</code> performs proper separation of a rational
+function, extracting stable, antistable and neutral terms such that
+<code>f=fs+fu+f0</code>.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">f</td>
+<td>scalar model of LTI system in <code>'ss'</code>, <code>'tf'</code>
+or <code>'zpk'</code> form</td></tr>
+<tr>
+<td class="cc">type</td>
+<td>type of separation:
+<ul>
+<LI><code>'s'</code> - with respect to the imaginary axis, stability region
+is the left half-plane (default for continuous-time models)
+<LI><code>'z'</code> - with respect to the unit circle, stability region
+is inside the unit disk  (default for discrete-time models)
+<LI><code>'d'</code> - with respect to the unit circle, stability region
+is outside the unit disk
+<LI><code>'s0'</code>, <code>'z0'</code> and <code>'d0'</code> -
+the same as <code>'s'</code>, <code>'z'</code> and <code>'d'</code>, but
+neutral poles are included in the stable term
+</ul>
+</td></tr>
+<tr>
+<td class="cc">stype</td>
+<td>defines where to place a polynomial term for non-strictly proper functions:
+<ul>
+<LI><code>'infs'</code> - polynomial term is included in the stable part (default)
+<LI><code>'infu'</code> - polynomial term is included in the antistable part
+</ul>
+</td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">fs</TD><TD>stable term</TD></tr>
+<TD class="cc">fu</TD><TD>antistable term</TD></tr>
+<TD class="cc">f0</TD><TD>neutral term</TD></tr>
+</table>
+
+<H3>Example</H3>
+<pre>
+   F = tf([2 4 -1 -2], [1 -1 -2 0])
+   [fs,fu,f0] = separtf ( F )
+
+fs: transfer function 1 x 1
+
+      2 s + 2.333
+      -----------
+         s + 1
+
+fu: transfer function 1 x 1
+
+      4.667
+      -----
+      s - 2
+
+f0: transfer function 1 x 1
+
+      1
+      -
+      s
+ </pre>
+
+<H3>See also</H3>
+<!--%%funref.i&name=sfactor&text=Spectral factorization for polynomials and rational functions.%%-->
+<!--%%funref.i&name=separss&text=State-space separation of LTI models.%%-->
+
+%%-->

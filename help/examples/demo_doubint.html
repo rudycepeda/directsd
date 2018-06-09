@@ -1,0 +1,251 @@
+<html><head><title>Optimal control for double integrator  :: Examples (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="demo_aut97.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="demo_l2.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H2>Example: Optimal control for double integrator</H2>
+<H3>Statement of the problem</H3>
+Consider the following sampled-data stochastic control
+problem:
+<CENTER><IMG SRC="images/dint_schema.gif" WIDTH=378 HEIGHT=137 ALT=""></CENTER>
+Here <span class=tms>w</span> is a centered white noise signal
+with unit intensity. The plant is modelled as a double
+integrator.
+<p>
+It is required to find digital controller <span class=tms>K</span>
+minimizing
+(in the steady-state mode for
+<span class=tms>r</span>(<span class=tms>t</span>)&nbsp;=&nbsp;0)
+the cost function
+<CENTER><IMG SRC="images/dint_j.gif" WIDTH=109 HEIGHT=22 ALT=""></CENTER>
+where <SUB><IMG SRC="images/dint_ve.gif" WIDTH=18 HEIGHT=17 ALT=""></SUB>
+and <SUB><IMG SRC="images/dint_vu.gif" WIDTH=18 HEIGHT=17 ALT=""></SUB>
+denote the average variances of the <A HREF="../getstart/stochstd.html">periodically nonstationary
+signals</A>
+<span class=tms>e</span>(<span class=tms>t</span>) and
+<span class=tms>u</span>(<span class=tms>t</span>), respectively, and
+<SUB><IMG SRC="images/dint_rho.gif" WIDTH=19 HEIGHT=21 ALT=""></SUB>=1
+is a nonnegative constant.
+<p>
+For comparison, we solve this problem by means of
+direct design method and two approximate methods.
+
+<H3>Preparing data</H3>
+First, we enter the plant transfer function:
+<pre>
+   F = tf ( 1, [1 0 0] );
+</pre>
+Then, it is necessary to construct a model the augmented
+plant in the <A HREF="../getstart/sdstd.html">standard sampled-data system</A>.
+Operator equations have the form
+<CENTER><IMG SRC="images/dint_op.gif" vspace=5 WIDTH=157 HEIGHT=73 ALT=""></CENTER>
+Then, blocks of the plant in the standard system have the form
+<CENTER><IMG SRC="images/dint_pij.gif" vspace=5 WIDTH=279 HEIGHT=85 ALT=""></CENTER>
+Such a system can be formed as
+<pre>
+   rho = 1;
+   sys = [-F  -F
+           0 rho
+          -F  -F];
+
+sys: transfer function 3 x 2
+
+    !  -1     -1 !
+    ! ---    --- !
+    ! s^2    s^2 !
+    !            !
+    !  0      1  !
+    !            !
+    !  -1     -1 !
+    ! ---    --- !
+    ! s^2    s^2 !
+</pre>
+
+<H3>Direct sampled-data design</H3>
+Choose a sampling period:
+<pre>
+   T = 0.1;
+</pre>
+To minimize the <I>H</I><SUB>2</SUB>-norm
+of the system (this is equivalent to minimizing
+the chosen cost function), we use
+<A HREF="../functions/sdh2.html">sdh2</A>:
+<pre>
+   Kopt = sdh2 ( sys, T )
+
+Kopt: zero-pole-gain model 1 x 1
+
+      18.2231 (z-0.9352)
+      ------------------
+          (z+0.3179)
+
+Sampling time: 0.1
+</pre>
+Compute the closed-loop poles of the
+optimal sampled-data system by taking roots of
+the characteristic polynomial (see
+<A HREF="../functions/charpol.html">charpol</A>):
+<pre>
+   roots(charpol(sys,Kopt))
+
+ans =
+  -0.2680
+   0.9295 + 0.0658i
+   0.9295 - 0.0658i
+
+</pre>
+Since all of them are inside the unit disk, the system is
+stable.
+
+<H3>Redesign technique</H3>
+For comparison, we consider how the redesign technique works.
+First, we find the optimal <I>continuous-time controller</I>,
+using <A HREF="../functions/ch2.html">ch2</A>):
+<pre>
+   Kc = ch2 ( sys )
+
+Kc: zero-pole-gain model 1 x 1
+
+      1.4142 (s+0.7071)
+
+</pre>
+This means that the optimal controller contains
+differentiating term and is not causal. Then,
+using <A HREF="../functions/bilintr.html">bilintr</A>,
+we apply the Tustin transform to obtain the causal
+redesigned discrete controller:
+<pre>
+   Kc2d = bilintr ( Kc, 'tustin', T )
+
+Kc2d: zero-pole-gain model 1 x 1
+
+      3.8284 (z-0.4776)
+      -----------------
+            (z+1)
+
+Sampling time: 1
+
+</pre>
+We note that this controller has a pole at
+<span class=tms>&#950;&nbsp;=&nbsp;-1</span>
+and may cause highly oscillating transients.
+<p>
+Having found the closed-loop poles
+<pre>
+   roots(charpol(sys,Kc2d))
+
+ans =
+  -1.0000
+   0.0429 + 0.2897i
+   0.0429 - 0.2897i
+
+</pre>
+we conclude that the system is marginally stable due to
+the pole at <span class=tms>&#950;&nbsp;=&nbsp;-1</span>.
+
+<H3>Discretization method</H3>
+Another approximate method supposes preliminary
+discretization of the augmented plant:
+<pre>
+   dsys = c2d ( sys, T )
+
+dsys: transfer function 3 x 2
+
+    !  0.005 z + 0.005     0.005 z + 0.005 !
+    !  ---------------     --------------- !
+    !   z^2 - 2 z + 1       z^2 - 2 z + 1  !
+    !                                      !
+    !         0                   1        !
+    !                                      !
+    ! -0.005 z - 0.005    -0.005 z - 0.005 !
+    ! ----------------    ---------------- !
+    !   z^2 - 2 z + 1       z^2 - 2 z + 1  !
+
+Sampling time: 0.1
+
+</pre>
+Then, we find the optimal discrete-time controller
+for this model:
+<pre>
+   Kd = zpk( h2reg(dsys) )
+
+Kd: zero-pole-gain model 1 x 1
+
+      28.2337 (z-0.934)
+      -----------------
+            (z+1)
+
+Sampling time: 0.1
+
+</pre>
+The controller also has a pole at <span class=tms>&#950;&nbsp;=&nbsp;-1</span>
+so that oscillations are expected.
+The closed-loop poles
+<pre>
+   roots(charpol(sys,Kd))
+
+ans =
+  -1.0000
+   0.9294 + 0.0658i
+   0.9294 - 0.0658i
+
+</pre>
+indicate that the system is marginally stable.
+
+<H3>Comparison</H3>
+The following main points should be emphasized:
+<ol>
+<LI>Controllers obtained by the three methods are
+quite different.
+<LI>Both the approximate methods yield systems
+that are marginally stable and cannot be used
+in applications.
+<LI>Decreasing the sampling period does not improve the
+situation with the approximate methods.
+</ol>
+Finally, the following step responses of the three systems
+are instructive:
+<CENTER><IMG SRC="images/dint_cmp.jpg" vspace=5 WIDTH=400 HEIGHT=349 ALT=""></CENTER>
+The upper two graphs are for direct sampled-data design,
+the next two characterize the redesign method, while
+the lower pair is for the discretization method.
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Polyakov K.Y.,
+Rosenwasser E.N., and Lampe B.,
+Optimal digital controllers for double integrator:
+Comparison of four methods // Proc. CCA and
+CACSD, Glasgow, UK, CACSDREG 1026, September 2002.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Polyakov, K.Yu., Polynomial Design of Optimal
+Sampled-data Control Systems, Dr. Sc. Thesis, State University of Ocean Technology,
+St. Petersburg, 2006 [in Russian].
+</p>
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="demo_aut97.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;Optimal disturbance attenuation </td><td>&nbsp;</td>
+<td align=right>L2-optimal tracking &nbsp;</td>
+<td align=right width=20><a href="demo_l2.html"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+

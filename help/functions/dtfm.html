@@ -1,0 +1,100 @@
+<html><head><title> dtfm (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="diophsys2.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="dtfm2.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H4>dtfm</H4>
+
+<H3>Syntax</H3>
+<p class="code">D = dtfm ( F, T, t )</p>
+<p class="code">D = dtfm ( F, T, t, type )</p>
+<p class="code">D = dtfm ( F, T, t, H )</p>
+<p class="code">D = dtfm ( F, T, t, type, H )</p>
+
+<H3>Description</H3>
+<code>dtfm</code> returns the discrete  Laplace transform
+for <I>F</I>(s)&nbsp;<I>H</I>(s), where <I>F</i>(s)
+is a proper function and <I>H</I>(s) is transfer function of a hold
+<A HREF="#ref1">[1]</A>.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">F</td>
+<td>model of a continuous-time LTI plant with proper transfer function
+</td></tr>
+<tr>
+<td class="cc">T</td><td>sampling period</td></tr>
+<tr>
+<td class="cc">t</td><td>time parameter</td></tr>
+<tr>
+<td class="cc">H</td>
+<td><A HREF="../getstart/sdstd.html#hold">generalized hold</A> given as an
+LTI continuous-time model.
+</td></tr>
+<tr>
+<td class="cc">type</td>
+<td>class of return value: <code>'tf'</code>, <code>'ss'</code> or
+<code>'zpk'</code> (default)
+</td></tr>
+</table>
+<p>
+If the hold is not given, a zero-order hold is used by default.
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">D</TD>
+<TD>discrete Laplace transform with a hold curcuit</TD></tr>
+</table>
+
+<H3>Example</H3>
+<pre>
+    F = rss(2,1,1);
+    T = 1;
+    H = rss(1,1,1);
+    H.d = 0;
+    dtfm(F, T, 0, H)
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Rosenwasser, E.N., and B.P. Lampe,
+<I>Computer Controlled Systems: Analysis and Design with
+Process-orientated Models</I>. London: Springer-Verlag, 2000.
+</p>
+
+<H3>See also</H3>
+
+<p class=fref><code><a href=ztrm.html>ztrm</a>&nbsp;&nbsp;</code><code>&nbsp;</code>Discrete 
+Laplace transform.</p>
+<p class=fref><code><a href=dtfm2.html>dtfm2</a>&nbsp;&nbsp;</code>Symmetric discrete Laplace 
+transform with a hold.</p>
+
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="diophsys2.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;diophsys2</td><td>&nbsp;</td>
+<td align=right>dtfm2&nbsp;</td>
+<td align=right width=20><a href="dtfm2.html"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+

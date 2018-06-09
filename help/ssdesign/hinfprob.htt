@@ -1,0 +1,71 @@
+<!--%%page.i
+&secname=:: State-space design
+&name=Hinf-optimization problem
+&next=limits.html
+&nextname=Limitations
+&prev=h2prob.html
+&prevname=H2-optimization problem
+&content=
+<H2><I>H</I><SUB>&#8734;</SUB>-optimization problem</H2>
+<!--%%hinf.i%%-->-problem consists in minimizing
+the
+<A HREF="../analysis/hinf.html"><!--%%hinf.i%%-->-norm</A> (or
+<I>L</I><SUB>2</SUB>-induced norm) of sampled-data system:
+<CENTER><IMG SRC="../images/l2indnorm.gif" WIDTH=265 HEIGHT=47 ALT=""></CENTER>
+<p>
+State-space algorithms for solving this problem for
+finite-dimensional plants given in the state space
+are developed in <A HREF="#ref1">[1]</A>-<A HREF="#ref2">[2]</A>
+and some other works.
+<p>
+For time-delayed plants with scalar controllers,
+a polynomial method of minimizing
+<!--%%ahinf.i%%-->-norm can be used
+<A HREF="#ref3">[3]</A>-<A HREF="#ref4">[4]</A>.
+<p>
+The function
+<A HREF="../functions/sdhinfreg.html">sdhinfreg</A>
+returns the optimal digital controller and the
+minimal attainable value of the cost function:
+<pre>
+   F = tf(1, [1 1 0]);
+   sys = [F F;-F -F];
+   T = 0.1;
+   [K,cost] = sdhinfreg ( sys, T );
+   K = zpk ( K )
+   cost
+
+K: zero-pole-gain model 1 x 1
+
+      381.5411 (z-0.4523)
+      -------------------
+           (z+0.8953)
+
+Sampling time: 0.1
+cost =
+    0.0091
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Chen, T., and B.A. Francis,
+<I>Optimal Sampled-Data Control Systems</I>.
+Berlin Heidelberg New York: Springer-Verlag, 1995.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Bamieh B.A., Pearson J.B.,
+A general framework for linear periodic systems
+with applications to
+<!--%%hinf.i%%--> sampled-data control //
+<I>IEEE Trans. Automat. Contr.</I>, vol.&nbsp;AC-37,
+no.&nbsp;4, pp.&nbsp;418-435, 1992.
+</p>
+<p><A name="ref3"></A>[3]&nbsp;Rosenwasser, E.N., and B.P. Lampe,
+<I>Computer Controlled Systems: Analysis and Design with
+Process-orientated Models</I>. London: Springer-Verlag, 2000.
+</p>
+<p><A name="ref4"></A>[4]&nbsp;Polyakov, K.Yu., Polynomial Design of Optimal
+Sampled-data Control Systems, Dr. Sc. Thesis, State University of Ocean Technology,
+St. Petersburg, 2006 [in Russian].
+</p>
+
+%%-->
+

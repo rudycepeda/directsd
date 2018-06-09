@@ -1,0 +1,27 @@
+<!--%%page.i
+&secname=First section
+&name=:: First page
+&nextname=Next page
+&prevname=Previous page
+&content=
+<!--%%sec.i&title=Function list%%-->
+<H2>Design functions</H2>                               
+
+<!--%%func.i&name=sdh2%%-->
+
+<!--%%syntax.i%%-->
+<!--%%code.i&text=[K,cost] = sdh2(sys)%%-->
+<!--%%code.i&text=&nbsp;%%-->
+<!--%%code.i&text=[K,cost] = sdh2(sys, t)%%-->
+
+<!--%%descr.i%%-->
+DirectSD toolbox is a
+toolbox for analysis and design of sampled-data systems.
+
+<!--%%ex.i%%-->
+
+<!--%%also.i%%-->
+<!--%%funref.i&name=sdl2&text=&nbsp;&nbsp;<I>L</I><SUB>2</SUB>-optimization%%-->
+<!--%%funref.i&name=sdl2&text=&nbsp;&nbsp;<I>L</I><SUB>2</SUB>-optimization%%-->
+
+%%-->

@@ -1,0 +1,105 @@
+<html><head><title> sfactfft (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="separtf.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="sfactor.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H4>sfactfft</H4>
+
+<H3>Syntax</H3>
+<p class="code">fs = sfactfft ( s, type )</p>
+<p class="code">fs = sfactfft ( s, type )</p>
+
+<H3>Description</H3>
+<code>sfactfft</code> performs spectral factorization of a
+Hermitian self-conjugate quasipolynomial.
+Returns a stable factor.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">s</td>
+<td>Hermitian self-conjugate quasipolynomial or
+symmetric array of coefficients.</td></tr>
+<tr>
+<td class="cc">type</td>
+<td>type of factorization:
+<ul>
+<LI><code>'z'</code> - stability region is inside the unit disk
+<LI><code>'d'</code> - stability region
+is outside the unit disk (default)
+</ul>
+</td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">fs</TD>
+<TD>stable polynomial spectral factor</TD></tr>
+</table>
+
+<H3>Examples</H3>
+<B>Example 1.</B> Quasipolynomial as an array of coefficients.
+<pre>
+   s = [3 8 14 8 3]
+   fs = sfactfft ( s )
+
+fs =
+    1.0000    2.0000    3.0000
+    
+</pre>
+<B>Example 2.</B> Quasipolynomial as an object .
+<pre>
+   s = 3*z^2 + 8*z + 14 + 8*z^-1 + 3*z^-2;
+   fs = sfactfft ( s )
+
+fs: polynomial
+  z^2 + 2 z + 3
+
+   fs = sfactfft ( s, 'z' )
+
+fs: polynomial
+  3 z^2 + 2 z + 1
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Hromcik M., Jezek J., and Sebek M., New algorithm for
+spectral factorization and its practical application // <i>Proc. European
+Control Conference</i>, Porto, Portugal, September 1-5, 2001.
+</p>
+
+<H3>See also</H3>
+
+<p class=fref><code><a href=factor.html>factor</a>&nbsp;&nbsp;</code><code>&nbsp;</code>Polynomial 
+factorization.</p>
+<p class=fref><code><a href=sfactor.html>sfactor</a>&nbsp;&nbsp;</code>Spectral factorization for 
+polynomials and rational functions.</p>
+
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="separtf.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;separtf</td><td>&nbsp;</td>
+<td align=right>sfactor&nbsp;</td>
+<td align=right width=20><a href="sfactor.html"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+

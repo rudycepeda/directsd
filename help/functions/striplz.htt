@@ -1,0 +1,60 @@
+<!--%%page.i
+&secname=striplz
+&name=
+&next=sumzpk.html
+&nextname=sumzpk
+&prev=ssquad.html
+&prevname=ssquad
+&content=
+<H4>striplz</H4>
+
+<H3>Syntax</H3>
+<p class="code">[b,n] = striplz ( a )</p>
+<p class="code">[b,n] = striplz ( a, tol )</p>
+
+<H3>Description</H3>
+<code>striplz</code> removes leading zeros of a polynomial.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">a</td>
+<td>polynomial as an array of coefficients</td></tr>
+<tr>
+<td class="cc">tol</td>
+<td>tolerabce for removing zeros (default <I>eps</I>)</td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">b</TD>
+<TD>polynomial without leading zeros</TD></tr>
+<tr>
+<TD class="cc">n</TD>
+<TD>number of removed leading zeros</TD></tr>
+</table>
+
+<H3>Example</H3>
+<pre>
+   a = [1e-10 0.1 1 20];
+   [b,n] = striplz ( a )
+
+b =
+    0.0000    0.1000    1.0000   20.0000
+n =
+     0
+
+   [b,n] = striplz ( a, 1e-8 )
+
+b =
+    0.1000    1.0000   20.0000
+n =
+     1
+</pre>
+
+<H3>See also</H3>
+<!--%%funref.i&name=deg&text=Degree of a polynomial.%%-->
+
+
+%%-->

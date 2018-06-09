@@ -1,0 +1,118 @@
+<html><head><title>Stabilization :: Analysis (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="analysis.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="h2simple.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H2>Stability</H2>
+<H3>Characteristic polynomial</H3>
+Stability of sampled-data system is determined by
+characteristic polynomial on the basis of discrete-time model
+of the block <I>P</I><SUB>22</SUB> with hold <I>H</I>
+in the <A HREF="../getstart/sdstd.html">standard sampled-data system</A>.
+<p>
+Function <A HREF="../functions/charpol.html">charpol</A> returns
+the characteristic polynomial in the <code>z</code>-plane of
+the standard sampled-data system
+with continuous-time plant <code>sys</code> and
+discrete-time controller
+<code>K</code>:
+<pre>
+    F = tf(1, [1 1 0]);
+    sys = [F F;-F -F];
+    T = 0.1;
+    K = zpk ( 0.45, -0.89, 380, T );
+    p = charpol(sys, K)
+
+p: polynomial
+  z^3 + 0.82338 z^2 + 0.16029 z + 0.0052236
+
+</pre>
+For stability of the closed loop it is necessary and sufficient that
+all roots of the characteristic polynomial be located inside
+the unit circle. For the above example we find:
+<pre>
+   rts = roots ( p )
+
+rts =
+   -0.5485
+   -0.2342
+   -0.0407
+
+</pre>
+so that the system is stable.
+
+<H3>Stability margin</H3>
+To find the stability margin, it is necessary to extract
+the uncertainty block as shown below:
+<CENTER><IMG SRC="../images/sysdelta.gif" WIDTH=177 HEIGHT=162 ALT=""></CENTER>
+Then, the stability margin is defined as the inverse
+of the
+
+<I>H</I><SUB><IMG SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT="" border=0></SUB>-norm 
+of the standard sampled-data system
+(without the &#916;-block). This value equals the maximal
+admissible <I>L</I><SUB>2</SUB>-induced norm of the
+periodically nonstationary perturbations described by the
+&#916;-block, under which the closed-loop system remains stable.
+<p>
+Function <A HREF="../functions/sdmargin.html">sdmargin</A>
+returns the stability margin for
+the standard sampled-data system
+with continuous-time plant <code>sys</code> and
+discrete-time controller
+<code>K</code>:
+<pre>
+    F = tf(1, [1 1 0]);
+    sys = [F F;-F -F];
+    T = 0.1;
+    K = zpk ( 0.45, -0.89, 380, T );
+    g = sdmargin (sys, K)
+
+g =
+  108.8637
+</pre>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Chen, T., and B.A. Francis,
+<I>Optimal Sampled-Data Control Systems</I>.
+Berlin Heidelberg New York: Springer-Verlag, 1995.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Sivashankar N., Khargonekar P.P., Robust stability and performance
+analysis of sampled-data systems //
+<I>IEEE Trans. Automat. Contr.</I>, vol.&nbsp;AC-38,
+no.&nbsp;1, pp.&nbsp;58-69, 1993.
+</p>
+<p><A name="ref3"></A>[3]&nbsp;Hagiwara T., Araki M., Robust stability of sampled-data systems 
+under possibly
+unstable additive/multiplicative perturbations // <i>IEEE Trans. Automat.
+Contr.</i>, vol.&nbsp;AC-43, no.&nbsp;9, pp.&nbsp;1340-1346, 1998.
+</p>
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="analysis.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;Analysis</td><td>&nbsp;</td>
+<td align=right>Simple H2-norm&nbsp;</td>
+<td align=right width=20><a href="h2simple.html"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+
+

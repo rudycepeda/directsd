@@ -1,0 +1,309 @@
+<!--%%page.i
+&secname=Functions - Categorical List
+&name=
+&next=alphabet.html
+&nextname=Functions - Alphabetical List
+&prev=examples\demo_modl2r.html
+&prevname=Reduced-order redesign 
+&content=
+<H2>Functions - Categorical list</H2>
+
+<!------------------------------------------------->
+<A NAME="poln"></A><H3>Polynomials</H3>
+<table border="0" cellpaddinf="5">
+<tr>
+<td class="ref"><A HREF="deg.html">deg</a></td>
+<td>Degree of a polynomial</td>
+</tr>
+<TR>
+<td class="ref"><A HREF="gcd.html">gcd</a></td><td>
+Greatest common divisor</td>
+</TR>
+<tr>
+<td class="ref"><A HREF="coprime.html">coprime</a></td>
+<td>Extract greatest common divisor of two polynomials</td>
+</tr>
+<TR>
+<td class="ref"><A HREF="triple.html">triple</a></td><td>
+Extract greatest common divisor of three polynomials</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="vec.html">vec</a></td><td>
+Vectorize coefficients of a polynomial</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="factor.html">factor</a></td><td>
+Factorization of a polynomial</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="sfactor.html">sfactor</a></td><td>
+Spectral factorization for polynomials and transfer functions</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="sfactfft.html">sfactfft</a></td><td>
+FFT-based spactral factorization of discrete-time polynomials</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="recip.html">recip</a></td><td>
+Reciprocal polynomial</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="striplz.html">striplz</a></td><td>
+Cut off leading zero coefficients of a polynomial</td>
+</TR>
+<tr>
+<td class="ref"><A HREF="delzero.html">delzero</a></td>
+<td>Delete zeros at the origin</td>
+</tr>
+<tr>
+<td class="ref"><A HREF="c2d.html">c2d</a></td>
+<td>Discretization of a polynomial in the &#950;-plane</td>
+</tr>
+<tr>
+<td class="ref"><A HREF="c2z.html">c2z</a></td>
+<td>Discretization of a polynomial in the z-plane</td>
+</tr>
+<TR>
+<td class="ref"><A HREF="tf2nd.html">tf2nd</a></td><td>
+Find polynomial numerator and denominator of a transfer function</td>
+</TR>
+</table>
+
+<!------------------------------------------------->
+<A NAME="poleq"></A><H3>Polynomial equations</H3>
+<table border="0" cellpaddinf="5">
+<tr>
+<td class="ref"><A HREF="dioph.html">dioph</a></td><td>
+Standard Diophantine polynomial equation</td>
+</tr>
+<tr>
+<td class="ref"><A HREF="dioph2.html">dioph2</a></td><td>
+Special Diophantine polynomial equation</td>
+</tr>
+<tr>
+<td class="ref"><A HREF="diophsys.html">diophsys</a></td><td>
+System of standard Diophantine polynomial equations</td>
+</tr>
+<tr>
+<td class="ref"><A HREF="diophsys2.html">diophsys2</a></td><td>
+System of special Diophantine polynomial equations</td>
+</tr>
+</table>
+
+<!------------------------------------------------->
+<A NAME="trans"></A><H3>Discrete transformations</H3>
+<table border="0" cellpaddinf="5">
+<TR>
+<td class="ref"><A HREF="ztrm.html">ztrm</a></td><td>
+Discrete Laplace transform for a Laplace image</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="dtfm.html">dtfm</a></td><td>
+Discrete Laplace transform with a hold</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="dtfm2.html">dtfm2</a></td><td>
+Special symmetric discrete Laplace transform with a hold</td>
+</TR>
+</table>
+
+<!------------------------------------------------->
+<A NAME="analysis"></A><H3>Analysis of sampled-data systems</H3>
+<table border="0" cellpaddinf="5">
+<tr>
+<td class="ref"><A HREF="charpol.html">charpol</a></td>
+<td>Characteristic polynomial</td>
+</tr>
+<TR>
+<td class="ref"><A HREF="sdmargin.html">sdmargin</a></td><td>
+Stability margin</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="quaderr.html">quaderr</a></td><td>
+Computation of integral quadratic error</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="sdl2err.html">sdl2err</a></td><td>
+Integral quadratic error for sampled-data systems</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="sdh2norm.html">sdh2norm</a></td><td>
+<I>H</I><SUB>2</SUB>-norm of sampled-data systems</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="sd2doferr.html">sd2doferr</a></td><td>
+Integral quadratic error in 2-DOF sampled-data system</td>
+</TR>
+<tr>
+<td class="ref"><A HREF="dinfnorm.html">dinfnorm</a></td><td>
+<!--%%hinf.i%%-->-norm for discrete-time systems</td>
+</tr>
+<tr>
+<td class="ref"><A HREF="dahinorm.html">dahinorm</a></td>
+<td><!--%%ahinf.i%%-->-norm for discrete-time models</td>
+</tr>
+<TR>
+<td class="ref"><A HREF="sdhinorm.html">sdhinorm</a></td><td>
+<!--%%hinf.i%%-->-norm for sampled-data systems</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="sdahinorm.html">sdahinorm</a></td><td>
+<!--%%ahinf.i%%-->-norm for sampled-data systems
+</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="sdtrhinferr.html">sdtrhinferr</a></td><td>
+<!--%%ahinf.i%%-->-cost for sampled-data tracking systems</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="sdnorm.html">sdnorm</a></td><td>
+various norms of sampled-data systems</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="sdsim.html">sdsim</a></td><td>
+Simulation of sampled-data systems</td>
+</TR>
+</table>
+
+<!------------------------------------------------->
+<A NAME="poldesign"></A><H3>Polynomial design of sampled-data systems</H3>
+<table border="0" cellpaddinf="5">
+<tr>
+<td class="ref"><A HREF="ch2.html">ch2</a></td>
+<td><I>H</I><SUB>2</SUB>-optimization of continuous-time systems</td>
+</tr>
+<tr>
+<td class="ref"><A HREF="dhinf.html">dhinf</a></td>
+<td>
+<!--%%hinf.i%%-->-optimization of discrete-time systems</td>
+</tr>
+<TR>
+<td class="ref"><A HREF="polquad.html">polquad</a></td><td>
+Polynomial minimizition of a quadratic functional</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="whquad.html">whquad</a></td><td>
+Wiener-Hopf minimization of frequency-domain quadratic functionals</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="ssquad.html">ssquad</a></td><td>
+State-space minimization of frequency-domain quadratic functionals</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="sdh2.html">sdh2</a></td><td>
+<I>H</I><SUB>2</SUB>-optimal controller for sampled-data systems</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="sdh2hinf.html">sdh2hinf</a></td><td>
+Mixed <I>H</I><SUB>2</SUB>/<!--%%ahinf.i%%-->-optimization
+of sampled-data systems</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="sdl2.html">sdl2</a></td><td>
+<I>L</I><SUB>2</SUB>-optimal controller for sampled-data systems</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="sd2dof.html">sd2dof</a></td><td>
+Optimal feedforward controller for 2-DOF sampled-data systems</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="split2dof.html">split2dof</a></td><td>
+Stable realization of 2-DOF sampled-data systems</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="sdahinf.html">sdahinf</a></td><td>
+<!--%%ahinf.i%%-->-optimal controller for sampled-data systems</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="polhinf.html">polhinf</a></td><td>
+Polynomial solution to an
+<!--%%hinf.i%%-->-problem</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="sdtrhinf.html">sdtrhinf</a></td><td>
+<!--%%ahinf.i%%-->-optimal controller for sampled-data tracking systems</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="polopth2.html">polopth2</a></td><td>
+Minimization of a quadratic functional with respect to a
+polynomial of known degree</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="modsdh2.html">modsdh2</a></td><td>
+<I>H</I><SUB>2</SUB>-optimal
+reduced-order modal digital controller</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="modsdl2.html">modsdl2</a></td><td>
+<I>L</I><SUB>2</SUB>-optimal
+reduced-order modal digital controller </td>
+</TR>
+<TR>
+<td class="ref"><A HREF="psigain.html">psigain</a></td><td>
+DC-gain of parameter function &#936;</td>
+</TR>
+</table>
+
+<!------------------------------------------------->
+<A NAME="ssdesign"></A><H3>State-space design of sampled-data systems</H3>
+<table border="0" cellpaddinf="5">
+<TR>
+<td class="ref"><A HREF="h2reg.html">h2reg</a></td><td>
+<I>H</I><SUB>2</SUB>-optimal controller for LTI systems</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="hinfreg.html">hinfreg</a></td><td>
+<!--%%hinf.i%%-->-optimal controller for LTI systems</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="sdfast.html">sdfast</a></td><td>
+Fast discretization of sampled-data systems</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="sdgh2mod.html">sdgh2mod</a></td><td>
+Equivalent discrete model in generalized <I>H</I><SUB>2</SUB>-problem</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="sdh2simple.html">sdh2simple</a></td><td>
+Equivalent discrete model in simple <I>H</I><SUB>2</SUB>-problem</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="sdh2reg.html">sdh2reg</a></td><td>
+<I>H</I><SUB>2</SUB>-optimal controller for sampled-data systems</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="sdhinfreg.html">sdhinfreg</a></td><td>
+<!--%%hinf.i%%-->-optimal controller for sampled-data systems</td>
+</TR>
+</table>
+
+<!------------------------------------------------->
+<A NAME="misc"></A><H3>Miscellaneous functions</H3>
+<table border="0" cellpaddinf="5">
+<TR>
+<td class="ref"><A HREF="sector.html">sector</a></td><td>
+Find degree of stability and oscillation for closed-loop poles</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="improper.html">improper</a></td><td>
+Improper part of a transfer function</td>
+</tr>
+<TR>
+<td class="ref"><A HREF="sumzpk.html">sumzpk</a></td><td>
+Reliable summation of zpk-models with common poles</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="sfactor.html">sfactor</a></td><td>
+Spectral factorization for polynomials and transfer functions</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="separss.html">separss</a></td><td>
+Proper separation (state-space technique)</td>
+</TR>
+<TR>
+<td class="ref"><A HREF="separtf.html">separtf</a></td><td>
+Proper separation (polynomial equations technique)</td>
+</TR>
+</table>
+
+%%-->

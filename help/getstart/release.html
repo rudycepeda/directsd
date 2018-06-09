@@ -1,0 +1,81 @@
+<html><head><title> Release Notes (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>&nbsp;&nbsp;&nbsp;</td>
+</tr>
+</table>
+
+
+<H1>DirectSD Toolbox Release Notes</H1><hr>
+The DirectSD Toolbox 3.0 Release Notes describe the
+changes introduced in the most recent version of the DirectSD Toolbox.
+These includes the following important new features.
+<H3>Standard sampled-data system</H3>
+As distinct from the previous versions,
+the <A HREF="sdstd.html">standard sampled-data system</A> is used
+as a basic configuration. This make it possible to
+handle all reasonable structures typical for
+engineering applications in a unified framework.
+
+<H3>Generalized holds</H3>
+New version generalizes most of analysis and design
+procedures onto systems with
+<A HREF="sdstd.html#hold">generalized holds</A>
+with impulse response of the form
+<CENTER>
+<IMG SRC="../images/ht.gif" WIDTH=198 HEIGHT=29 ALT="">
+</CENTER>
+Here <span class=tms>A</span>,
+<span class=tms>B</span> and
+<span class=tms>C</span> are constant matrices of
+compatible dimensions.
+
+<H3>Polynomials as objects</H3>
+Operations with polynomials and quasipolynomials
+(two-sided polynomials) are realized in the current version
+on the basis of object-oriented technology.
+All basic arithmetic operations are overloaded
+for objects of class <code>poln</code>. This greatly
+simplifies operations with polynomials and quasipolynomials
+both from the command line and  scripts.
+
+<H3>Numerical enhancement</H3>
+In this version some modern reliable methods of
+polynomial computations were realized, including
+some  FFT-based algorithms.
+
+<H3>Help and demos</H3>
+New help system in compiled HTML (CHM) format is included
+in version 3.0. Many examples with detailed discussion
+can be found therein.
+<p>
+A new package of demos introduces the main
+concepts and features of the DirectSD toolbox in
+order to make its use easy and comfortable. To view
+these demos, enter
+<pre>
+   demos
+</pre>
+in the Matlab command window.
+
+<H3>Compatibility with Matlab&nbsp;7</H3>
+Compatibility with Matlab&nbsp;7 is provided.
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>&nbsp;</td>
+<td align=left>&nbsp;</td><td>&nbsp;</td>
+<td align=right>&nbsp;</td>
+<td align=right width=20>&nbsp;</td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+

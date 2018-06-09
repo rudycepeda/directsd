@@ -1,0 +1,92 @@
+<html><head><title> polopth2 (DirectSD Toolbox)</title>
+<link rel=stylesheet href="../dsd.css" type="text/css">
+</head>
+<body bgcolor=#ffffff>
+
+<table border=0 width="100%" cellpadding=0 cellspacing=0><tr>
+<td valign=baseline bgcolor="#e7ebf7"><b>DirectSD Toolbox</b></td>
+<td valign=baseline bgcolor="#e7ebf7" align=right>
+<a href="polhinf.html"><img src="../images/b_prev.gif" alt="Previous page" 
+border=0></a>&nbsp;&nbsp;&nbsp;<a href="polquad.html"><img 
+src="../images/b_next.gif" alt="Next Page" border=0></a></td>
+</tr>
+</table>
+
+
+<H4>polopth2</H4>
+
+<H3>Syntax</H3>
+<p class="code">[Q,E,Emin] = polopth2 ( V, W, n )</p>
+
+<H3>Description</H3>
+<code>polopth2</code> solves quadratic minimization problem
+<CENTER><IMG SRC="../images/h2pol.gif" WIDTH=224 HEIGHT=25 ALT=""></CENTER>
+for stable rational functions <I>V</I>(&#950;) and <I>W</I>(&#950;). It
+is required to find the minimizing <I>polynomial</I> <I>Q</I>(&#950;) of a known degree.
+<p>
+Solution method is based on the polynomial approach of <A HREF="#ref1">[1]</A>
+and <A HREF="#ref2">[2]</A>.
+
+<H3>Arguments</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<td class="cc">V, W</td>
+<td>stable functions in the backward shift operator &#950;</A>.
+</td></tr>
+<tr>
+<td class="cc">n</td>
+<td>degree of polynomial <I>Q</I></td></tr>
+</table>
+
+<H3>Return values</H3>
+<table border=1 cellpadding=5 width=100%>
+<tr>
+<TD class="cc">Q</TD>
+<TD>optimal polynomial of degree <I>n</I></TD></tr>
+<tr>
+<TD class="cc">E</TD>
+<TD>the minimal value of the <I>H</I><SUB>2</SUB>-norm for fixed <I>n</I></TD></tr>
+<tr>
+<TD class="cc">Emin</TD>
+<TD>the minimal value of the <I>H</I><SUB>2</SUB>-norm for <I>n</I>&nbsp;=&nbsp;<IMG 
+SRC="../images/inf.gif" WIDTH=16 HEIGHT=15 ALT=""></TD></tr>
+</table>
+
+<H3>References</H3>
+<p><A name="ref1"></A>[1]&nbsp;Polyakov K., Rosenwasser E., and Lampe B., Two-level numerical 
+procedure for
+optimal design of digital modal controllers // <i>Proc. 44th IEEE Conf.
+Decision Contr. and ECC</i>, Sevilla, Spain, pp.&nbsp;4481-4486, 2005.
+</p>
+<p><A name="ref2"></A>[2]&nbsp;Polyakov, K.Yu., Polynomial Design of Optimal
+Sampled-data Control Systems, Dr. Sc. Thesis, State University of Ocean Technology,
+St. Petersburg, 2006 [in Russian].
+</p>
+
+<H3>See also</H3>
+
+<p class=fref><code><a 
+href=modsdl2.html>modsdl2</a>&nbsp;&nbsp;</code><I>L</I><SUB>2</SUB>-optimization of modal digital 
+controllers</SUB>.</p>
+<p class=fref><code><a 
+href=modsdh2.html>modsdh2</a>&nbsp;&nbsp;</code><I>H</I><SUB>2</SUB>-optimization of modal digital 
+controllers</SUB>.</p>
+
+
+
+
+<p><table bgcolor="#e7ebf7" border=0 width="100%" cellpadding=0 cellspacing=0>
+<tr valign=top><td align=left width=20>
+<a href="polhinf.html"><img src="../images/b_prev.gif" alt="Previous page" border=0 
+align=bottom></a>&nbsp;</td>
+<td align=left>&nbsp;polhinf</td><td>&nbsp;</td>
+<td align=right>polquad&nbsp;</td>
+<td align=right width=20><a href="polquad.html"><img src="../images/b_next.gif" alt="Next page" 
+border=0 align=bottom></a></td>
+</tr></table>
+<p class="copy" align="right">Copyright &copy; 1999-2006 K. Polyakov.</p>
+
+</body>
+</html>
+
+
