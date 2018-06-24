@@ -33,8 +33,8 @@ p0 = p;
 for r=1:rows
     for c=1:cols
         p = p0;
-        pF = FP.p{r,c};
-        zF = FP.z{r,c};
+        pF = FP.P{r,c};
+        zF = FP.Z{r,c};
         %-----------------------------------------------
         %       Correct existing poles
         %-----------------------------------------------
@@ -70,8 +70,8 @@ for r=1:rows
         if size(new,2) > 1, new = new'; end;
         zF = [zF; new];
         pF = [pFCorr; new];
-        FP.z{r,c} = zF;
-        FP.p{r,c} = pF;
+        FP.Z{r,c} = zF;
+        FP.P{r,c} = pF;
     end;
 end;
 

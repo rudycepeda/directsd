@@ -46,7 +46,7 @@ for i=1:2:nargin-1,
       if ~isreal(Value) | ~all(isfinite(Value(:))) | ~isnumeric(Value) %| any(Value(:)<0),
          error('I/O delay times must be non negative numbers.')
       end
-      sys.ioDelay = LocalMakeFullDouble(Value);
+      sys.IODelay = LocalMakeFullDouble(Value);
 
    case 'Ts'
       if isempty(Value),  

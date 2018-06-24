@@ -34,7 +34,7 @@ elseif ~any(Td(:)),
 end
 
 % Map the I/O delays to poles at zero
-sizes = size(sys.k);
+sizes = size(sys.K);
 if ndims(Td)<length(sizes), 
    Td = repmat(Td,[1 1 sizes(3:end)]);
 end
@@ -42,8 +42,8 @@ end
 for j=find(Td(:))',
    Tdj = Td(j); 
    if Tdj > 0					% Revision by K. Polyakov
-        sys.p{j} = [sys.p{j} ; zeros(Tdj,1)];
-   else sys.z{j} = [sys.z{j} ; zeros(-Tdj,1)]; 
+        sys.P{j} = [sys.P{j} ; zeros(Tdj,1)];
+   else sys.Z{j} = [sys.Z{j} ; zeros(-Tdj,1)]; 
    end;
 end
 

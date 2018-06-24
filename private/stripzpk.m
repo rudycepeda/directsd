@@ -35,8 +35,8 @@ function F = stripzpk ( F, tol )
 %------------------------------------------------------
 %       Remove leading numerator zeros    
 %------------------------------------------------------
-        n = striplz(F.K*poly(F.z{1}), eps);
-        F.z{1} = roots(n);
+        n = striplz(F.K*poly(F.Z{1}), eps);
+        F.Z{1} = roots(n);
         F.K = n(1);
 %------------------------------------------------------
 %       Remove phantom zeros    

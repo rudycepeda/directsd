@@ -200,8 +200,8 @@ end
 
 switch type
     case 'zpk'
-        sysd = zpk(minreal(sysd));
+        sysd = sdzpk(minreal(sysd));
     case 'tf'
-        sysd = tf(minreal(sysd));
+        sysd = sdtf(minreal(sysd));
 end
 

@@ -36,10 +36,10 @@ end
 
 % Look for pole/zero cancellations in each channel
 sysr = sys;
-for j=1:prod(size(sys.k)),
+for j=1:prod(size(sys.K)),
    % Perform reduction (denoise multiple roots to improve cancellation rate)
    % No denoise: K. Polyakov, 12/13/05
-   [sysr.z{j},sysr.p{j}] = reducezp(sys.z{j}, sys.p{j}, tol);
+   [sysr.Z{j},sysr.P{j}] = reducezp(sys.Z{j}, sys.P{j}, tol);
 %      reducezp(mroots(sys.z{j},'roots',tol),mroots(sys.p{j},'roots',tol),tol);
 end
    
