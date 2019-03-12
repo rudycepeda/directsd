@@ -25,7 +25,7 @@ function [K,err,err0,err2] = whquad ( A, B, E, D22, PCancel )
 %------------------------------------------------------        
         T = A.Ts;
         [n,d] = tf2nd ( D22 ); 
-        dzpk = zpk(d, 1, T);
+        dzpk = sdzpk(d, 1, T);
         Av = minreal(dzpk*(dzpk*dzpk')*dzpk'*A);
         Lam = sfactor(Av);
 %------------------------------------------------------
@@ -35,7 +35,7 @@ function [K,err,err0,err2] = whquad ( A, B, E, D22, PCancel )
 %------------------------------------------------------
 %       Construct L1 and L2
 %------------------------------------------------------
-        L1 = minreal(dzpk'*dzpk'*B'/Lam');
+        L1 = minreal(dzpk'*dzpk'*sdzpk(B)'/sdzpk(Lam)');
         L2 = minreal(a0*Lam/dzpk);
 %------------------------------------------------------
 %       Construct L
@@ -63,7 +63,7 @@ function [K,err,err0,err2] = whquad ( A, B, E, D22, PCancel )
 %------------------------------------------------------
         [pL,Lsp] = improper ( L );
         [Lp,Lm] = separss ( Lsp, dLp.z );
-        Lp = Lp + zpk(pL,1,T);
+        Lp = Lp + tf(pL,1,T);
           %[nMinus,nPlus] = dioph ( dLp, dLm, nL );
           %Lp = zpk ( nPlus, dLp, T );
           %Lm = zpk ( nMinus, dLm, T );

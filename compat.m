@@ -28,7 +28,9 @@ end;
 %       If there is at least one polynomial, ...
 %------------------------------------------------------
 varargout = varargin;
-for i=1:nargin
+if ~isempty(var)
+    for i=1:nargin
         varargout{i} = poln(varargin{i},var);
+    end
 end
 %------- End of COMPAT.M --------- KYuP ----------

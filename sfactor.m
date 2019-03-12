@@ -23,32 +23,40 @@ function [fs,fs0] = sfactor ( s, type )
 %------------------------------------------------------    
 %       Check data
 %------------------------------------------------------           
-        if ~exist('type','var'),
-           if isnumeric(s), s = poln(s); end; 
-           if isdt(s), type = 'd'; else type = 's'; end;
-        end;
+        if ~exist('type','var')
+           if isnumeric(s)
+              s = poln(s); 
+           end 
+           if isdt(s)
+               type = 'd'; 
+           else
+               type = 's';
+           end
+        end
         if ~strcmp(type,'s') &&  ~strcmp(type,'z')  &&  ~strcmp(type,'d')
             error('Unknown factorization type: ''%s''', type);
-        end;         
-        if isnumeric(s), s = poln(s, type); end;
+        end         
+        if isnumeric(s)
+            s = poln(s, type); 
+        end
         if isa(s,'poln')
            fs = sfactor ( s, type );
            fs = fs.coef;
            fs0 = fs;
            return;
-        end;
+        end
         if ~isa(s,'lti')
             error('This factorization is applicable only to LTI models');
-        end;         
+        end        
 %------------------------------------------------------
 %       Check for zero function
 %------------------------------------------------------
         s = zpk(s); 
-        if s.K == 0, 
+        if s.K == 0 
           fs = zpk(0); fs.Ts = s.Ts;
           fs0 = fs; 
           return;
-        end;
+        end
         errmsg = 'Exact Hermitian factorization is impossible';
 %------------------------------------------------------
 %       Symmetrize zeros
@@ -62,14 +70,14 @@ function [fs,fs0] = sfactor ( s, type )
          % Find the nearest to counterpart of z0
          %----------------------------------------------- 
           z0 = zz(i); zz(i) = [];  
-          if type == 's', 
+          if type == 's' 
             z0H = - z0; 
-          elseif abs(z0) > sqrt(eps), 
+          elseif abs(z0) > sqrt(eps) 
             z0H = 1/z0; 
           else
             zCorr = [zCorr; z0];           
             continue;  
-          end;
+          end
           diff = abs(zz - z0H); 
           [diff,ind] = sort(diff);  
           if diff(1) < tol*(abs(z0)+abs(z0H))/2  ||  diff(1) < sqrt(eps)
@@ -78,66 +86,73 @@ function [fs,fs0] = sfactor ( s, type )
            %----------------------------------------------- 
            % Consider real-complex pair, make both real
            %----------------------------------------------- 
-            if (im0 == 0) ~= (im1 == 0),
+            if (im0 == 0) ~= (im1 == 0)
               z0 = real(z0); z1 = real(z1);  
               err = abs(im0+im1);  
-              if err > 1e-3,
+              if err > 1e-3
                 warning('Symmetrization error %g',err);
-              end;
-            end;
+              end
+            end
            %----------------------------------------------- 
            % Symmetrization
            %----------------------------------------------- 
-            if type == 's', 
+            if type == 's' 
               z0 = (z0 - z1) / 2;  
               zCorr = [zCorr; z0; -z0];
             else
               z0 = (1/z0 + z1) / 2;
               zCorr = [zCorr; z0; 1/z0];
-            end;
+            end
             zz(ind(1)) = [];
           else
             zCorr = [zCorr; z0];  %error(errmsg); 
-          end;
-        end;        
+          end
+        end        
 %------------------------------------------------------
 %       Unfactored zeros
 %------------------------------------------------------
         if ~isempty(zz)
            zCorr = [zCorr; zz];
-        end;
+        end
 %------------------------------------------------------
 %       Factorize a rational function
 %------------------------------------------------------
         [zs,zRem,z0] = extrpair ( zCorr, type );
         [ps,pRem,p0] = extrpair ( s.p{1}, type );       
-        if ~isempty(zRem)  ||  ~isempty(pRem), 
+        if ~isempty(zRem)  ||  ~isempty(pRem) 
           if length(zRem) == length(pRem)
             rem = others(zRem,pRem,1e-2);
-            if ~isempty(rem), error(errmsg); end;
-          else warning(errmsg); %Changed error to warning RCG 31.07.2014 
-          end;
-        end;
+            if ~isempty(rem)
+                error(errmsg); 
+            end
+          else
+              warning(errmsg); %Changed error to warning RCG 31.07.2014
+          end
+        end
 %------------------------------------------------------
 %       Check conjugation of complex zeros
 %------------------------------------------------------
         ind = find(imag(zs) ~= 0);
-        for i = 1:length(ind);  
+        for i = 1:length(ind)  
           zc = zs(ind(i));  
-          if isempty(find(zs == conj(zc)))   
+          if isempty(find(zs == conj(zc), 1))   
             zs(ind(i)) = real(zc);   
-          end;
-        end;
+          end
+        end
 %------------------------------------------------------
 %       Check gain
 %------------------------------------------------------
         if type == 's'
            K = real(s.K);
-           if mod(length(ps)+length(zs),2) == 1, K = - K; end;
+           if mod(length(ps)+length(zs),2) == 1
+               K = - K; 
+           end
         else
-           if length(zs)+z0 ~= length(ps)+p0, warning(errmsg); end;       %Changed error to warning RCG 31.07.2014
+           if length(zs)+z0 ~= length(ps)+p0
+               warning(errmsg);
+           end       %Changed error to warning RCG 31.07.2014
            K = real(s.K*prod(-ps) / prod(-zs));
-        end;
+        end
         errmsg = 'Function is negative definite';
         if K < 0 
             warning(errmsg); %Changed by RCG 28.07.2013

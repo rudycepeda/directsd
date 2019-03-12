@@ -124,7 +124,7 @@ classdef poln
             end
             %End of constructor method-------------------------------------
         end
-        function display(P)
+        function disp(P)
             %Display method for class poln
             iname = inputname(1);
             if isempty(P.coef)
@@ -541,7 +541,7 @@ classdef poln
             %   divisor of the two polynomials.
             
             %Set tolerance
-            tol = sqrt(eps);
+            tol = 1e-4;sqrt(eps);
             %Check input
             if A.var ~= B.var
                 error('Incompatible variables')
@@ -573,7 +573,7 @@ classdef poln
                 end;
                 errB = sort(abs(rtsB - R));
                 if errB(1) < tolR
-                    if abs(imag(R)) > eps % complex conjugate pair
+                    if abs(imag(R)) > 1e-12 % complex conjugate pair
                         R = [R; conj(R)];
                     end
                     rtsG = [rtsG; R];
@@ -925,7 +925,7 @@ classdef poln
         end
         function sys = zpk(N,D,T)
             %ZPK Transforms polynomials into zpk objects
-            if ~isa(D,'poln');
+            if ~isa(D,'poln')
                 if isa(D,'double')
                     D = poln(D,N.var);
                 else
@@ -933,7 +933,7 @@ classdef poln
                 end
             end
             
-            if ~isa(N,'poln');
+            if ~isa(N,'poln')
                 if isa(N,'double')
                     N = poln(N,D.var);
                 else
@@ -1096,6 +1096,40 @@ classdef poln
                     A.coef(1:nZero) = [];
                 end
             end
+        end
+        function P = matching(P,tol)
+            %MATCHING: Matches complex roots to make sure they all come in
+            %conjugate pairs
+            if nargin == 1
+                tol = 1e-5;
+            end
+            zt = P.z;
+            znew = [];
+            for i = 1:length(zt)-1
+                found = 0;
+                for j = i+1:length(zt)
+                    if abs(real(zt(i))-real(zt(j))) < tol
+                        if abs(imag(zt(i))+imag(zt(j))) < tol
+                            znew = [znew; zt(i); zt(i)'];
+                            zt(j) = NaN;
+                            found = 1;
+                        end                    
+                    end
+                end
+                if ~found && ~isnan(zt(i))
+                    if imag(zt(i)) < tol
+                        zt(i)=real(zt(i));
+                    end
+                    znew = [znew; zt(i)];
+                end                
+            end
+            if ~isnan(zt(end))
+                if imag(zt(end)) < tol
+                    zt(end)=real(zt(end));
+                end
+                znew = [znew; zt(end)];
+            end
+            P.z = znew;
         end
         %Likely unnecessary, candidates to deletion
         function P = change(P,k,z,coef)

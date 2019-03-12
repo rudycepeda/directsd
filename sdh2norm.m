@@ -32,15 +32,21 @@ function err = sdh2norm ( sys, K, t, H, method )
 %------------------------------------------------------
         if ~exist('t','var'), t = []; 
         elseif isa(t,'lti')
-           if exist('H','var'), method = H; end;
-           H = t; t = [];
+           if exist('H','var')
+               method = H; 
+           end
+           H = t; 
+           t = [];
         elseif ischar(t)
-           method = t; t = []; 
-        end;
-        if ~exist('H','var'), H = []; 
+           method = t; 
+           t = []; 
+        end
+        if ~exist('H','var')
+            H = []; 
         elseif ischar(H)
-          method = H; H = [];  
-        end;
+          method = H; 
+          H = [];  
+        end
         K = zpk(K);
 %------------------------------------------------------
 %       Check method

@@ -23,7 +23,9 @@ function [K,err,err0,err2] = polquad ( A, B, E, D22, PCancel, Sigma )
 %------------------------------------------------------
 %       Take account of Sigma
 %------------------------------------------------------        
-        if ~exist('PCancel','var'), PCancel = []; end;
+        if ~exist('PCancel','var')
+            PCancel = []; 
+        end
         if exist('Sigma','var')
            %A = minreal(A*Sigma);
            %B = minreal(B*Sigma);
@@ -32,12 +34,12 @@ function [K,err,err0,err2] = polquad ( A, B, E, D22, PCancel, Sigma )
         else
           nSigma = 1;   
           dSigma = 1;   
-        end;
+        end
 %------------------------------------------------------
 %       Construct YN and YD
 %------------------------------------------------------        
         T = A.Ts;
-        [n,d,a0,b0,Lam,na,da,nb,db,dLp,dLm,dL0,nL,YN,YD,dLCancel,L,L1,L2] = ...
+        [n,~,~,~,Lam,na,da,nb,db,dLp,dLm,dL0,nL,YN,YD,~,~,~,L2] = ...
              ynyd ( A, B, D22, PCancel );
 %------------------------------------------------------
 %       Solve polynomial equation
@@ -55,13 +57,14 @@ function [K,err,err0,err2] = polquad ( A, B, E, D22, PCancel, Sigma )
           [CN,remN] = mrdivide(CN, gABN);
           if norm(remN) > 1e-3*norm(CN)
              warning('Incorrect division of CN: err=%g',norm(remN)); 
-          end;
+          end
          %-----------------------------------------------
          %   Solve polynomial equation
          %-----------------------------------------------
           [AN,CN,gN] = coprime(AN, CN);
           [Pi,N] = dioph(AN, BN, CN);        
-          K = minreal(zpk(gN*N, dLp, A.Ts)/Lam, 1e-3);
+          K = minreal(sdzpk(gN*N, dLp, A.Ts)/sdzpk(Lam), 1e-3);
+          K = sdzpk(K);
        %-----------------------------------------------
        %       Closed-loop system
        %-----------------------------------------------
@@ -77,24 +80,24 @@ function [K,err,err0,err2] = polquad ( A, B, E, D22, PCancel, Sigma )
           [CN,remN] = mrdivide(CN, gABN);
           if norm(remN) > 1e-3*norm(CN)
              warning('Incorrect division of CN: err=%g',norm(remN)); 
-          end;
+          end
           [AD,BD,gABD] = coprime(AD, BD);
           [CD,remD] = mrdivide(CD, gABD);
           if norm(remD) > 1e-6*norm(CD)
              warning('Incorrect division of CD: err=%g',norm(remD)); 
-          end;
+          end
          %-----------------------------------------------
          %   Extract possible divisor of CD at the unit circle
          %-----------------------------------------------
           gD0 = 1; 
           if deg(dL0) > 0
             [CDx,err] = mrdivide(CD, dL0);
-            if norm(err) < 1e-3*norm(CD),
+            if norm(err) < 1e-3*norm(CD)
                AD = AD / dL0;
                CD = CDx;
                gD0 = dL0;
-            end;
-          end;
+            end
+          end
          %-----------------------------------------------
          %   Solve polynomial equations
          %-----------------------------------------------
@@ -104,47 +107,53 @@ function [K,err,err0,err2] = polquad ( A, B, E, D22, PCancel, Sigma )
           if norm(D) < eps*norm(N)
              K = Inf; err = Inf; err0 = 0; err2 = 0;  
              return; 
-          end;
+          end
           K = minreal(sdzpk(db*gN*N, da*gD0*gD*D, A.Ts), 1e-3);
           K = sdzpk(K);
-        end;
-        if T ~= 0, K = K'; end;
+        end
+        if T ~= 0
+            K = K'; 
+        end
 %------------------------------------------------------
 %       Return if only controller needed
 %------------------------------------------------------
-        if nargout < 2, return; end;
+        if nargout < 2
+            return
+        end
 %------------------------------------------------------
 %       Unstable part of L
 %------------------------------------------------------
-        Lm = zpk(Pi, dLm, A.Ts);
-        if T == 0, Lm = Lm'; end;
+        Lm = sdzpk(Pi, dLm, A.Ts);
+        if T == 0
+            Lm = Lm';
+        end
         errLm = norm(Lm)^2;
 %------------------------------------------------------
 %       Compute int_Gamma (E - B*B'/A) dz/z
 %------------------------------------------------------
-        BBA = minreal(B*B'/A);
+        BBA = minreal((sdzpk(B)*sdzpk(B)')/A);
         if T == 0
            X = sumzpk(E, -BBA);
            F = sfactor ( X );
            err0 = norm(F)^2;
         else
            err0 = intz2b (E, -BBA); 
-        end;
+        end
         err = errLm + err0;
 %------------------------------------------------------
 %       Additional term due to unstable plants
 %------------------------------------------------------
         if nargout > 3
-          [xx,L2] = improper(L2);
-          [xx,dL2] = tf2nd(L2);
-          [xx,dL2m,xx] = factor ( dL2 );
+          [~,L2] = improper(L2);
+          [~,dL2] = tf2nd(L2);
+          [~,dL2m,~] = factor ( dL2 );
           if deg(dL2m) > 0
             L2m = separss(L2, dL2m.z, 'infu');            
             err2 = norm(L2m)^2;
           else
             err2 = 0;  
-          end;
-        end;
+          end
+        end
 
 %------- End of POLQUAD.M --------- KYuP ----------           
         

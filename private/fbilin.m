@@ -24,7 +24,9 @@ function BL = fbilin ( b )
 %                 (s + b)(s - b)
 %
 %------------------------------------------------------
-        if ~exist('b','var'), b = 1; end;
-        BL = zpk([], [b -b], -2*b);
+        if ~exist('b','var')
+            b = 1; 
+        end
+        BL = sdzpk([], [b -b], -2*b);
         
 %------- End of BILIN_0.M --------- KYuP ----------

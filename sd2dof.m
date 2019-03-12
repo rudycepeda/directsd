@@ -29,16 +29,18 @@ function [KR,err,errPrev] = sd2dof ( sys, K, H, method )
         if ~exist('H','var'), H = []; 
         elseif ischar(H)
           method = H; H = [];  
-        end;
-        if ~exist('method','var'), method = 'pol'; end;         
+        end
+        if ~exist('method','var')
+            method = 'pol'; 
+        end         
         if ~isequal(method,'pol')  &&  ~isequal(method,'wh') ...
            &&  ~isequal(method,'ssf')     
           error('Unknown solution method ''%s''',method);  
-        end;
+        end
 %------------------------------------------------------
 %       Transform to negative feedback
 %------------------------------------------------------
-        sys = zpk(sys);
+        sys = sdzpk(sys);
         sys(end-1,:) = -sys(end-1,:);
         K = - K;
 %------------------------------------------------------
@@ -49,17 +51,17 @@ function [KR,err,errPrev] = sd2dof ( sys, K, H, method )
 %------------------------------------------------------
 %       Solve general quadratic problem
 %------------------------------------------------------
-        D22 = zpk([], [], 0, T); 
+        D22 = sdzpk([], [], 0, T); 
         if isequal(method,'pol')
            switch nargout 
-            case {0, 1}, 
+            case {0, 1} 
               PsiX = polquad ( A, B, E, D22 );
-            case 2,      
+            case 2      
               [PsiX,err] = polquad ( A, B, E, D22 );
-            case 3,
+            case 3
               [PsiX,err,err0,err2] = polquad ( A, B, E, D22 );
               errPrev = err0 + err2;   
-           end;
+           end
         elseif isequal(method,'wh')
            if nargout < 3, 
              [PsiX,err] = whquad  ( A, B, E, D22 ); 
@@ -72,15 +74,16 @@ function [KR,err,errPrev] = sd2dof ( sys, K, H, method )
            [PsiX,err] = ssquad ( A0, A1, B, E, D22 );
         end;
         PsiX = PsiX';
+        PsiX.k = real(PsiX.k);
 %------------------------------------------------------
 %       Construct b and Delta
 %------------------------------------------------------
-        [a,b] = tf2nd ( K' );        
+        [a,b] = tf2nd (sdzpk(K)');        
         Delta = a*n + b*d;
 %------------------------------------------------------
 %       Form reference controller
 %------------------------------------------------------
-        KR = sumzpk(minreal(PsiX*zpk(Delta,b,T)), -kCoef*K);
+        KR = sumzpk(minreal(PsiX*sdzpk(matching(Delta,1e-4),b,T)), -kCoef*K);
         KR = KR';
 
 %------- End of SD2DOF.M --------- KYuP ----------           

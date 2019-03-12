@@ -47,15 +47,15 @@ for i=1:max(size(A))
     %--------------------------------------------
     %       Factorization
     %--------------------------------------------
-    [xx,X] = improper ( X, 'symm' );
+    [~,X] = improper ( X, 'symm' );
     try 
         FX = sfactor ( X );
     catch
         keyboard;
-    end;
+    end
     %[xx,FX] = improper ( FX );
     err = [err; norm(FX)^2]; %#ok<AGROW>
-end;
+end
 
 %------- End of QUADERR.M --------- KYuP ----------
 

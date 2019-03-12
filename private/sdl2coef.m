@@ -23,21 +23,25 @@ function [A,B,E,A0,A1] = sdl2coef ( sys, T, H )
         [nout,nin] = size(sys);
         o2 = 1; i2 = 1;
         i1 = nin - i2;
-        if i1 ~= 1, error('L2-problem is formulated for a single input'); end;
+        if i1 ~= 1
+            error('L2-problem is formulated for a single input')
+        end
         o1 = nout - o2;
-        if o1 < 1, error('Incorrect number of outputs'); end;
+        if o1 < 1
+            error('Incorrect number of outputs'); 
+        end
 %------------------------------------------------------
 %       Extrapolator
 %------------------------------------------------------
-        if ~exist('H', 'var'), 
+        if ~exist('H', 'var') 
            H = ss(0, 1, 1, 0); % scalar ZOH by default
-        end;
+        end
 %------------------------------------------------------
 %       Extract transfer matrices
 %------------------------------------------------------
-        P11 = sys(1:o1,1:i1);
-        P12 = sys(1:o1,i1+1:nin);
-        P21 = sys(o1+1:nout,1:i1);
+        P11 = sdzpk(sys(1:o1,1:i1));
+        P12 = sdzpk(sys(1:o1,i1+1:nin));
+        P21 = sdzpk(sys(o1+1:nout,1:i1));
         %P22 = sys(o1+1:nout,i1+1:nin);
 %------------------------------------------------------
 %       Construct A0
@@ -45,8 +49,9 @@ function [A,B,E,A0,A1] = sdl2coef ( sys, T, H )
         scale12 = norm(P12.k);
         if scale12 ~= 0
              P12 = P12 / scale12;
-        else scale12 = 1; 
-        end;
+        else
+            scale12 = 1;
+        end
         A0 = dtfm2(P12, T, H);
         p12 = allpoles(P12);
         A0 = scale12^2*setpoles(sdzpk(A0), exp(-[p12; -p12]*T) );
@@ -56,8 +61,9 @@ function [A,B,E,A0,A1] = sdl2coef ( sys, T, H )
         scale21 = norm(P21.k); 
         if scale21 ~= 0
              P21 = P21 / scale21;
-        else scale21 = 1; 
-        end;
+        else
+            scale21 = 1;
+        end
         A1 = z2zeta(sdzpk(ztrm(P21, T, 0)));
         p21 = allpoles(P21);
         A1 = scale21*setpoles(A1, exp(-p21*T) );
@@ -71,8 +77,9 @@ function [A,B,E,A0,A1] = sdl2coef ( sys, T, H )
         scale11 = norm(P11.k);
         if scale11 ~= 0
              P11 = P11 / scale11;
-        else scale11 = 1; 
-        end;
+        else
+            scale11 = 1;
+        end
         P11H = sdzpk(P11)';
         try 
           Px = minreal(P11H*P12);
@@ -87,8 +94,8 @@ function [A,B,E,A0,A1] = sdl2coef ( sys, T, H )
             px = allpoles(Pxi);
             B1i = setpoles(B1i, exp(-px*T) );
             B1 = sumzpk(B1, B1i);
-          end;
-        end;
+          end
+        end
         B = minreal(A1*B1*scale11*scale12);
 %------------------------------------------------------
 %       Construct spectrum of A1
@@ -109,7 +116,9 @@ function [A,B,E,A0,A1] = sdl2coef ( sys, T, H )
           p11 = allpoles(SP11);
           E = scale11^2*setpoles(sdzpk(E), exp(p11*T) );
 	      FE = sfactor(E);
-          E = FE*FE';
-        end;
+          FET=FE';
+          FET.k=real(FET.k);
+          E = FE*FET;
+        end
 
 %------- End of SDL2COEF.M --------- KYuP ----------           

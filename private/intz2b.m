@@ -39,7 +39,7 @@ function [V,err] = intz2b ( varargin )
             P0 = P0 - val1;
             S0 = S0 + val1;
             P = P0+P;
-          end;
+          end
          %--------------------------------------------- 
          %   Make the function positive definite
          %--------------------------------------------- 
@@ -47,7 +47,7 @@ function [V,err] = intz2b ( varargin )
           S0 = (S0 + a)*BL;
           F = sfactor(S0);
           V = V + norm(F)^2 - a;
-        end;
+        end
 %------------------------------------------------------
 %       Truncation error
 %------------------------------------------------------

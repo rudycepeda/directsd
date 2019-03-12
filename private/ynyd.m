@@ -40,7 +40,7 @@ function [n,d,a0,b0,Lam,na,da,nb,db,dLp,dLm,dL0,nL,YN,YD,...
 %------------------------------------------------------
 %       Construct L1 and L2
 %------------------------------------------------------
-        L1 = minreal(dzpk'*dzpk'*B'/Lam');
+        L1 = minreal(dzpk'*dzpk'*sdzpk(B)'/sdzpk(Lam)');
         if norm(a0) > eps 
              L2 = minreal(a0*Lam/dzpk);        
         else L2 = zpk([], [], 0, T); 

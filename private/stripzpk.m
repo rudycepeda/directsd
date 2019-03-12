@@ -41,7 +41,7 @@ function F = stripzpk ( F, tol )
 %------------------------------------------------------
 %       Remove phantom zeros    
 %------------------------------------------------------
-        tol2 = eps;
+        tol2 = tol;
         while find(abs(F.z{1}) > tol)
           n = striplz(F.K * poly(F.z{1}), tol2);
           F.z{1} = roots(n);
